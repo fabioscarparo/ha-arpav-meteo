@@ -16,7 +16,8 @@ from typing import Any
 try:
     from astral import LocationInfo
     from astral.moon import phase as astral_moon_phase
-    from astral.sun import elevation as astral_elevation, sun as astral_sun
+    from astral.sun import elevation as astral_elevation
+    from astral.sun import sun as astral_sun
 except ImportError:  # pragma: no cover - astral is bundled in Home Assistant
     LocationInfo = None  # type: ignore[assignment,misc]
     astral_moon_phase = None  # type: ignore[assignment]
