@@ -45,6 +45,9 @@ ignore = [
     "PLW2901",
 ]
 
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D", "PLC0415"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"

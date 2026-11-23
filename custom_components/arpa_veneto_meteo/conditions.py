@@ -13,10 +13,19 @@ from datetime import UTC, datetime
 from math import cos, radians, sin
 from typing import Any
 
+try:
+    from astral import LocationInfo
+    from astral.moon import phase as astral_moon_phase
+    from astral.sun import elevation as astral_elevation, sun as astral_sun
+except ImportError:  # pragma: no cover - astral is bundled in Home Assistant
+    LocationInfo = None  # type: ignore[assignment,misc]
+    astral_moon_phase = None  # type: ignore[assignment]
+    astral_elevation = None  # type: ignore[assignment]
+    astral_sun = None  # type: ignore[assignment]
+
 from .const import (
     CONF_DAY_CONDITION_FORECAST,
     CONF_DAY_CONDITION_METAR,
-    CONF_DAY_CONDITION_RADIATION,
     CONF_DAY_CONDITION_RADIATION_OR_FORECAST,
     CONF_DAY_CONDITION_RADIATION_OR_METAR,
     CONF_DAY_CONDITION_UNKNOWN,
@@ -52,25 +61,26 @@ from .models import (
 MIN_SOLAR_ELEVATION_DEG = 5.0
 POURING_MM_PER_HOUR = 10.0
 WINDY_KMH_THRESHOLD = 35.0
+_DEFAULT_DAY_THRESHOLDS = DayThresholds()
+_DEFAULT_NIGHT_THRESHOLDS = NightThresholds()
 
 
 def _sun_is_day_and_elevation(lat: float, lon: float, dt: datetime) -> tuple[bool, float]:
-    """Return (is_day, solar_elevation_deg) using astral if installed."""
-    from astral import LocationInfo
-    from astral.sun import elevation, sun
-
+    """Return (is_day, solar_elevation_deg) using astral."""
+    if LocationInfo is None or astral_sun is None or astral_elevation is None:
+        raise RuntimeError("astral package is required to compute solar elevation")
     city = LocationInfo(latitude=lat, longitude=lon)
     aware = dt if dt.tzinfo is not None else dt.replace(tzinfo=UTC)
-    s = sun(city.observer, date=aware.date(), tzinfo=aware.tzinfo)
-    elev = float(elevation(city.observer, aware))
+    s = astral_sun(city.observer, date=aware.date(), tzinfo=aware.tzinfo)
+    elev = float(astral_elevation(city.observer, aware))
     return (s["sunrise"] <= aware <= s["sunset"]), elev
 
 
 def moon_illumination(dt: datetime) -> float:
     """Return approximate Moon illumination percentage (0..100)."""
-    from astral.moon import phase
-
-    p = float(phase(dt))  # 0 = new, ~14.76 = full
+    if astral_moon_phase is None:
+        raise RuntimeError("astral package is required to compute moon phase")
+    p = float(astral_moon_phase(dt))  # 0 = new, ~14.76 = full
     return (1.0 - cos(radians(p * 360.0 / 29.53))) / 2.0 * 100.0
 
 
@@ -100,8 +110,8 @@ async def async_classify_condition(
     zone_name: str | None,
     day_strategy: str = CONF_DAY_CONDITION_RADIATION_OR_FORECAST,
     night_strategy: str = CONF_NIGHT_CONDITION_BRIGHTNESS_OR_FORECAST,
-    day_thresholds: DayThresholds = DayThresholds(),
-    night_thresholds: NightThresholds = NightThresholds(),
+    day_thresholds: DayThresholds = _DEFAULT_DAY_THRESHOLDS,
+    night_thresholds: NightThresholds = _DEFAULT_NIGHT_THRESHOLDS,
     metar_obs: MetarObservation | None = None,
     fetch_brightness: Callable[[], Awaitable[SkyBrightnessReading | None]] | None = None,
 ) -> tuple[str | None, Provenance]:
@@ -136,9 +146,10 @@ async def async_classify_condition(
         return "rainy", prov
 
     # 2. Fog / very low visibility overrides wind and sky cover
-    if visibility is not None:
-        if visibility < 1.0 or (visibility < 2.0 and humidity is not None and humidity >= 98):
-            return "fog", _measured(RULE_VISIBILITY, "visibility")
+    if visibility is not None and (
+        visibility < 1.0 or (visibility < 2.0 and humidity is not None and humidity >= 98)
+    ):
+        return "fog", _measured(RULE_VISIBILITY, "visibility")
 
     # 3. Strong wind
     if wind_speed is not None and wind_speed > WINDY_KMH_THRESHOLD:

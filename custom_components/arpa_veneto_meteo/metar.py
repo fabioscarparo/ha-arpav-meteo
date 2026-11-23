@@ -5,6 +5,7 @@ Reuses the shared Home Assistant aiohttp ClientSession with explicit timeouts.
 
 from __future__ import annotations
 
+import contextlib
 import logging
 from collections.abc import Callable
 from datetime import UTC, datetime, timedelta
@@ -164,10 +165,8 @@ def parse_observation(report: dict[str, Any]) -> MetarObservation:
 
     for key, raw_val in (("pressure", report.get("altim")), ("temperature", report.get("temp"))):
         if raw_val is not None:
-            try:
+            with contextlib.suppress(TypeError, ValueError):
                 values[key] = round(float(raw_val), 1)
-            except (TypeError, ValueError):
-                pass
 
     humidity = _relative_humidity(report.get("temp"), report.get("dewp"))
     if humidity is not None:
@@ -175,17 +174,13 @@ def parse_observation(report: dict[str, Any]) -> MetarObservation:
 
     wind_speed = report.get("wspd")
     if wind_speed is not None:
-        try:
+        with contextlib.suppress(TypeError, ValueError):
             values["wind_speed"] = round(float(wind_speed) * KNOTS_TO_KMH, 1)
-        except (TypeError, ValueError):
-            pass
 
     wind_gust = report.get("wgst")
     if wind_gust is not None:
-        try:
+        with contextlib.suppress(TypeError, ValueError):
             values["wind_gust_24h"] = round(float(wind_gust) * KNOTS_TO_KMH, 1)
-        except (TypeError, ValueError):
-            pass
 
     bearing = report.get("wdir")
     if isinstance(bearing, (int, float)):
@@ -285,16 +280,12 @@ def _observed_at(report: dict[str, Any]) -> str | None:
     """Extract ISO-8601 observation timestamp from a METAR report."""
     report_time = report.get("reportTime")
     if report_time:
-        try:
+        with contextlib.suppress(TypeError, ValueError):
             return datetime.fromisoformat(str(report_time).replace("Z", "+00:00")).isoformat()
-        except (TypeError, ValueError):
-            pass
 
     obs_time = report.get("obsTime")
     if obs_time is not None:
-        try:
+        with contextlib.suppress(TypeError, ValueError, OSError):
             return datetime.fromtimestamp(int(obs_time), tz=UTC).isoformat()
-        except (TypeError, ValueError, OSError):
-            pass
 
     return None

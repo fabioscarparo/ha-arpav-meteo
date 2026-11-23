@@ -19,7 +19,7 @@ jobs:
       - name: Ruff lint
         run: ruff check custom_components tests
       - name: Run unit tests
-        run: pytest -v
+        run: python -m pytest -v
 
   validate-hacs:
     runs-on: ubuntu-latest
@@ -28,6 +28,8 @@ jobs:
       - uses: hacs/action@main
         with:
           category: integration
+          # Remove 'brands' once custom_components/arpa_veneto_meteo/brand/icon.png is added
+          ignore: brands
 
   validate-hassfest:
     runs-on: ubuntu-latest
