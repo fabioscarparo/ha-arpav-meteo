@@ -50,8 +50,10 @@ from custom_components.arpa_veneto_meteo.models import (  # noqa: E402
     StationSummary24h,
 )
 from custom_components.arpa_veneto_meteo.sensor import (  # noqa: E402
+    MAX_HA_STATE_LEN,
     SENSOR_DESCRIPTIONS,
     ArpaVenetoSensorEntity,
+    _truncate_state,
 )
 from custom_components.arpa_veneto_meteo.weather import (  # noqa: E402
     ArpaVenetoWeatherEntity,
@@ -214,6 +216,39 @@ class TestEntitiesAndForecastAggregation(unittest.TestCase):
         desc = next(d for d in SENSOR_DESCRIPTIONS if d.key == "precipitation_probability")
         entity = ArpaVenetoSensorEntity(coord, entry, desc)
         self.assertIsNone(entity.native_value)
+
+    def test_bulletin_summary_truncation_fits_ha_255_char_limit(self) -> None:
+        long_text = (
+            "Domenica il transito di una perturbazione di origine atlantica porta frequenti "
+            "annuvolamenti, precipitazioni estese e nevicate sui rilievi montani. "
+            "Da lunedi la pressione atmosferica tornera ad aumentare gradualmente favorendo "
+            "schiarite via via piu ampie su pianura e costa, con temperature minime in calo "
+            "e possibili foschie nelle ore piu fredde della notte e del primo mattino."
+        )
+        self.assertGreater(len(long_text), MAX_HA_STATE_LEN)
+
+        data = ArpaVenetoData(
+            bulletin=BulletinSummary(
+                bulletin_code="MV",
+                general_evolution=long_text,
+            )
+        )
+        coord, entry = self._make_coordinator(data)
+        desc = next(d for d in SENSOR_DESCRIPTIONS if d.key == "bulletin_summary")
+        entity = ArpaVenetoSensorEntity(coord, entry, desc)
+
+        val = entity.native_value
+        self.assertIsNotNone(val)
+        self.assertLessEqual(len(val), MAX_HA_STATE_LEN)
+        self.assertTrue(val.endswith("..."))
+        # Full untruncated text must stay available in attributes
+        self.assertEqual(entity.extra_state_attributes["general_evolution"], long_text)
+
+        # Edge cases for _truncate_state
+        self.assertEqual(len(_truncate_state("a" * 300) or ""), MAX_HA_STATE_LEN)
+        self.assertEqual(len(_truncate_state("b" * 256) or ""), MAX_HA_STATE_LEN)
+        self.assertEqual(_truncate_state("c" * 255), "c" * 255)
+        self.assertIsNone(_truncate_state("   "))
 
     def test_binary_sensors_alert_and_exceedances(self) -> None:
         data = ArpaVenetoData(

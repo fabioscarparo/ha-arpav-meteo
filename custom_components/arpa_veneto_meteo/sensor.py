@@ -50,15 +50,25 @@ _WIND_DIR_DEVICE_CLASS = getattr(SensorDeviceClass, "WIND_DIRECTION", None)
 _ANGLE_STATE_CLASS = getattr(SensorStateClass, "MEASUREMENT_ANGLE", None)
 
 MAX_HA_STATE_LEN = 255
+TRUNCATION_SUFFIX = "..."
 
 
 def _truncate_state(text: str | None) -> str | None:
     """Shorten long text to fit Home Assistant's 255-character state limit."""
     if not text:
         return None
-    if len(text) <= MAX_HA_STATE_LEN:
-        return text
-    return text[: MAX_HA_STATE_LEN - 1].rstrip() + "..."
+    cleaned = text.strip()
+    if not cleaned:
+        return None
+    if len(cleaned) <= MAX_HA_STATE_LEN:
+        return cleaned
+    limit = MAX_HA_STATE_LEN - len(TRUNCATION_SUFFIX)
+    truncated = cleaned[:limit].rstrip()
+    if " " in truncated:
+        candidate = truncated.rsplit(" ", 1)[0].rstrip(" ,;:-")
+        if len(candidate) >= limit - 30:
+            truncated = candidate
+    return truncated + TRUNCATION_SUFFIX
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -464,7 +474,7 @@ SENSOR_DESCRIPTIONS: tuple[ArpaVenetoSensorDescription, ...] = (
     ArpaVenetoSensorDescription(
         key="snow_line",
         translation_key="snow_line",
-        value_fn=_sensor_val("snow_line"),
+        value_fn=lambda data: _truncate_state(data.sensors.get("snow_line")),
         include_fn=_has_sensor("snow_line"),
         provenance_key="snow_line",
     ),

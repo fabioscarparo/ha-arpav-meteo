@@ -314,9 +314,11 @@ class ArpaVenetoDataUpdateCoordinator(DataUpdateCoordinator[ArpaVenetoData]):
                 if isinstance(b_res, BaseException):
                     _LOGGER.warning("Unable to fetch textual weather bulletin: %s", b_res)
                     bulletin = self._bulletin_cache[0] if self._bulletin_cache else None
-                else:
+                elif b_res is not None:
                     bulletin = b_res
                     self._bulletin_cache = (bulletin, now)
+                else:
+                    bulletin = self._bulletin_cache[0] if self._bulletin_cache else None
             else:
                 bulletin = self._bulletin_cache[0] if self._bulletin_cache else None
 
@@ -370,9 +372,11 @@ class ArpaVenetoDataUpdateCoordinator(DataUpdateCoordinator[ArpaVenetoData]):
                 if isinstance(p_res, BaseException):
                     _LOGGER.warning("Unable to fetch pollen report: %s", p_res)
                     pollen = self._pollen_cache[0] if self._pollen_cache else None
-                else:
+                elif p_res is not None:
                     pollen = p_res
                     self._pollen_cache = (pollen, now)
+                else:
+                    pollen = self._pollen_cache[0] if self._pollen_cache else None
             else:
                 pollen = self._pollen_cache[0] if self._pollen_cache else None
 
