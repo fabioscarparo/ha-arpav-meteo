@@ -1,0 +1,6 @@
+{
+  "name": "ARPA Veneto Meteo",
+  "homeassistant": "2025.1.0",
+  "render_readme": true,
+  "country": ["IT"]
+}

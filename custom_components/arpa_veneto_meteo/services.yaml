@@ -1,0 +1,23 @@
+refresh_data:
+  name: "Refresh ARPA Veneto data"
+  description: "Force-refresh all ARPA Veneto feeds (bypassing tiered cache TTLs)."
+  fields:
+    entry_id:
+      name: "Station"
+      description: "Target station entry. Refreshes all configured stations when omitted."
+      required: false
+      selector:
+        config_entry:
+          integration: arpa_veneto_meteo
+
+archive_brightness:
+  name: "Archive night sky brightness"
+  description: "Import the last ~72 hours of ARPAV night sky brightness readings as long-term statistics."
+  fields:
+    entry_id:
+      name: "Station"
+      description: "Target station entry. Archives for all configured stations when omitted."
+      required: false
+      selector:
+        config_entry:
+          integration: arpa_veneto_meteo

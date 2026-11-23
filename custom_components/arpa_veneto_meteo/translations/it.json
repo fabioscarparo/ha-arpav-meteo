@@ -1,0 +1,216 @@
+{
+  "title": "ARPA Veneto Meteo",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Seleziona Comune",
+        "description": "Scegli il tuo comune del Veneto per individuare automaticamente la zona di previsione ARPAV.",
+        "data": {
+          "comune_id": "Comune"
+        }
+      },
+      "station": {
+        "title": "Seleziona Zona e Stazione Meteo",
+        "description": "Conferma la zona di previsione per {comune} e scegli la stazione meteo ARPAV più vicina.",
+        "data": {
+          "zone_id": "Zona di previsione",
+          "station_id": "Stazione meteo"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossibile connettersi alle API ARPA Veneto. Riprova tra poco.",
+      "invalid_comune": "Il comune selezionato non è valido.",
+      "invalid_station": "La stazione meteo selezionata non è valida."
+    },
+    "abort": {
+      "already_configured": "Questa combinazione di zona e stazione meteo è già configurata.",
+      "reconfigure_successful": "Configurazione aggiornata con successo."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opzioni ARPA Veneto Meteo",
+        "data": {
+          "update_interval": "Intervallo di aggiornamento (minuti)",
+          "forecast_language": "Lingua bollettino previsioni",
+          "radar_source": "Immagine radar meteo",
+          "enable_bulletin": "Abilita bollettino testuale regionale e avvisi meteo",
+          "enable_avalanche": "Abilita bollettino Dolomiti/Prealpi Neve e Valanghe",
+          "infer_condition": "Calcolo condizione meteo attuale",
+          "day_condition": "Sorgente stato del cielo diurno",
+          "night_condition": "Sorgente stato del cielo notturno",
+          "archive_brightness": "Archivia brillanza cielo notturno come statistiche a lungo termine"
+        },
+        "sections": {
+          "air_quality": {
+            "name": "Qualità dell'aria (PM10, PM2.5, Ozono)",
+            "description": "Stazioni ordinate per distanza. Fornisce valori orari validati (FLAG ≥ 9), medie giornaliere ufficiali e superamenti soglie di legge.",
+            "data": {
+              "pm10_station": "Stazione PM10",
+              "pm25_station": "Stazione PM2.5",
+              "ozone_station": "Stazione Ozono (O₃)"
+            }
+          },
+          "hydrology": {
+            "name": "Idrologia (Livelli fiumi e portate)",
+            "description": "Scegli una stazione idrometrica ARPAV vicina per monitorare livello del fiume, tendenza e portata.",
+            "data": {
+              "hydro_station": "Stazione idrometrica"
+            }
+          },
+          "pollen": {
+            "name": "Pollini allergenici",
+            "description": "Scegli la stazione provinciale ARPAV più vicina per il bollettino pollini e spore.",
+            "data": {
+              "pollen_station": "Stazione pollini"
+            }
+          },
+          "metar": {
+            "name": "Osservazioni METAR aggiuntive",
+            "description": "Seleziona opzionalmente un aeroporto vicino che emette METAR ogni 30 minuti per copertura nuvolosa e dati mancanti di pressione/visibilità.",
+            "data": {
+              "metar_station": "Aeroporto METAR",
+              "metar_fill_missing": "Completa i dati mancanti della stazione (visibilità, pressione)"
+            }
+          }
+        }
+      },
+      "thresholds": {
+        "title": "Soglie Personalizzate Stato del Cielo",
+        "data": {
+          "day_clear_threshold": "Soglia cielo sereno diurno (rapporto radiazione 0-1)",
+          "day_partly_threshold": "Soglia parzialmente nuvoloso diurno (0-1)",
+          "night_clear_threshold": "Soglia cielo sereno notturno (mag/arcsec²)",
+          "night_partly_threshold": "Soglia parzialmente nuvoloso notturno (mag/arcsec²)"
+        }
+      }
+    }
+  },
+  "selector": {
+    "forecast_language": {
+      "options": {
+        "auto": "Automatica (segue la lingua di Home Assistant)",
+        "it": "Italiano",
+        "en": "Inglese"
+      }
+    },
+    "radar_source": {
+      "options": {
+        "mosaic": "Mosaico Radar Veneto (PNG)",
+        "teolo": "Radar Monte Grande - Teolo",
+        "concordia": "Radar Concordia Sagittaria",
+        "none": "Disabilitato"
+      }
+    },
+    "infer_condition": {
+      "options": {
+        "auto": "Automatico (soglie predefinite)",
+        "custom_thresholds": "Automatico (soglie personalizzate)",
+        "disabled": "Disabilitato"
+      }
+    },
+    "day_condition": {
+      "options": {
+        "radiation_or_forecast": "Radiazione solare, ripiego su METAR o previsione",
+        "radiation": "Solo radiazione solare",
+        "radiation_or_metar": "Radiazione solare, ripiego su METAR",
+        "metar": "METAR, ripiego su previsione",
+        "forecast": "Bollettino di previsione",
+        "unknown": "Lascia sconosciuto"
+      }
+    },
+    "night_condition": {
+      "options": {
+        "brightness_or_forecast": "Brillanza del cielo, ripiego su previsione",
+        "brightness": "Solo brillanza del cielo",
+        "metar": "METAR, ripiego su previsione",
+        "forecast": "Bollettino di previsione",
+        "unknown": "Lascia sconosciuto"
+      }
+    }
+  },
+  "entity": {
+    "weather": {
+      "arpav_weather": {
+        "name": "Meteo"
+      }
+    },
+    "sensor": {
+      "temperature": { "name": "Temperatura" },
+      "temperature_min_24h": { "name": "Temperatura minima (24h)" },
+      "temperature_max_24h": { "name": "Temperatura massima (24h)" },
+      "dew_point": { "name": "Punto di rugiada" },
+      "apparent_temperature": { "name": "Temperatura percepita" },
+      "humidity": { "name": "Umidità" },
+      "pressure": { "name": "Pressione atmosferica" },
+      "visibility": { "name": "Visibilità" },
+      "wind_speed": { "name": "Velocità vento" },
+      "wind_speed_max_24h": { "name": "Vento massimo (24h)" },
+      "wind_gust_24h": { "name": "Raffica vento (24h)" },
+      "wind_bearing": { "name": "Direzione vento" },
+      "solar_radiation": { "name": "Radiazione solare" },
+      "uv_index": { "name": "Indice UV" },
+      "precipitation_5m": { "name": "Precipitazioni (ultimi 5 min)" },
+      "precipitation_intensity": { "name": "Intensità precipitazioni" },
+      "precipitation_1h": { "name": "Precipitazioni (ultima 1h)" },
+      "precipitation_3h": { "name": "Precipitazioni (ultime 3h)" },
+      "precipitation_6h": { "name": "Precipitazioni (ultime 6h)" },
+      "precipitation_12h": { "name": "Precipitazioni (ultime 12h)" },
+      "precipitation_24h": { "name": "Precipitazioni (ultime 24h)" },
+      "precipitation_today": { "name": "Precipitazioni oggi" },
+      "precipitation_probability": { "name": "Probabilità precipitazioni" },
+      "leaf_wetness": { "name": "Bagnatura fogliare" },
+      "snow_depth": { "name": "Altezza neve" },
+      "snow_line": { "name": "Quota neve" },
+      "bulletin_summary": { "name": "Bollettino meteo" },
+      "pm10_hourly": { "name": "PM10 (orario)" },
+      "pm10_daily": { "name": "PM10 (media giornaliera)" },
+      "pm25_hourly": { "name": "PM2.5 (orario)" },
+      "pm25_daily": { "name": "PM2.5 (media giornaliera)" },
+      "ozone": { "name": "Ozono (O₃)" },
+      "river_level": { "name": "Livello idrometrico" },
+      "river_discharge": { "name": "Portata fiume" },
+      "avalanche_dolomiti": {
+        "name": "Pericolo valanghe (Dolomiti)",
+        "state": {
+          "not_issued": "Non emesso",
+          "1_low": "1 - Debole",
+          "2_moderate": "2 - Moderato",
+          "3_considerable": "3 - Marcato",
+          "4_high": "4 - Forte",
+          "5_very_high": "5 - Molto forte"
+        }
+      },
+      "avalanche_prealpi": {
+        "name": "Pericolo valanghe (Prealpi)",
+        "state": {
+          "not_issued": "Non emesso",
+          "1_low": "1 - Debole",
+          "2_moderate": "2 - Moderato",
+          "3_considerable": "3 - Marcato",
+          "4_high": "4 - Forte",
+          "5_very_high": "5 - Molto forte"
+        }
+      },
+      "pollen_risk": {
+        "name": "Rischio pollini",
+        "state": {
+          "absent": "Assente",
+          "low": "Basso",
+          "moderate": "Moderato",
+          "high": "Elevato"
+        }
+      }
+    },
+    "binary_sensor": {
+      "weather_alert": { "name": "Avviso meteo" },
+      "pm10_exceedance": { "name": "Superamento limite PM10" },
+      "ozone_exceedance": { "name": "Superamento soglia Ozono" }
+    },
+    "image": {
+      "radar": { "name": "Radar meteo" }
+    }
+  }
+}

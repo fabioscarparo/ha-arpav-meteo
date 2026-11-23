@@ -1,0 +1,55 @@
+{
+  "entity": {
+    "sensor": {
+      "visibility": { "default": "mdi:eye" },
+      "precipitation_probability": { "default": "mdi:weather-rainy" },
+      "precipitation_intensity": { "default": "mdi:weather-pouring" },
+      "precipitation_5m": { "default": "mdi:water" },
+      "precipitation_1h": { "default": "mdi:water" },
+      "precipitation_3h": { "default": "mdi:water" },
+      "precipitation_6h": { "default": "mdi:water" },
+      "precipitation_12h": { "default": "mdi:water" },
+      "precipitation_24h": { "default": "mdi:water" },
+      "precipitation_today": { "default": "mdi:water-plus" },
+      "wind_bearing": { "default": "mdi:compass-outline" },
+      "wind_speed_max_24h": { "default": "mdi:weather-windy" },
+      "wind_gust_24h": { "default": "mdi:weather-windy-variant" },
+      "solar_radiation": { "default": "mdi:white-balance-sunny" },
+      "uv_index": { "default": "mdi:sun-wireless" },
+      "snow_depth": { "default": "mdi:snowflake" },
+      "snow_line": { "default": "mdi:elevation-rise" },
+      "bulletin_summary": { "default": "mdi:bulletin-board" },
+      "river_level": { "default": "mdi:waves-arrow-up" },
+      "river_discharge": { "default": "mdi:water-pump" },
+      "avalanche_dolomiti": { "default": "mdi:landslide" },
+      "avalanche_prealpi": { "default": "mdi:landslide" },
+      "pollen_risk": { "default": "mdi:flower-pollen" }
+    },
+    "binary_sensor": {
+      "weather_alert": {
+        "default": "mdi:weather-lightning",
+        "state": {
+          "on": "mdi:alert-octagon",
+          "off": "mdi:check-circle-outline"
+        }
+      },
+      "pm10_exceedance": {
+        "default": "mdi:air-filter",
+        "state": {
+          "on": "mdi:smog",
+          "off": "mdi:air-filter"
+        }
+      },
+      "ozone_exceedance": {
+        "default": "mdi:molecule",
+        "state": {
+          "on": "mdi:alert-circle",
+          "off": "mdi:molecule"
+        }
+      }
+    },
+    "image": {
+      "radar": { "default": "mdi:radar" }
+    }
+  }
+}
