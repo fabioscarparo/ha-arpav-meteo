@@ -1,7 +1,7 @@
 {
   "domain": "arpa_veneto_meteo",
   "name": "ARPA Veneto Meteo",
-  "after_dependencies": ["recorder"],
+  "after_dependencies": ["frontend", "http", "recorder"],
   "codeowners": ["@fabioscarparo"],
   "config_flow": true,
   "dependencies": [],
@@ -10,5 +10,5 @@
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/fabioscarparo/ha-arpav-meteo/issues",
   "requirements": [],
-  "version": "1.0.2"
+  "version": "1.1.0"
 }

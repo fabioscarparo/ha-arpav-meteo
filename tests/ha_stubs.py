@@ -123,17 +123,45 @@ def _install_ha_stubs() -> None:
     ha_const.UnitOfVolumeFlowRate = UnitOfVolumeFlowRate  # type: ignore[attr-defined]
     sys.modules["homeassistant.const"] = ha_const
 
+    # homeassistant.components.frontend & homeassistant.components.http
+    ha_frontend = types.ModuleType("homeassistant.components.frontend")
+
+    def add_extra_js_url(hass: Any, url: str, es5: bool = False) -> None:
+        urls = getattr(hass, "_extra_js_urls", None)
+        if urls is None:
+            urls = []
+            hass._extra_js_urls = urls
+        urls.append((url, es5))
+
+    ha_frontend.add_extra_js_url = add_extra_js_url  # type: ignore[attr-defined]
+    sys.modules["homeassistant.components.frontend"] = ha_frontend
+
+    ha_http = types.ModuleType("homeassistant.components.http")
+
+    @dataclass
+    class StaticPathConfig:
+        url_path: str
+        path: str
+        cache_headers: bool = True
+
+    ha_http.StaticPathConfig = StaticPathConfig  # type: ignore[attr-defined]
+    sys.modules["homeassistant.components.http"] = ha_http
+
     # homeassistant.core
     ha_core = types.ModuleType("homeassistant.core")
 
     class HomeAssistant:
         def __init__(self) -> None:
+            self.data: dict[str, Any] = {}
             self.config = types.SimpleNamespace(
                 language="it",
                 latitude=45.4,
                 longitude=11.88,
                 components=set(),
             )
+
+        async def async_add_executor_job(self, target: Any, *args: Any) -> Any:
+            return target(*args)
 
     class ServiceCall:
         def __init__(self, data: dict[str, Any] | None = None) -> None:

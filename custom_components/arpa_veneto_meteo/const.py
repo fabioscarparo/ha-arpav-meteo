@@ -6,6 +6,11 @@ from datetime import timedelta, timezone
 
 DOMAIN = "arpa_veneto_meteo"
 
+# Built-in Lovelace card serving metadata
+CARD_VERSION = "1.1.0"
+CARD_FILENAME = "arpa-veneto-meteo-card.js"
+CARD_URL = f"/{DOMAIN}/{CARD_FILENAME}"
+
 ATTRIBUTION = "Data provided by ARPA Veneto (CC BY 4.0)"
 ATTRIBUTION_METAR = (
     "Data provided by ARPA Veneto (CC BY 4.0), "

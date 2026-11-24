@@ -52,6 +52,11 @@ and JSON feeds with no API keys or accounts required.
 - **Optional METAR and sky brightness**: aerodrome cloud cover and missing
   visibility/pressure fallback via NOAA Aviation Weather Center, plus long-term
   statistics archiving for night sky brightness.
+- **Built-in Lovelace card**: native Home Assistant dashboard card served
+  automatically by the integration (no extra HACS plugin or manual resource
+  needed), with a full visual editor to toggle header, alerts, weather details,
+  daily/twice-daily forecasts, radar, textual bulletin, air quality, pollen,
+  hydrology and avalanches.
 - **English and Italian**, following Home Assistant's configured language.
 
 ## Quick start
@@ -173,6 +178,59 @@ created, keeping the device clean without permanently `unknown` entities.
 | PM10 limit exceeded | `binary_sensor` (`problem`) | `on` when official daily mean PM10 exceeds `50 µg/m³` |
 | Ozone threshold exceeded | `binary_sensor` (`problem`) | `on` when hourly Ozone exceeds `180 µg/m³` |
 | Weather radar | `image` | Veneto Mosaic PNG or Teolo / Concordia JPEG, cached for 5 minutes |
+
+## Dashboard card
+
+The integration automatically registers a built-in Lovelace card
+(`custom:arpa-veneto-meteo-card`) built on Home Assistant's native design
+tokens (light and dark themes, English and Italian, sections grid and mobile
+responsive). No manual dashboard resource or separate HACS frontend repository
+is required.
+
+### Adding the card
+
+1. Open a dashboard, select **Edit dashboard -> Add card**, and search for
+   **ARPA Veneto Meteo**.
+2. Choose your **ARPA Veneto Meteo** device in the visual editor (no entity IDs
+   to type).
+3. Expand **Visible sections** or **Current conditions visibility** to show or
+   hide any module or individual metric. Modules not configured on your device
+   are hidden automatically.
+
+### Card configuration
+
+```yaml
+type: custom:arpa-veneto-meteo-card
+device_id: 0123456789abcdef0123456789abcdef
+name: Padova                # optional: custom title
+color: blue                 # optional: HA color name or CSS color
+compact: false              # optional: compact spacing
+show_header: true           # station title, condition, current temp & 24h min/max
+show_alerts: true           # active weather alert, PM10 & Ozone limit banners
+show_metrics: true          # humidity, wind, rain, pressure, UV, visibility, snow
+show_forecast: true         # weather forecast strip
+forecast_type: both         # daily | twice_daily | both
+forecast_days: 5            # 2..7
+show_radar: true            # live radar image with fullscreen modal
+radar_collapsed: false      # start with radar collapsed
+show_bulletin: true         # regional bulletin summary with full-text modal
+show_air_quality: true      # PM10, PM2.5 and Ozone cards
+show_pollen: true           # pollen risk pill, species chips and full table modal
+show_hydrology: true        # river water level, trend and discharge
+show_avalanche: true        # Dolomiti / Prealpi danger levels and details modal
+```
+
+Individual weather tiles can also be toggled via `show_metric_humidity`,
+`show_metric_wind`, `show_metric_precipitation`, `show_metric_pressure`,
+`show_metric_dew_point`, `show_metric_solar_uv`, `show_metric_visibility`,
+`show_metric_snow` and `show_metric_leaf_wetness`.
+
+> [!TIP]
+> After updating the integration, do a hard reload in your browser
+> (`Ctrl+Shift+R` or `Cmd+Shift+R`), or reset the frontend cache in the Home
+> Assistant Companion App (**Settings -> Companion app -> Troubleshooting ->
+> Reset frontend cache** on Android, or **Debugging -> Clear web view cache**
+> on iOS) if the new card does not appear immediately.
 
 ## Actions
 

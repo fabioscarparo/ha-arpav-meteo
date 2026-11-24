@@ -24,6 +24,7 @@ from .const import (
     DOMAIN,
 )
 from .coordinator import ArpaVenetoDataUpdateCoordinator
+from .frontend import async_register_frontend
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -62,11 +63,13 @@ async def async_setup(hass: HomeAssistant, config: dict) -> bool:
     if not hass.services.has_service(DOMAIN, "archive_brightness"):
         hass.services.async_register(DOMAIN, "archive_brightness", handle_archive_brightness)
 
+    await async_register_frontend(hass)
     return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ArpaVenetoConfigEntry) -> bool:
     """Set up ARPA Veneto Meteo from a config entry."""
+    await async_register_frontend(hass)
     coordinator = ArpaVenetoDataUpdateCoordinator(hass, entry)
     await coordinator.async_config_entry_first_refresh()
 

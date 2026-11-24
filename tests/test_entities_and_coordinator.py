@@ -6,6 +6,7 @@ import json
 import pathlib
 import unittest
 from datetime import datetime
+from typing import Any
 from unittest.mock import AsyncMock, patch
 
 from tests.ha_stubs import install_stubs_if_needed
@@ -419,6 +420,97 @@ class TestRadarImageEntityCaching(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(img2, b"\x89PNGFAKE")
             # Second call within 5 minutes must use cached bytes
             self.assertEqual(m_rad.call_count, 1)
+
+
+class TestFrontendCardServing(unittest.IsolatedAsyncioTestCase):
+    """Verify built-in Lovelace card registration, version sync, and frontend contracts."""
+
+    async def test_frontend_static_path_and_extra_js_registration_is_idempotent(self) -> None:
+        import hashlib
+
+        from custom_components.arpa_veneto_meteo.const import CARD_FILENAME, CARD_URL
+        from custom_components.arpa_veneto_meteo.frontend import async_register_frontend
+
+        registered_paths: list[Any] = []
+
+        class _FakeHttp:
+            async def async_register_static_paths(self, configs: list[Any]) -> None:
+                registered_paths.extend(configs)
+
+        hass = HomeAssistant()
+        hass.http = _FakeHttp()  # type: ignore[attr-defined]
+
+        # Must skip safely when frontend component is not loaded (e.g. headless/tests)
+        skipped = await async_register_frontend(hass)
+        self.assertFalse(skipped)
+        self.assertEqual(len(registered_paths), 0)
+
+        hass.config.components.add("frontend")
+        first = await async_register_frontend(hass)
+        second = await async_register_frontend(hass)
+        self.assertTrue(first)
+        self.assertFalse(second)
+        self.assertEqual(len(registered_paths), 1)
+        self.assertEqual(registered_paths[0].url_path, CARD_URL)
+        self.assertTrue(registered_paths[0].cache_headers)
+        card_file = pathlib.Path(registered_paths[0].path)
+        self.assertTrue(card_file.is_file())
+        self.assertEqual(card_file.name, CARD_FILENAME)
+        expected_digest = hashlib.sha256(card_file.read_bytes()).hexdigest()[:12]
+        self.assertEqual(
+            getattr(hass, "_extra_js_urls", []),
+            [(f"{CARD_URL}?v={expected_digest}", False)],
+        )
+
+    def test_lovelace_card_versions_and_design_contracts(self) -> None:
+        import shutil
+        import subprocess
+
+        from custom_components.arpa_veneto_meteo.const import CARD_FILENAME, CARD_VERSION
+
+        manifest = json.loads((COMP_DIR / "manifest.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifest["version"], CARD_VERSION)
+        self.assertEqual(manifest["dependencies"], [])
+        self.assertIn("frontend", manifest["after_dependencies"])
+        self.assertIn("http", manifest["after_dependencies"])
+
+        card_path = COMP_DIR / "frontend" / CARD_FILENAME
+        self.assertTrue(card_path.is_file())
+        source = card_path.read_text(encoding="utf-8")
+
+        self.assertIn(f'const VERSION = "{CARD_VERSION}"', source)
+        self.assertIn("container-type: inline-size", source)
+        self.assertIn("overscroll-behavior: contain", source)
+        self.assertIn('closedby", "any"', source)
+        self.assertIn("closedBy", source)
+        self.assertIn('customElements.whenDefined("home-assistant")', source)
+        self.assertIn("window.customCards", source)
+        self.assertIn("async function loadHaForm()", source)
+        self.assertIn("flatten: true", source)
+        self.assertIn("filter: { integration: DOMAIN }", source)
+        self.assertNotIn("prefers-color-scheme", source)
+        self.assertNotIn(":host-context", source)
+        self.assertNotIn('role="dialog"', source)
+        self.assertNotIn("aria-modal", source)
+        self.assertNotIn("__ARPAV_DEMO__", source)
+
+        node_bin = shutil.which("node")
+        if node_bin is not None:
+            syntax = subprocess.run(
+                [node_bin, "--check", str(card_path)],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(syntax.returncode, 0, syntax.stderr)
+
+            behavior = subprocess.run(
+                [node_bin, str(REPO_ROOT / "tests" / "test_lovelace_card.mjs")],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(behavior.returncode, 0, behavior.stderr or behavior.stdout)
 
 
 if __name__ == "__main__":
