@@ -202,6 +202,9 @@
           "moderate": "Moderate",
           "high": "High"
         }
+      },
+      "pollen_species": {
+        "name": "Pollen {species}"
       }
     },
     "binary_sensor": {

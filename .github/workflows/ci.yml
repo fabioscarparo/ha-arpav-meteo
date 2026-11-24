@@ -28,8 +28,6 @@ jobs:
       - uses: hacs/action@main
         with:
           category: integration
-          # Remove 'brands' once custom_components/arpa_veneto_meteo/brand/icon.png is added
-          ignore: brands
 
   validate-hassfest:
     runs-on: ubuntu-latest

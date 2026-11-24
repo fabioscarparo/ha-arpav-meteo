@@ -23,7 +23,8 @@
       "river_discharge": { "default": "mdi:water-pump" },
       "avalanche_dolomiti": { "default": "mdi:landslide" },
       "avalanche_prealpi": { "default": "mdi:landslide" },
-      "pollen_risk": { "default": "mdi:flower-pollen" }
+      "pollen_risk": { "default": "mdi:flower-pollen" },
+      "pollen_species": { "default": "mdi:flower-pollen-outline" }
     },
     "binary_sensor": {
       "weather_alert": {

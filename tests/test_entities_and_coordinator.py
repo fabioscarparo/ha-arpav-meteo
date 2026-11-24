@@ -145,6 +145,8 @@ class TestRecorderAndHACompliance(unittest.TestCase):
                     sensor_tr,
                     f"Missing sensor translation {desc.translation_key} in {lang_name}.json",
                 )
+            # Per-species pollen sensors: translated name with the species as placeholder
+            self.assertIn("{species}", sensor_tr["pollen_species"]["name"])
             bs_tr = doc["entity"]["binary_sensor"]
             for bdesc in BINARY_SENSOR_DESCRIPTIONS:
                 self.assertIn(

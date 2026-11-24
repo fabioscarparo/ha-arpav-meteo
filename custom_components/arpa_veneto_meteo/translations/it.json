@@ -202,6 +202,9 @@
           "moderate": "Moderato",
           "high": "Elevato"
         }
+      },
+      "pollen_species": {
+        "name": "Polline {species}"
       }
     },
     "binary_sensor": {

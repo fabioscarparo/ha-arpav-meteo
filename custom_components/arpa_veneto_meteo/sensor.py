@@ -692,7 +692,7 @@ class ArpaVenetoPollenSpeciesSensor(ArpaVenetoEntity, SensorEntity):
 
     _attr_state_class = SensorStateClass.MEASUREMENT
     _attr_native_unit_of_measurement = "granuli/m³"
-    _attr_icon = "mdi:flower-pollen-outline"
+    _attr_translation_key = "pollen_species"
 
     def __init__(
         self,
@@ -705,7 +705,7 @@ class ArpaVenetoPollenSpeciesSensor(ArpaVenetoEntity, SensorEntity):
         self._species_code = species.code
         self._species_slug = species.slug
         self._attr_unique_id = f"{config_entry.entry_id}_pollen_{species.slug}"
-        self._attr_name = f"Pollen {species.name}"
+        self._attr_translation_placeholders = {"species": species.name}
 
     def _find_species(self) -> PollenSpecies | None:
         """Look up this sensor's species entry in the latest pollen report."""

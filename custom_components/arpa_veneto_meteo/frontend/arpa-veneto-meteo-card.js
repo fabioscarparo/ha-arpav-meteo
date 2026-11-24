@@ -6,7 +6,7 @@
  * ha-badge, ha-alert, card features, ha-control-select, ha-form, ha-dialog).
  */
 
-const VERSION = "1.1.0";
+const VERSION = "1.1.1";
 const DOMAIN = "arpa_veneto_meteo";
 const CARD_TYPE = "arpa-veneto-meteo-card";
 const EDITOR_TYPE = "arpa-veneto-meteo-card-editor";
@@ -125,6 +125,47 @@ const AVALANCHE_LEVEL_META = {
 
 const POLLEN_RANK = { absent: 0, low: 1, moderate: 2, high: 3 };
 
+// Entities whose state the card shows. A state change of any other entity of the device (rolling
+// precipitation totals, 24h wind maximum...) doesn't redraw the card. Every ctx.map key the card
+// reads must be listed here; the tests check it.
+const WATCHED_KEYS = new Set([
+  "weather.arpav_weather",
+  "image.radar",
+  "binary_sensor.weather_alert",
+  "binary_sensor.pm10_exceedance",
+  "binary_sensor.ozone_exceedance",
+  "sensor.temperature",
+  "sensor.temperature_min_24h",
+  "sensor.temperature_max_24h",
+  "sensor.apparent_temperature",
+  "sensor.humidity",
+  "sensor.wind_speed",
+  "sensor.wind_bearing",
+  "sensor.wind_gust_24h",
+  "sensor.precipitation_today",
+  "sensor.precipitation_intensity",
+  "sensor.precipitation_probability",
+  "sensor.pressure",
+  "sensor.dew_point",
+  "sensor.solar_radiation",
+  "sensor.uv_index",
+  "sensor.visibility",
+  "sensor.snow_depth",
+  "sensor.snow_line",
+  "sensor.leaf_wetness",
+  "sensor.bulletin_summary",
+  "sensor.pm10_daily",
+  "sensor.pm10_hourly",
+  "sensor.pm25_daily",
+  "sensor.pm25_hourly",
+  "sensor.ozone",
+  "sensor.pollen_risk",
+  "sensor.river_level",
+  "sensor.river_discharge",
+  "sensor.avalanche_dolomiti",
+  "sensor.avalanche_prealpi",
+]);
+
 // Card and editor strings (English default, Italian native).
 const STRINGS = {
   en: {
@@ -173,6 +214,8 @@ const STRINGS = {
     pollen_moderate: "Moderate",
     pollen_high: "High",
     pollen_comment: "ARPAV comment",
+    pollen_level: "Level",
+    pollen_unit: "grains/m³",
     hydro_level: "River level",
     hydro_discharge: "Discharge",
     hydro_rising: "Rising",
@@ -283,6 +326,8 @@ const STRINGS = {
     pollen_moderate: "Moderato",
     pollen_high: "Elevato",
     pollen_comment: "Commento ARPAV",
+    pollen_level: "Livello",
+    pollen_unit: "granuli/m³",
     hydro_level: "Livello idrometrico",
     hydro_discharge: "Portata",
     hydro_rising: "In crescita",
@@ -422,20 +467,41 @@ function formatState(hass, stateObj) {
   return unit ? `${stateObj.state} ${unit}` : String(stateObj.state);
 }
 
+const dateLocale = (hass) => hass?.locale?.language || hass?.language || "en";
+
+// Time zone chosen in the user profile: "server" means Home Assistant's, otherwise the browser's.
+const timeZoneOption = (hass) =>
+  hass?.locale?.time_zone === "server" && hass?.config?.time_zone
+    ? { timeZone: hass.config.time_zone }
+    : {};
+
+// 12 or 24 hour clock from the user profile, like the frontend's own useAmPm().
+function useAmPm(hass) {
+  const tf = hass?.locale?.time_format;
+  if (tf === "12") return true;
+  if (tf === "24") return false;
+  try {
+    const locale = tf === "system" ? undefined : dateLocale(hass);
+    return new Intl.DateTimeFormat(locale, { hour: "numeric" }).resolvedOptions().hour12 === true;
+  } catch {
+    return false;
+  }
+}
+
+const capitalize = (label) => label.charAt(0).toUpperCase() + label.slice(1);
+
 function formatTime(hass, isoString) {
   if (!isoString) return "";
   const dt = new Date(isoString);
   if (Number.isNaN(dt.getTime())) return "";
-  const lang = hass?.locale?.language || hass?.language || "en";
-  const tf = hass?.locale?.time_format;
-  const opts = { hour: "2-digit", minute: "2-digit" };
-  if (tf === "12") opts.hour12 = true;
-  else if (tf === "24") opts.hour12 = false;
-  if (hass?.locale?.time_zone === "server" && hass?.config?.time_zone) {
-    opts.timeZone = hass.config.time_zone;
-  }
+  const amPm = useAmPm(hass);
   try {
-    return new Intl.DateTimeFormat(lang, opts).format(dt);
+    return new Intl.DateTimeFormat(dateLocale(hass), {
+      hour: amPm ? "numeric" : "2-digit",
+      minute: "2-digit",
+      hourCycle: amPm ? "h12" : "h23",
+      ...timeZoneOption(hass),
+    }).format(dt);
   } catch {
     return dt.toLocaleTimeString();
   }
@@ -444,10 +510,14 @@ function formatTime(hass, isoString) {
 function formatShortDay(hass, isoString) {
   const dt = new Date(isoString);
   if (Number.isNaN(dt.getTime())) return String(isoString || "").slice(0, 10);
-  const lang = hass?.locale?.language || hass?.language || "en";
   try {
-    const label = new Intl.DateTimeFormat(lang, { weekday: "short", day: "numeric" }).format(dt);
-    return label.charAt(0).toUpperCase() + label.slice(1);
+    return capitalize(
+      new Intl.DateTimeFormat(dateLocale(hass), {
+        weekday: "short",
+        day: "numeric",
+        ...timeZoneOption(hass),
+      }).format(dt)
+    );
   } catch {
     return String(isoString).slice(5, 10);
   }
@@ -455,16 +525,19 @@ function formatShortDay(hass, isoString) {
 
 function formatLongDate(hass, dateStr) {
   if (!dateStr) return "";
-  const dt = new Date(dateStr.includes("T") ? dateStr : `${dateStr}T12:00:00`);
+  // A plain date is a calendar day, not an instant: format it in UTC so no time zone shifts it.
+  const dateOnly = /^\d{4}-\d{2}-\d{2}$/.test(dateStr);
+  const dt = dateOnly ? new Date(`${dateStr}T12:00:00Z`) : new Date(dateStr);
   if (Number.isNaN(dt.getTime())) return dateStr;
-  const lang = hass?.locale?.language || hass?.language || "en";
   try {
-    const label = new Intl.DateTimeFormat(lang, {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-    }).format(dt);
-    return label.charAt(0).toUpperCase() + label.slice(1);
+    return capitalize(
+      new Intl.DateTimeFormat(dateLocale(hass), {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        ...(dateOnly ? { timeZone: "UTC" } : timeZoneOption(hass)),
+      }).format(dt)
+    );
   } catch {
     return dateStr;
   }
@@ -491,6 +564,59 @@ function findFirstDeviceId(hass) {
       d.identifiers.some((pair) => Array.isArray(pair) && pair[0] === DOMAIN)
   );
   return dev?.id || "";
+}
+
+/*
+ * Minimal DOM patching: the card builds its markup as a string, then updates the live nodes in
+ * place instead of replacing them, so focus, hover, the forecast strip's scroll position and the
+ * radar image survive state updates. Children are matched by `data-key` when they have one (the
+ * card's sections, which come and go), otherwise by position.
+ */
+function patchAttributes(from, to) {
+  for (const { name } of [...from.attributes]) {
+    if (!to.hasAttribute(name)) from.removeAttribute(name);
+  }
+  for (const { name, value } of [...to.attributes]) {
+    if (from.getAttribute(name) !== value) from.setAttribute(name, value);
+  }
+}
+
+function sameKind(a, b) {
+  return a.nodeType === b.nodeType && a.nodeName === b.nodeName;
+}
+
+function patchChildren(fromParent, toParent) {
+  const keyed = new Map();
+  for (const node of fromParent.childNodes) {
+    const key = node.nodeType === 1 ? node.getAttribute("data-key") : null;
+    if (key) keyed.set(key, node);
+  }
+  const targets = [...toParent.childNodes];
+  targets.forEach((to, index) => {
+    const current = fromParent.childNodes[index] || null;
+    const key = to.nodeType === 1 ? to.getAttribute("data-key") : null;
+    let match = null;
+    if (key) {
+      match = keyed.get(key) || null;
+      if (match && !sameKind(match, to)) match = null;
+    } else if (current && sameKind(current, to) && !(current.nodeType === 1 && current.getAttribute("data-key"))) {
+      match = current;
+    }
+    if (!match) {
+      fromParent.insertBefore(to, current);
+      return;
+    }
+    if (match !== current) fromParent.insertBefore(match, current);
+    if (match.nodeType === 1) {
+      patchAttributes(match, to);
+      patchChildren(match, to);
+    } else if (match.nodeValue !== to.nodeValue) {
+      match.nodeValue = to.nodeValue;
+    }
+  });
+  while (fromParent.childNodes.length > targets.length) {
+    fromParent.lastChild.remove();
+  }
 }
 
 function fireEvent(node, type, detail = {}) {
@@ -551,6 +677,111 @@ function hydroTrendMeta(trend) {
     labelKey: "hydro_stable",
     color: "var(--secondary-text-color, #727272)",
   };
+}
+
+/*
+ * The Veneto radar mosaic is a transparent overlay drawn for a light map: thin black borders and
+ * a precipitation scale whose weakest class is a dark blue. On a dark card both disappear, and
+ * inverting the image would also invert the scale (heavy rain turns dark, light rain turns
+ * bright). In dark themes the card recolors it on a canvas instead: borders take the theme's
+ * secondary text color, colors without enough contrast against the card are lifted toward white,
+ * and every other color stays exactly as ARPAV draws it.
+ */
+const RADAR_DARK_MAX_WIDTH = 1600;
+const RADAR_MIN_CONTRAST = 3;
+const RADAR_BORDER_MAX_CHANNEL = 48;
+
+const srgbToLinear = (channel) => {
+  const v = channel / 255;
+  return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+};
+
+const relativeLuminance = (r, g, b) =>
+  0.2126 * srgbToLinear(r) + 0.7152 * srgbToLinear(g) + 0.0722 * srgbToLinear(b);
+
+function liftToLuminance(r, g, b, target) {
+  if (relativeLuminance(r, g, b) >= target) return [r, g, b];
+  const mix = (k) => [r + (255 - r) * k, g + (255 - g) * k, b + (255 - b) * k];
+  let lo = 0;
+  let hi = 1;
+  for (let step = 0; step < 12; step += 1) {
+    const k = (lo + hi) / 2;
+    if (relativeLuminance(...mix(k)) >= target) hi = k;
+    else lo = k;
+  }
+  return mix(hi).map(Math.round);
+}
+
+/** Recolor RGBA pixels of the radar mosaic in place for a dark card background. */
+function recolorRadarForDark(pixels, lineRgb, backgroundRgb) {
+  const bgLum = relativeLuminance(...backgroundRgb);
+  // Only lift colors against a dark background; on a light one the target would wash them out.
+  const target = bgLum < 0.18 ? RADAR_MIN_CONTRAST * (bgLum + 0.05) - 0.05 : 0;
+  const lifted = new Map();
+  for (let i = 0; i < pixels.length; i += 4) {
+    const a = pixels[i + 3];
+    if (a === 0) continue;
+    const r = pixels[i];
+    const g = pixels[i + 1];
+    const b = pixels[i + 2];
+    if (r < RADAR_BORDER_MAX_CHANNEL && g < RADAR_BORDER_MAX_CHANNEL && b < RADAR_BORDER_MAX_CHANNEL) {
+      // Border lines, thinned by the downscale: theme line color, alpha doubled to stay visible.
+      pixels[i] = lineRgb[0];
+      pixels[i + 1] = lineRgb[1];
+      pixels[i + 2] = lineRgb[2];
+      pixels[i + 3] = Math.min(255, a * 2);
+      continue;
+    }
+    if (!target) continue;
+    const key = (r << 16) | (g << 8) | b;
+    let out = lifted.get(key);
+    if (!out) {
+      out = liftToLuminance(r, g, b, target);
+      lifted.set(key, out);
+    }
+    pixels[i] = out[0];
+    pixels[i + 1] = out[1];
+    pixels[i + 2] = out[2];
+  }
+  return pixels;
+}
+
+/** Normalize any CSS color the canvas understands to [r, g, b], or return the fallback. */
+function cssColorToRgb(ctx, value, fallback) {
+  ctx.fillStyle = `rgb(${fallback.join(",")})`;
+  if (value) ctx.fillStyle = value;
+  const normalized = String(ctx.fillStyle);
+  if (normalized.startsWith("#") && normalized.length === 7) {
+    return [1, 3, 5].map((i) => parseInt(normalized.slice(i, i + 2), 16));
+  }
+  const parts = normalized.match(/[\d.]+/g);
+  return parts && parts.length >= 3 ? parts.slice(0, 3).map(Number) : fallback;
+}
+
+/** Load the mosaic, recolor it for the dark theme and return an object URL of the result. */
+async function buildDarkRadarUrl(src, colors) {
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.src = src;
+  await img.decode();
+  const scale = Math.min(1, RADAR_DARK_MAX_WIDTH / img.naturalWidth);
+  const width = Math.max(1, Math.round(img.naturalWidth * scale));
+  const height = Math.max(1, Math.round(img.naturalHeight * scale));
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  const line = cssColorToRgb(ctx, colors.line, [155, 155, 155]);
+  const background = cssColorToRgb(ctx, colors.background, [28, 28, 28]);
+  ctx.drawImage(img, 0, 0, width, height);
+  // Throws for a cross-origin image served without CORS: the caller keeps the original image.
+  const data = ctx.getImageData(0, 0, width, height);
+  recolorRadarForDark(data.data, line, background);
+  ctx.putImageData(data, 0, 0);
+  const blob = await new Promise((resolve, reject) => {
+    canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("Radar encoding failed"))), "image/png");
+  });
+  return URL.createObjectURL(blob);
 }
 
 /**
@@ -1046,7 +1277,9 @@ function buildCardStyles() {
       display: inline-flex;
       align-items: center;
       gap: var(--ha-space-1, 4px);
-      min-height: 32px;
+      /* 40px touch target; the negative margin keeps the section header 32px tall */
+      min-height: 40px;
+      margin-block: -4px;
       padding: 0 var(--ha-space-2, 8px);
       margin-inline-end: -8px;
       border-radius: var(--ha-border-radius-md, 8px);
@@ -1084,6 +1317,8 @@ function buildCardStyles() {
 
     /* Native Segmented Control (like ha-control-select) */
     .segmented {
+      /* A control, not a weather state: primary color like core's ha-control-select */
+      --control-color: var(--primary-color, #03a9f4);
       position: relative;
       display: flex;
       gap: 4px;
@@ -1121,7 +1356,7 @@ function buildCardStyles() {
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background: var(--tile-color);
+      background: var(--control-color);
       opacity: 0;
       pointer-events: none;
       transition: opacity 80ms ease-in-out;
@@ -1132,7 +1367,7 @@ function buildCardStyles() {
     }
 
     .option:focus-visible {
-      box-shadow: inset 0 0 0 2px var(--tile-color);
+      box-shadow: inset 0 0 0 2px var(--control-color);
     }
 
     .option.selected {
@@ -1368,10 +1603,6 @@ function buildCardStyles() {
       width: 100%;
       aspect-ratio: 16 / 10;
       object-fit: contain;
-    }
-
-    .radar-img.dark-mosaic {
-      filter: invert(0.88) hue-rotate(180deg);
     }
 
     .radar-scrim {
@@ -1776,10 +2007,6 @@ function buildCardStyles() {
       display: block;
     }
 
-    .dialog-radar-img.dark-mosaic {
-      filter: invert(0.88) hue-rotate(180deg);
-    }
-
     .dialog-table {
       width: 100%;
       border-collapse: collapse;
@@ -1819,8 +2046,15 @@ function buildCardStyles() {
       display: none;
     }
 
-    /* Container-aware breakpoints (inside .card container-type: inline-size) */
-    @container (min-width: 380px) {
+    /* Container-aware breakpoints (inside .card container-type: inline-size). A metric needs
+       about 150px to show "1.008,3 hPa" and its secondary line without cutting them. */
+    @container (max-width: 259px) {
+      .metrics-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @container (min-width: 500px) {
       .metrics-grid:not(.cols-1):not(.cols-2) {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
@@ -1832,7 +2066,7 @@ function buildCardStyles() {
       }
     }
 
-    @container (min-width: 540px) {
+    @container (min-width: 680px) {
       .metrics-grid:not(.cols-1):not(.cols-2):not(.cols-3) {
         grid-template-columns: repeat(4, minmax(0, 1fr));
       }
@@ -1866,6 +2100,9 @@ function buildCardStyles() {
 }
 
 class ArpaVenetoMeteoCard extends HTMLElement {
+  // Exposed for the headless tests
+  static recolorRadarForDark = recolorRadarForDark;
+
   static getConfigElement() {
     return document.createElement(EDITOR_TYPE);
   }
@@ -1887,11 +2124,13 @@ class ArpaVenetoMeteoCard extends HTMLElement {
     this._unsubDaily = null;
     this._unsubTwice = null;
     this._subscribedEntityId = null;
+    this._forecastEntityId = null;
     this._cacheEntitiesRef = null;
     this._cacheDeviceId = null;
     this._cacheFallback = null;
     this._entityCache = null;
     this._domReady = false;
+    this._radarDark = null;
   }
 
   setConfig(config) {
@@ -1936,6 +2175,8 @@ class ArpaVenetoMeteoCard extends HTMLElement {
 
   disconnectedCallback() {
     this._unsubscribeForecasts();
+    if (this._radarDark?.url) URL.revokeObjectURL(this._radarDark.url);
+    this._radarDark = null;
     this._detached = true;
   }
 
@@ -1954,7 +2195,7 @@ class ArpaVenetoMeteoCard extends HTMLElement {
   getGridOptions() {
     return {
       columns: 12,
-      min_columns: 6,
+      min_columns: this._config?.compact ? 6 : 9,
     };
   }
 
@@ -1967,7 +2208,7 @@ class ArpaVenetoMeteoCard extends HTMLElement {
     ) {
       return true;
     }
-    const watched = this._getEntityIndex(hass).allEntityIds;
+    const watched = this._getEntityIndex(hass).watchedIds;
     return watched.some((id) => old.states?.[id] !== hass.states?.[id]);
   }
 
@@ -1985,45 +2226,42 @@ class ArpaVenetoMeteoCard extends HTMLElement {
 
     const byKey = new Map();
     const pollenIds = [];
-    const allEntityIds = [];
+    const watchedIds = [];
 
     if (hass) {
       const registry = hass.entities || {};
       for (const entry of Object.values(registry)) {
         if (!entry || entry.device_id !== deviceId || entry.disabled_by) continue;
         const entityId = entry.entity_id;
-        allEntityIds.push(entityId);
         const domain = entityId.split(".")[0];
         const tkey = entry.translation_key;
+        let key = tkey ? `${domain}.${tkey}` : null;
+        if (!key && domain === "weather") key = "weather.arpav_weather";
+        if (!key && domain === "image") key = "image.radar";
 
-        if (tkey) {
-          const composite = `${domain}.${tkey}`;
-          const list = byKey.get(composite) || [];
-          list.push(entityId);
-          byKey.set(composite, list);
-        } else if (domain === "weather") {
-          const list = byKey.get("weather.arpav_weather") || [];
-          list.push(entityId);
-          byKey.set("weather.arpav_weather", list);
-        } else if (domain === "image") {
-          const list = byKey.get("image.radar") || [];
-          list.push(entityId);
-          byKey.set("image.radar", list);
-        } else if (domain === "sensor") {
+        // Per-species pollen sensors: translation key since 1.1.1, recognized by attributes before
+        if (key === "sensor.pollen_species" || (!key && domain === "sensor")) {
           pollenIds.push(entityId);
+          watchedIds.push(entityId);
+          continue;
         }
+        if (!key) continue;
+        const list = byKey.get(key) || [];
+        list.push(entityId);
+        byKey.set(key, list);
+        if (WATCHED_KEYS.has(key)) watchedIds.push(entityId);
       }
 
       if (!byKey.has("weather.arpav_weather") && fallback) {
         byKey.set("weather.arpav_weather", [fallback]);
-        allEntityIds.push(fallback);
+        watchedIds.push(fallback);
       }
     }
 
     this._cacheEntitiesRef = hass?.entities || null;
     this._cacheDeviceId = deviceId;
     this._cacheFallback = fallback;
-    this._entityCache = { deviceId, byKey, pollenIds, allEntityIds };
+    this._entityCache = { deviceId, byKey, pollenIds, watchedIds };
     return this._entityCache;
   }
 
@@ -2067,7 +2305,6 @@ class ArpaVenetoMeteoCard extends HTMLElement {
       device,
       map,
       pollenSpecies,
-      allEntityIds: index.allEntityIds,
     };
   }
 
@@ -2164,6 +2401,11 @@ class ArpaVenetoMeteoCard extends HTMLElement {
       this._unsubscribeForecasts();
       this._subscribedEntityId = weatherEntityId;
     }
+    // Another station: drop its forecasts instead of showing them until the new ones arrive
+    if (this._forecastEntityId !== weatherEntityId) {
+      this._forecastEntityId = weatherEntityId;
+      this._forecasts = { daily: null, twice_daily: null };
+    }
 
     if (!this._hass.connection || typeof this._hass.connection.subscribeMessage !== "function") {
       const attrs = weatherEntry.stateObj?.attributes || {};
@@ -2204,9 +2446,13 @@ class ArpaVenetoMeteoCard extends HTMLElement {
       }
     );
 
+    // A refused subscription (forecast type not supported) shows "no forecast" instead of
+    // loading forever. The rejected promise stays stored so it isn't retried on every update;
+    // reconnecting the card or switching station retries it.
     subPromise.catch(() => {
-      if (forecastType === "daily") this._unsubDaily = null;
-      if (forecastType === "twice_daily") this._unsubTwice = null;
+      if (this._subscribedEntityId !== entityId) return;
+      this._forecasts[forecastType] = [];
+      this._render();
     });
 
     if (forecastType === "daily") this._unsubDaily = subPromise;
@@ -2251,8 +2497,8 @@ class ArpaVenetoMeteoCard extends HTMLElement {
     this._bodyEl.className = cfg.compact ? "card compact" : "card";
 
     if (!hass || (!ctx.deviceId && !weatherEntry)) {
-      this._bodyEl.innerHTML = `
-        <div class="empty">
+      this._patchBody(`
+        <div class="empty" data-key="empty">
           <span class="tile-icon">
             <ha-icon icon="mdi:weather-partly-cloudy" aria-hidden="true"></ha-icon>
           </span>
@@ -2261,49 +2507,44 @@ class ArpaVenetoMeteoCard extends HTMLElement {
             <span class="secondary">${escapeHtml(t(hass, "select_device_hint"))}</span>
           </div>
         </div>
-      `;
+      `);
       return;
     }
 
+    const sections = [
+      ["header", cfg.show_header, () => this._renderHeader(ctx)],
+      ["alerts", cfg.show_alerts, () => this._renderAlerts(ctx)],
+      ["metrics", cfg.show_metrics, () => this._renderMetrics(ctx)],
+      ["forecast", cfg.show_forecast && weatherEntry, () => this._renderForecast(ctx)],
+      ["radar", cfg.show_radar, () => this._renderRadar(ctx)],
+      ["bulletin", cfg.show_bulletin, () => this._renderBulletin(ctx)],
+      ["air-quality", cfg.show_air_quality, () => this._renderAirQuality(ctx)],
+      ["pollen", cfg.show_pollen, () => this._renderPollen(ctx)],
+      ["hydrology", cfg.show_hydrology, () => this._renderHydrology(ctx)],
+      ["avalanche", cfg.show_avalanche, () => this._renderAvalanche(ctx)],
+    ];
     const blocks = [];
-    if (cfg.show_header) blocks.push(this._renderHeader(ctx));
-    if (cfg.show_alerts) {
-      const html = this._renderAlerts(ctx);
-      if (html) blocks.push(html);
+    for (const [key, shown, render] of sections) {
+      if (!shown) continue;
+      const html = render();
+      // Key the section's root element, so sections that appear or disappear don't shift the rest
+      if (html) blocks.push(html.replace(/^\s*<([a-z][a-z0-9-]*)/, `<$1 data-key="${key}"`));
     }
-    if (cfg.show_metrics) {
-      const html = this._renderMetrics(ctx);
-      if (html) blocks.push(html);
-    }
-    if (cfg.show_forecast && weatherEntry) {
-      blocks.push(this._renderForecast(ctx));
-    }
-    if (cfg.show_radar) {
-      const html = this._renderRadar(ctx);
-      if (html) blocks.push(html);
-    }
-    if (cfg.show_bulletin) {
-      const html = this._renderBulletin(ctx);
-      if (html) blocks.push(html);
-    }
-    if (cfg.show_air_quality) {
-      const html = this._renderAirQuality(ctx);
-      if (html) blocks.push(html);
-    }
-    if (cfg.show_pollen) {
-      const html = this._renderPollen(ctx);
-      if (html) blocks.push(html);
-    }
-    if (cfg.show_hydrology) {
-      const html = this._renderHydrology(ctx);
-      if (html) blocks.push(html);
-    }
-    if (cfg.show_avalanche) {
-      const html = this._renderAvalanche(ctx);
-      if (html) blocks.push(html);
-    }
+    this._patchBody(blocks.join(""));
+  }
 
-    this._bodyEl.innerHTML = blocks.join("");
+  /** Update the card body to the new markup, patching the live nodes rather than replacing them. */
+  _patchBody(html) {
+    if (html === this._lastBodyHtml) return;
+    this._lastBodyHtml = html;
+    const body = this._bodyEl;
+    const template = document.createElement("template");
+    if (!body.firstChild || !template.content?.childNodes) {
+      body.innerHTML = html;
+      return;
+    }
+    template.innerHTML = html;
+    patchChildren(body, template.content);
   }
 
   _renderHeader(ctx) {
@@ -2546,16 +2787,20 @@ class ArpaVenetoMeteoCard extends HTMLElement {
     if (cfg.show_metric_snow) {
       const snowDepth = ctx.map["sensor.snow_depth"];
       const snowLine = ctx.map["sensor.snow_line"];
+      // ARPAV gives altitude temperatures as text ("-5", "0", "-2/0"); a number is formatted.
       const altBits = [];
-      if (wAttrs.temperature_1500m) altBits.push(`1500m ${wAttrs.temperature_1500m}°`);
-      if (wAttrs.temperature_2000m) altBits.push(`2000m ${wAttrs.temperature_2000m}°`);
-      if (wAttrs.temperature_3000m) altBits.push(`3000m ${wAttrs.temperature_3000m}°`);
+      for (const level of ["1500", "2000", "3000"]) {
+        const raw = wAttrs[`temperature_${level}m`];
+        if (raw === null || raw === undefined || raw === "") continue;
+        const text = typeof raw === "number" ? formatNumber(hass, raw, 1) : String(raw);
+        altBits.push(`${level}m ${text}°`);
+      }
 
       if (snowDepth && isLiveState(snowDepth.stateObj)) {
-        const sub = snowLine && isLiveState(snowLine.stateObj) ? snowLine.stateObj.state : "";
+        const sub = snowLine && isLiveState(snowLine.stateObj) ? formatState(hass, snowLine.stateObj) : "";
         addMetric(snowDepth.entityId, "mdi:snowflake", t(hass, "metric_snow"), formatState(hass, snowDepth.stateObj), sub);
       } else if (snowLine && isLiveState(snowLine.stateObj)) {
-        addMetric(snowLine.entityId, "mdi:elevation-rise", t(hass, "metric_snow_line"), snowLine.stateObj.state);
+        addMetric(snowLine.entityId, "mdi:elevation-rise", t(hass, "metric_snow_line"), formatState(hass, snowLine.stateObj));
       }
       if (altBits.length && wEntry) {
         addMetric(wEntry.entityId, "mdi:elevation-rise", t(hass, "altitude_temps"), altBits[0], altBits.slice(1).join(" - "));
@@ -2702,7 +2947,7 @@ class ArpaVenetoMeteoCard extends HTMLElement {
           : "radar_mosaic";
     const sourceLabel = t(hass, sourceKey);
     const updatedTime = formatTime(hass, radarEntry.stateObj.state);
-    const mosaicDarkCls = hass?.themes?.darkMode && sourceKey === "radar_mosaic" ? " dark-mosaic" : "";
+    const displaySrc = this._radarDisplaySrc(imgSrc, sourceKey === "radar_mosaic");
 
     if (this._radarCollapsed) {
       return `
@@ -2736,8 +2981,8 @@ class ArpaVenetoMeteoCard extends HTMLElement {
           aria-label="${escapeHtml(t(hass, "radar_expand"))}"
         >
           <img
-            class="radar-img${mosaicDarkCls}"
-            src="${escapeHtml(imgSrc)}"
+            class="radar-img"
+            src="${escapeHtml(displaySrc)}"
             alt="${escapeHtml(`${t(hass, "radar_alt")} - ${sourceLabel}`)}"
             loading="lazy"
           />
@@ -3151,9 +3396,53 @@ class ArpaVenetoMeteoCard extends HTMLElement {
           ? "radar_concordia"
           : "radar_mosaic";
     const title = `${t(this._hass, "section_radar")} - ${t(this._hass, sourceKey)}`;
-    const mosaicDarkCls = this._hass?.themes?.darkMode && sourceKey === "radar_mosaic" ? " dark-mosaic" : "";
-    const html = `<img class="dialog-radar-img${mosaicDarkCls}" src="${escapeHtml(imgSrc)}" alt="${escapeHtml(title)}" />`;
+    const displaySrc = this._radarDisplaySrc(imgSrc, sourceKey === "radar_mosaic");
+    const html = `<img class="dialog-radar-img" src="${escapeHtml(displaySrc)}" alt="${escapeHtml(title)}" />`;
     this._showDialog(title, html, radarEntry.entityId);
+  }
+
+  /**
+   * Source to show for the radar: the original image, or in a dark theme the mosaic recolored
+   * for the card background. The recolored copy is built once per frame and theme; until it is
+   * ready, or if it can't be built, the original image is shown.
+   */
+  _radarDisplaySrc(imgSrc, isMosaic) {
+    if (!isMosaic || !this._hass?.themes?.darkMode || !imgSrc) return imgSrc;
+    const colors = this._radarDarkColors();
+    const key = `${imgSrc}|${colors.line}|${colors.background}`;
+    if (this._radarDark?.key === key) return this._radarDark.url || imgSrc;
+
+    if (this._radarDark?.url) URL.revokeObjectURL(this._radarDark.url);
+    this._radarDark = { key, url: null };
+    buildDarkRadarUrl(imgSrc, colors)
+      .then((url) => {
+        if (this._detached || this._radarDark?.key !== key) {
+          URL.revokeObjectURL(url);
+          return;
+        }
+        this._radarDark.url = url;
+        const dialogImg = this._dialogEl?.querySelector(".dialog-radar-img");
+        if (dialogImg) dialogImg.src = url;
+        this._render();
+      })
+      .catch(() => {
+        // Canvas unavailable or image not readable: keep showing the original mosaic.
+      });
+    return imgSrc;
+  }
+
+  _radarDarkColors() {
+    let style = null;
+    try {
+      style = getComputedStyle(this);
+    } catch {
+      // Not rendered yet, or no CSSOM (tests): use the default dark theme colors.
+    }
+    const read = (name) => style?.getPropertyValue(name)?.trim() || "";
+    return {
+      line: read("--secondary-text-color") || "#9b9b9b",
+      background: read("--ha-card-background") || read("--card-background-color") || "#1c1c1c",
+    };
   }
 
   _openBulletinDialog() {
@@ -3227,12 +3516,13 @@ class ArpaVenetoMeteoCard extends HTMLElement {
     const rowsHtml = species
       .map((sp) => {
         const dotColor = POLLEN_LEVEL_COLORS[sp.risk] || "var(--disabled-color, #bdbdbd)";
-        const val =
-          typeof sp.value === "number" ? `${formatNumber(hass, sp.value, 1)} granuli/m³` : "-";
+        const val = typeof sp.value === "number" ? formatNumber(hass, sp.value, 1) : "-";
+        // The card's own label in the user's language; ARPAV's Italian label only for unknown levels
+        const level = t(hass, `pollen_${sp.risk}`, null) || sp.risk_label || sp.risk || "-";
         return `
           <tr>
             <td>${escapeHtml(sp.name || "")}</td>
-            <td><span class="dialog-dot" style="--dot-color: ${escapeHtml(dotColor)};"></span>${escapeHtml(sp.risk_label || t(hass, `pollen_${sp.risk}`))}</td>
+            <td><span class="dialog-dot" style="--dot-color: ${escapeHtml(dotColor)};"></span>${escapeHtml(level)}</td>
             <td style="font-variant-numeric: tabular-nums;">${escapeHtml(val)}</td>
           </tr>
         `;
@@ -3258,8 +3548,8 @@ class ArpaVenetoMeteoCard extends HTMLElement {
           <thead>
             <tr>
               <th scope="col">${escapeHtml(t(hass, "pollen_details"))}</th>
-              <th scope="col">${escapeHtml(t(hass, "section_pollen"))}</th>
-              <th scope="col">granuli/m³</th>
+              <th scope="col">${escapeHtml(t(hass, "pollen_level"))}</th>
+              <th scope="col">${escapeHtml(t(hass, "pollen_unit"))}</th>
             </tr>
           </thead>
           <tbody>${rowsHtml}</tbody>
@@ -3359,7 +3649,38 @@ class ArpaVenetoMeteoCardEditor extends HTMLElement {
       .catch(() => {});
   }
 
-  _buildSchema(hass) {
+  _buildSchema(hass, config = DEFAULTS) {
+    // Options of a hidden section are hidden too, like core editors do
+    const forecastOptions = config.show_forecast
+      ? [
+          {
+            type: "grid",
+            name: "",
+            schema: [
+              {
+                name: "forecast_type",
+                selector: {
+                  select: {
+                    mode: "dropdown",
+                    options: [
+                      { value: "daily", label: t(hass, "editor_forecast_type_daily") },
+                      { value: "twice_daily", label: t(hass, "editor_forecast_type_twice") },
+                      { value: "both", label: t(hass, "editor_forecast_type_both") },
+                    ],
+                  },
+                },
+              },
+              {
+                name: "forecast_days",
+                selector: { number: { min: 2, max: 7, step: 1, mode: "box" } },
+              },
+            ],
+          },
+        ]
+      : [];
+    const radarOptions = config.show_radar
+      ? [{ name: "radar_collapsed", selector: { boolean: {} } }]
+      : [];
     return [
       {
         name: "device_id",
@@ -3386,31 +3707,9 @@ class ArpaVenetoMeteoCardEditor extends HTMLElement {
           { name: "show_alerts", selector: { boolean: {} } },
           { name: "show_metrics", selector: { boolean: {} } },
           { name: "show_forecast", selector: { boolean: {} } },
-          {
-            type: "grid",
-            name: "",
-            schema: [
-              {
-                name: "forecast_type",
-                selector: {
-                  select: {
-                    mode: "dropdown",
-                    options: [
-                      { value: "daily", label: t(hass, "editor_forecast_type_daily") },
-                      { value: "twice_daily", label: t(hass, "editor_forecast_type_twice") },
-                      { value: "both", label: t(hass, "editor_forecast_type_both") },
-                    ],
-                  },
-                },
-              },
-              {
-                name: "forecast_days",
-                selector: { number: { min: 2, max: 7, step: 1, mode: "box" } },
-              },
-            ],
-          },
+          ...forecastOptions,
           { name: "show_radar", selector: { boolean: {} } },
-          { name: "radar_collapsed", selector: { boolean: {} } },
+          ...radarOptions,
           { name: "show_bulletin", selector: { boolean: {} } },
           { name: "show_air_quality", selector: { boolean: {} } },
           { name: "show_pollen", selector: { boolean: {} } },
@@ -3467,7 +3766,7 @@ class ArpaVenetoMeteoCardEditor extends HTMLElement {
 
     this._form.hass = this._hass;
     this._form.data = { ...DEFAULTS, ...this._config };
-    this._form.schema = this._buildSchema(this._hass);
+    this._form.schema = this._buildSchema(this._hass, this._form.data);
     this._form.computeLabel = (schema) => t(this._hass, `editor_${schema.name}`, schema.name);
     this._form.computeHelper = (schema) => t(this._hass, `helper_${schema.name}`, null);
   }

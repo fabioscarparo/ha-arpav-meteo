@@ -57,7 +57,7 @@ and JSON feeds with no API keys or accounts required.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/images/wall-dark.svg">
-  <img alt="ARPA Veneto Meteo Lovelace cards on a Home Assistant dashboard: Padova weather, forecasts, radar, pollen and hydrology, Cortina snow and avalanches, Vicenza air quality alerts, Belluno thunderstorm and rising river, Venice compact half-day forecast, and Verona clean air quality, with demo data" src="docs/images/wall-light.svg">
+  <img alt="ARPA Veneto Meteo Lovelace cards on a Home Assistant dashboard: Padova weather, forecasts, radar, air quality, pollen and hydrology, Cortina snow and avalanches, Vicenza fog and air quality alerts, Belluno thunderstorm and rising river, Venice compact half-day forecast, and Verona bulletin and clean air quality, with demo data" src="docs/images/wall-light.svg">
 </picture>
 
 ## Quick start
@@ -72,7 +72,8 @@ and JSON feeds with no API keys or accounts required.
 
 ### Requirements
 
-- Home Assistant **2025.1** or later
+- Home Assistant **2025.1** or later (**2026.3** or later to show the
+  integration's icon, which ships inside the integration)
 - [HACS](https://hacs.xyz/) (recommended)
 
 ### Install with HACS
