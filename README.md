@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/images/header.svg" alt="ARPA Veneto Meteo Home Assistant" width="460">
+  <img src="docs/images/header.svg" alt="ARPA Veneto Meteo Home Assistant" width="240">
 </p>
 
 <p align="center">
