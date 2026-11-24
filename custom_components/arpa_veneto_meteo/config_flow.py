@@ -209,9 +209,7 @@ class ArpaVenetoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             else:
                 zone_name = self._zones.get(zone_id, f"Zona {zone_id}")
                 station_id = int(station_id_str)
-                station_label = (
-                    f"{station.name} ({station.province})" if station.province else station.name
-                )
+                station_label = station.display_name()
                 comune_id = (
                     self._selected_comune_id
                     if self._selected_comune_id is not None
