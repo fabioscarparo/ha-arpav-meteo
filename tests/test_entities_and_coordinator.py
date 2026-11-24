@@ -95,6 +95,13 @@ class TestRecorderAndHACompliance(unittest.TestCase):
         by_key = {d.key: d for d in SENSOR_DESCRIPTIONS}
         self.assertEqual(by_key["precipitation_5m"].native_unit_of_measurement, "mm")
         self.assertEqual(by_key["ozone"].native_unit_of_measurement, "µg/m³")
+        self.assertEqual(by_key["pm10_daily"].native_unit_of_measurement, "µg/m³")
+        for py_file in COMP_DIR.glob("*.py"):
+            self.assertNotIn(
+                "CONCENTRATION_MICROGRAMS_PER_CUBIC_METER",
+                py_file.read_text(encoding="utf-8"),
+                f"Deprecated concentration constant used in {py_file.name}",
+            )
 
     def test_sensor_uses_native_value_and_weather_does_not_override_state(self) -> None:
         self.assertIn("native_value", ArpaVenetoSensorEntity.__dict__)

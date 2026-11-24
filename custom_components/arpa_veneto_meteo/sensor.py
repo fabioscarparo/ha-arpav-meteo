@@ -11,6 +11,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
 
+from homeassistant import const as ha_const
 from homeassistant.components.sensor import (
     SensorDeviceClass,
     SensorEntity,
@@ -19,7 +20,6 @@ from homeassistant.components.sensor import (
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
-    CONCENTRATION_MICROGRAMS_PER_CUBIC_METER,
     DEGREE,
     PERCENTAGE,
     UnitOfIrradiance,
@@ -45,9 +45,15 @@ from .coordinator import ArpaVenetoDataUpdateCoordinator
 from .entity import ArpaVenetoEntity
 from .models import ArpaVenetoData, PollenSpecies
 
-# Compatibility across HA 2025.1..2026.x for WIND_DIRECTION / MEASUREMENT_ANGLE
+# Compatibility across HA 2025.1..2027.8+ for newer sensor constants
 _WIND_DIR_DEVICE_CLASS = getattr(SensorDeviceClass, "WIND_DIRECTION", None)
 _ANGLE_STATE_CLASS = getattr(SensorStateClass, "MEASUREMENT_ANGLE", None)
+_UNIT_OF_DENSITY = getattr(ha_const, "UnitOfDensity", None)
+_MICROGRAMS_PER_CUBIC_METER: str = (
+    _UNIT_OF_DENSITY.MICROGRAMS_PER_CUBIC_METER
+    if _UNIT_OF_DENSITY is not None
+    else "µg/m³"
+)
 
 MAX_HA_STATE_LEN = 255
 TRUNCATION_SUFFIX = "..."
@@ -492,7 +498,7 @@ SENSOR_DESCRIPTIONS: tuple[ArpaVenetoSensorDescription, ...] = (
         translation_key="pm10_hourly",
         device_class=SensorDeviceClass.PM10,
         state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement=CONCENTRATION_MICROGRAMS_PER_CUBIC_METER,
+        native_unit_of_measurement=_MICROGRAMS_PER_CUBIC_METER,
         suggested_display_precision=1,
         value_fn=_sensor_val("pm10_hourly"),
         include_fn=lambda coord, _data: coord.pm10_station_id is not None,
@@ -503,7 +509,7 @@ SENSOR_DESCRIPTIONS: tuple[ArpaVenetoSensorDescription, ...] = (
         translation_key="pm10_daily",
         device_class=SensorDeviceClass.PM10,
         state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement=CONCENTRATION_MICROGRAMS_PER_CUBIC_METER,
+        native_unit_of_measurement=_MICROGRAMS_PER_CUBIC_METER,
         suggested_display_precision=1,
         value_fn=_sensor_val("pm10_daily"),
         include_fn=lambda coord, _data: coord.pm10_station_id is not None,
@@ -514,7 +520,7 @@ SENSOR_DESCRIPTIONS: tuple[ArpaVenetoSensorDescription, ...] = (
         translation_key="pm25_hourly",
         device_class=SensorDeviceClass.PM25,
         state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement=CONCENTRATION_MICROGRAMS_PER_CUBIC_METER,
+        native_unit_of_measurement=_MICROGRAMS_PER_CUBIC_METER,
         suggested_display_precision=1,
         value_fn=_sensor_val("pm25_hourly"),
         include_fn=lambda coord, _data: coord.pm25_station_id is not None,
@@ -525,7 +531,7 @@ SENSOR_DESCRIPTIONS: tuple[ArpaVenetoSensorDescription, ...] = (
         translation_key="pm25_daily",
         device_class=SensorDeviceClass.PM25,
         state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement=CONCENTRATION_MICROGRAMS_PER_CUBIC_METER,
+        native_unit_of_measurement=_MICROGRAMS_PER_CUBIC_METER,
         suggested_display_precision=1,
         value_fn=_sensor_val("pm25_daily"),
         include_fn=lambda coord, _data: coord.pm25_station_id is not None,
@@ -536,7 +542,7 @@ SENSOR_DESCRIPTIONS: tuple[ArpaVenetoSensorDescription, ...] = (
         translation_key="ozone",
         device_class=SensorDeviceClass.OZONE,
         state_class=SensorStateClass.MEASUREMENT,
-        native_unit_of_measurement=CONCENTRATION_MICROGRAMS_PER_CUBIC_METER,
+        native_unit_of_measurement=_MICROGRAMS_PER_CUBIC_METER,
         suggested_display_precision=1,
         value_fn=_sensor_val("ozone"),
         attrs_fn=lambda data: (

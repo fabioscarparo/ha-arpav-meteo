@@ -106,10 +106,13 @@ def _install_ha_stubs() -> None:
     class UnitOfVolumeFlowRate(StrEnum):
         CUBIC_METERS_PER_SECOND = "m³/s"
 
+    class UnitOfDensity(StrEnum):
+        MICROGRAMS_PER_CUBIC_METER = "µg/m³"
+
     ha_const.Platform = Platform  # type: ignore[attr-defined]
     ha_const.PERCENTAGE = "%"  # type: ignore[attr-defined]
     ha_const.DEGREE = "°"  # type: ignore[attr-defined]
-    ha_const.CONCENTRATION_MICROGRAMS_PER_CUBIC_METER = "µg/m³"  # type: ignore[attr-defined]
+    ha_const.UnitOfDensity = UnitOfDensity  # type: ignore[attr-defined]
     ha_const.UnitOfTemperature = UnitOfTemperature  # type: ignore[attr-defined]
     ha_const.UnitOfPressure = UnitOfPressure  # type: ignore[attr-defined]
     ha_const.UnitOfSpeed = UnitOfSpeed  # type: ignore[attr-defined]
