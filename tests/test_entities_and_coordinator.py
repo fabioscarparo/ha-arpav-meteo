@@ -155,8 +155,11 @@ class TestRecorderAndHACompliance(unittest.TestCase):
 
     def test_no_long_dashes_anywhere_in_repository(self) -> None:
         """Ensure no em-dash or en-dash characters exist anywhere in repository files."""
+        binary_suffixes = {".png", ".jpg", ".jpeg", ".webp", ".ico", ".woff2"}
         for p in REPO_ROOT.rglob("*"):
             if not p.is_file() or ".git" in p.parts or "__pycache__" in p.parts:
+                continue
+            if p.suffix.lower() in binary_suffixes:
                 continue
             txt = p.read_text(encoding="utf-8", errors="replace")
             self.assertNotIn("\u2014", txt, f"Found em-dash in {p}")

@@ -1370,6 +1370,10 @@ function buildCardStyles() {
       object-fit: contain;
     }
 
+    .radar-img.dark-mosaic {
+      filter: invert(0.88) hue-rotate(180deg);
+    }
+
     .radar-scrim {
       position: absolute;
       left: 0;
@@ -1394,7 +1398,7 @@ function buildCardStyles() {
     /* Air quality mini-cards (native HA border + slim EU limit progress bar) */
     .aq-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(94px, 1fr));
       gap: var(--ha-space-2, 8px);
     }
 
@@ -1405,7 +1409,7 @@ function buildCardStyles() {
       flex-direction: column;
       gap: 6px;
       min-height: 76px;
-      padding: 10px var(--ha-space-3, 12px);
+      padding: 8px;
       border-radius: var(--radius);
       border: var(--ha-card-border-width, 1px) solid var(--ha-card-border-color, var(--divider-color, #e0e0e0));
       background: transparent;
@@ -1451,6 +1455,7 @@ function buildCardStyles() {
       font-size: var(--ha-font-size-xs, 10px);
       color: var(--secondary-text-color, #727272);
       font-variant-numeric: tabular-nums;
+      white-space: nowrap;
     }
 
     .aq-reading {
@@ -1769,6 +1774,10 @@ function buildCardStyles() {
       height: auto;
       border-radius: var(--ha-border-radius-lg, 12px);
       display: block;
+    }
+
+    .dialog-radar-img.dark-mosaic {
+      filter: invert(0.88) hue-rotate(180deg);
     }
 
     .dialog-table {
@@ -2693,6 +2702,7 @@ class ArpaVenetoMeteoCard extends HTMLElement {
           : "radar_mosaic";
     const sourceLabel = t(hass, sourceKey);
     const updatedTime = formatTime(hass, radarEntry.stateObj.state);
+    const mosaicDarkCls = hass?.themes?.darkMode && sourceKey === "radar_mosaic" ? " dark-mosaic" : "";
 
     if (this._radarCollapsed) {
       return `
@@ -2726,7 +2736,7 @@ class ArpaVenetoMeteoCard extends HTMLElement {
           aria-label="${escapeHtml(t(hass, "radar_expand"))}"
         >
           <img
-            class="radar-img"
+            class="radar-img${mosaicDarkCls}"
             src="${escapeHtml(imgSrc)}"
             alt="${escapeHtml(`${t(hass, "radar_alt")} - ${sourceLabel}`)}"
             loading="lazy"
@@ -3141,7 +3151,8 @@ class ArpaVenetoMeteoCard extends HTMLElement {
           ? "radar_concordia"
           : "radar_mosaic";
     const title = `${t(this._hass, "section_radar")} - ${t(this._hass, sourceKey)}`;
-    const html = `<img class="dialog-radar-img" src="${escapeHtml(imgSrc)}" alt="${escapeHtml(title)}" />`;
+    const mosaicDarkCls = this._hass?.themes?.darkMode && sourceKey === "radar_mosaic" ? " dark-mosaic" : "";
+    const html = `<img class="dialog-radar-img${mosaicDarkCls}" src="${escapeHtml(imgSrc)}" alt="${escapeHtml(title)}" />`;
     this._showDialog(title, html, radarEntry.entityId);
   }
 

@@ -1,14 +1,10 @@
-<!-- Uncomment once icon and header assets are added in docs/images/
 <p align="center">
-  <img src="docs/images/icon.svg" alt="ARPA Veneto Meteo" width="80">
+  <img src="docs/images/icon.svg" alt="" width="80">
 </p>
 
 <p align="center">
-  <img src="docs/images/header.svg" alt="ARPA Veneto Meteo Home Assistant" width="520">
+  <img src="docs/images/header.svg" alt="ARPA Veneto Meteo Home Assistant" width="460">
 </p>
--->
-
-<h1 align="center">ARPA Veneto Meteo</h1>
 
 <p align="center">
   <strong>Official ARPA Veneto weather, forecasts, alerts, radar, air quality,<br>
@@ -58,6 +54,11 @@ and JSON feeds with no API keys or accounts required.
   daily/twice-daily forecasts, radar, textual bulletin, air quality, pollen,
   hydrology and avalanches.
 - **English and Italian**, following Home Assistant's configured language.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/wall-dark.svg">
+  <img alt="ARPA Veneto Meteo Lovelace cards on a Home Assistant dashboard: Padova weather, forecasts, radar, pollen and hydrology, Cortina snow and avalanches, Vicenza air quality alerts, Belluno thunderstorm and rising river, Venice compact half-day forecast, and Verona clean air quality, with demo data" src="docs/images/wall-light.svg">
+</picture>
 
 ## Quick start
 
