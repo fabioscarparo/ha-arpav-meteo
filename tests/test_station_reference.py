@@ -113,8 +113,29 @@ class TestConfigFlowStationOrder(unittest.TestCase):
         flow._selected_comune_id = 2614
         _, stations = self._run_station_step(flow)
         stations.assert_awaited_once_with(*BOARA_PISANI["coords"])
-        # the zone of the municipality is known again for the zone preselection
+        # the municipalities are loaded, with their zones
         self.assertEqual(flow._comune_to_zone[2614], BOARA_PISANI["zone"])
+
+    def _default_zone(self, flow: Any) -> str:
+        # The voluptuous stub drops defaults: keep them in the schema keys to read them back
+        with patch.object(config_flow.vol, "Required", lambda key, default=None: (key, default)):
+            result, _ = self._run_station_step(flow)
+        schema = getattr(result["data_schema"], "schema", result["data_schema"])
+        # The schema keys are now (name, default) pairs
+        return dict(list(schema))[CONF_ZONE_ID]
+
+    def test_new_entry_preselects_the_municipality_zone(self) -> None:
+        flow = self._flow()
+        flow._comuni, flow._comune_to_zone, flow._comune_istat = self._comuni()
+        flow._selected_comune_id = 2614
+        self.assertEqual(self._default_zone(flow), "13")
+
+    def test_reconfigure_preselects_the_saved_zone(self) -> None:
+        # Set up on zone 10 although Boara Pisani belongs to zone 13: keep the user's choice
+        flow = self._flow()
+        flow._reconfigure_entry = SimpleNamespace(data={CONF_COMUNE_ID: 2614, CONF_ZONE_ID: 10, CONF_STATION_ID: 1})
+        flow._selected_comune_id = 2614
+        self.assertEqual(self._default_zone(flow), "10")
 
 
 if __name__ == "__main__":

@@ -231,15 +231,20 @@ class ArpaVenetoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             except ArpaVenetoApiError as err:
                 _LOGGER.warning("Failed to fetch ARPAV municipalities: %s", err)
 
-        preselected_zone = (
-            self._comune_to_zone.get(self._selected_comune_id)
-            if self._selected_comune_id is not None
-            else (
-                int(self._reconfigure_entry.data[CONF_ZONE_ID])
-                if self._reconfigure_entry is not None
-                else None
-            )
+        # Reconfiguring starts from the zone the entry uses, which may differ from the
+        # municipality's own if it was changed at setup; a new entry starts from the
+        # municipality's zone.
+        saved_zone = (
+            self._reconfigure_entry.data.get(CONF_ZONE_ID)
+            if self._reconfigure_entry is not None
+            else None
         )
+        if saved_zone is not None:
+            preselected_zone: int | None = int(saved_zone)
+        elif self._selected_comune_id is not None:
+            preselected_zone = self._comune_to_zone.get(self._selected_comune_id)
+        else:
+            preselected_zone = None
 
         if not self._zones or not self._stations:
             try:
