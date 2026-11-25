@@ -36,6 +36,7 @@ from custom_components.arpa_veneto_meteo.const import (  # noqa: E402
     AQ_PARAM_PM25,
     ARPAV_TZ,
 )
+from custom_components.arpa_veneto_meteo.models import GeoStation  # noqa: E402
 
 
 class TestStationObservationsParser(unittest.TestCase):
@@ -580,6 +581,20 @@ class TestAirHydroAvalanchePollenRadarParsers(unittest.TestCase):
             "data": [{"dataora": "2026-11-23T21:30:00", "valore": "0.0", "nome_stazione": "Ekar"}]
         }
         self.assertIsNone(parse_brightness_reading(zero, now=now))
+
+    def test_geo_station_label_province(self) -> None:
+        tribano = GeoStation(station_id="1", name="Tribano", province="Padova", distance_km=7.6)
+        self.assertEqual(tribano.label(), "Tribano (Padova) - 7.6 km")
+        # ARPAV already writes the province in some station names.
+        concadirame = GeoStation(station_id="2", name="Concadirame (Rovigo)", province="Rovigo")
+        self.assertEqual(concadirame.label(), "Concadirame (Rovigo)")
+        self.assertEqual(concadirame.display_name(), "Concadirame (Rovigo)")
+        self.assertEqual(tribano.display_name(), "Tribano (Padova)")
+        self.assertEqual(GeoStation(station_id="3", name="Padova", province="Padova").label(), "Padova")
+        # A province that is only part of the name is still added.
+        belluno = GeoStation(station_id="4", name="Belluno - aeroporto", province="Belluno")
+        self.assertEqual(belluno.label(), "Belluno - aeroporto (Belluno)")
+        self.assertEqual(GeoStation(station_id="5", name="Lusia").label(), "Lusia")
 
     def test_math_helpers(self) -> None:
         self.assertAlmostEqual(haversine_km(45.4064, 11.8768, 45.4408, 12.3155), 34.4, delta=0.5)

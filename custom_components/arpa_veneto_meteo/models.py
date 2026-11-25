@@ -63,9 +63,20 @@ class GeoStation:
     distance_km: float | None = None
     extra: dict[str, Any] = field(default_factory=dict)
 
+    def display_name(self) -> str:
+        """Return the station name with its province, unless the name already carries it."""
+        if not self.province:
+            return self.name
+        # Some ARPAV names already carry the province ("Concadirame (Rovigo)", "Padova").
+        name = self.name.casefold()
+        province = self.province.casefold()
+        if name == province or name.endswith(f"({province})"):
+            return self.name
+        return f"{self.name} ({self.province})"
+
     def label(self) -> str:
         """Build a readable dropdown label with province and distance when available."""
-        base = f"{self.name} ({self.province})" if self.province else self.name
+        base = self.display_name()
         if self.distance_km is not None:
             return f"{base} - {self.distance_km:.1f} km"
         return base
