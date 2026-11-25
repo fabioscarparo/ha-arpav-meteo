@@ -102,6 +102,42 @@ def _ensure_current_option(options: dict[str, str], current: str) -> dict[str, s
     return options
 
 
+# Optional catalogs of the options flow, in the order they are fetched: what each one lists and
+# where it comes from. Sources are proper names, shown to the user as they are in every language.
+_CATALOGS: tuple[tuple[str, str], ...] = (
+    ("PM10 stations", "ARPAV"),
+    ("PM2.5 stations", "ARPAV"),
+    ("ozone stations", "ARPAV"),
+    ("hydrometric stations", "ARPAV"),
+    ("pollen stations", "ARPAV"),
+    ("METAR aerodromes", "NOAA aviationweather.gov"),
+)
+
+
+def _describe_error(err: BaseException) -> str:
+    """Return an exception as 'Type: message', also when the message is empty (timeouts)."""
+    message = str(err)
+    return f"{type(err).__name__}: {message}" if message else type(err).__name__
+
+
+def _failed_catalog_sources(results: list[Any]) -> list[str]:
+    """Log every catalog that could not be loaded and return their sources, each once.
+
+    A failed catalog leaves its dropdown with only the current choice: the options form says so
+    instead of showing a silently empty list, and the log keeps the reason.
+    """
+    failed: list[str] = []
+    for (name, source), result in zip(_CATALOGS, results, strict=True):
+        if isinstance(result, asyncio.CancelledError):
+            raise result
+        if not isinstance(result, BaseException):
+            continue
+        _LOGGER.warning("Unable to load %s from %s: %s", name, source, _describe_error(result))
+        if source not in failed:
+            failed.append(source)
+    return failed
+
+
 class ArpaVenetoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Handle initial setup and reconfiguration for ARPA Veneto Meteo."""
 
@@ -351,6 +387,13 @@ class ArpaVenetoOptionsFlowHandler(config_entries.OptionsFlow):
         lon = self.config_entry.data.get(CONF_STATION_LON)
         ref_lat = float(lat) if lat is not None else None
         ref_lon = float(lon) if lon is not None else None
+        # A station listed without coordinates: sort from Home Assistant's location instead, so
+        # the METAR catalog (which needs a position) isn't left empty
+        if (ref_lat is None or ref_lon is None) and (
+            self.hass.config.latitude or self.hass.config.longitude
+        ):
+            ref_lat = float(self.hass.config.latitude)
+            ref_lon = float(self.hass.config.longitude)
 
         session = async_get_clientsession(self.hass)
         api = ArpaVenetoApiClient(session)
@@ -374,18 +417,17 @@ class ArpaVenetoOptionsFlowHandler(config_entries.OptionsFlow):
             ),
         ]
         results = await asyncio.gather(*catalog_tasks, return_exceptions=True)
+        failed_sources = _failed_catalog_sources(results)
 
         def _stations_map(res: Any) -> dict[str, str]:
-            """Convert a station list result into an id-to-label map, ignoring errors."""
+            """Convert a station list result into an id-to-label map (empty when it failed)."""
             if isinstance(res, BaseException):
-                _LOGGER.debug("Optional catalog unavailable during options flow: %s", res)
                 return {}
             return {st.station_id: st.label() for st in res}
 
         def _metar_map(res: Any) -> dict[str, str]:
-            """Convert a METAR aerodrome list into an ICAO-to-label map, ignoring errors."""
+            """Convert a METAR aerodrome list into an ICAO-to-label map (empty when it failed)."""
             if isinstance(res, BaseException):
-                _LOGGER.debug("METAR catalog unavailable during options flow: %s", res)
                 return {}
             return {st.icao: st.label for st in res}
 
@@ -596,7 +638,14 @@ class ArpaVenetoOptionsFlowHandler(config_entries.OptionsFlow):
             }
         )
 
-        return self.async_show_form(step_id="init", data_schema=schema)
+        return self.async_show_form(
+            step_id="init",
+            data_schema=schema,
+            errors={"base": "catalog_unavailable"} if failed_sources else {},
+            description_placeholders=(
+                {"sources": ", ".join(failed_sources)} if failed_sources else None
+            ),
+        )
 
     async def async_step_thresholds(
         self,

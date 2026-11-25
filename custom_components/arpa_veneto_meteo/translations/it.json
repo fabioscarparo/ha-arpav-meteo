@@ -29,6 +29,9 @@
     }
   },
   "options": {
+    "error": {
+      "catalog_unavailable": "Impossibile caricare alcuni elenchi di stazioni ({sources}). Le scelte salvate restano valide; riapri le opzioni per riprovare. Controlla i log per i dettagli."
+    },
     "step": {
       "init": {
         "title": "Opzioni ARPA Veneto Meteo",

@@ -6,7 +6,7 @@
  * ha-badge, ha-alert, card features, ha-control-select, ha-form, ha-dialog).
  */
 
-const VERSION = "1.1.1";
+const VERSION = "1.1.2";
 const DOMAIN = "arpa_veneto_meteo";
 const CARD_TYPE = "arpa-veneto-meteo-card";
 const EDITOR_TYPE = "arpa-veneto-meteo-card-editor";

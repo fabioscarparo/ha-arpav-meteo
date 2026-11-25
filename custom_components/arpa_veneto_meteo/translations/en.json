@@ -29,6 +29,9 @@
     }
   },
   "options": {
+    "error": {
+      "catalog_unavailable": "Unable to load some station lists ({sources}). Your saved selections are preserved; reopen options to retry. Check the logs for details."
+    },
     "step": {
       "init": {
         "title": "ARPA Veneto Meteo Options",
