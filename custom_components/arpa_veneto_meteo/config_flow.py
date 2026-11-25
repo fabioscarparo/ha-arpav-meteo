@@ -14,7 +14,12 @@ from homeassistant.helpers import selector
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from . import metar
-from .api import ArpaVenetoApiClient, ArpaVenetoApiError, haversine_km
+from .api import (
+    ArpaVenetoApiClient,
+    ArpaVenetoApiError,
+    haversine_km,
+    select_station_reference,
+)
 from .const import (
     CONF_ARCHIVE_BRIGHTNESS,
     CONF_COMUNE_ID,
@@ -147,6 +152,7 @@ class ArpaVenetoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         """Initialize ephemeral flow state."""
         self._comuni: dict[int, str] = {}
         self._comune_to_zone: dict[int, int] = {}
+        self._comune_istat: dict[int, int] = {}
         self._zones: dict[int, str] = {}
         self._zone_coords: dict[int, tuple[float, float]] = {}
         self._stations: dict[str, GeoStation] = {}
@@ -175,7 +181,11 @@ class ArpaVenetoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         if not self._comuni:
             try:
-                self._comuni, self._comune_to_zone = await self._api().async_get_comuni()
+                (
+                    self._comuni,
+                    self._comune_to_zone,
+                    self._comune_istat,
+                ) = await self._api().async_get_comuni()
             except ArpaVenetoApiError as err:
                 _LOGGER.warning("Failed to fetch ARPAV municipalities: %s", err)
                 errors["base"] = "cannot_connect"
@@ -209,6 +219,18 @@ class ArpaVenetoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         """Step 2: confirm forecast zone and pick a distance-sorted weather station."""
         errors: dict[str, str] = {}
 
+        if self._selected_comune_id is not None and not self._comune_istat:
+            # Reconfiguration skips the first step: load the municipalities here,
+            # for their zone and the coordinates the stations are sorted from.
+            try:
+                (
+                    self._comuni,
+                    self._comune_to_zone,
+                    self._comune_istat,
+                ) = await self._api().async_get_comuni()
+            except ArpaVenetoApiError as err:
+                _LOGGER.warning("Failed to fetch ARPAV municipalities: %s", err)
+
         preselected_zone = (
             self._comune_to_zone.get(self._selected_comune_id)
             if self._selected_comune_id is not None
@@ -222,10 +244,17 @@ class ArpaVenetoConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if not self._zones or not self._stations:
             try:
                 self._zones, self._zone_coords = await self._api().async_get_zones()
-                ref_lat, ref_lon = (
-                    self._zone_coords.get(preselected_zone, (None, None))
-                    if preselected_zone is not None
-                    else (None, None)
+                ref_lat, ref_lon = select_station_reference(
+                    (
+                        self._comune_istat.get(self._selected_comune_id)
+                        if self._selected_comune_id is not None
+                        else None
+                    ),
+                    (
+                        self._zone_coords.get(preselected_zone)
+                        if preselected_zone is not None
+                        else None
+                    ),
                 )
                 if ref_lat is None and self.hass.config.latitude:
                     ref_lat = self.hass.config.latitude

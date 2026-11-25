@@ -34,6 +34,7 @@ from zoneinfo import ZoneInfo
 
 import aiohttp
 
+from .comuni_coords import COMUNI_COORDS
 from .const import (
     API_REST_BASE,
     AQ_EXCLUDED_CODSEQS,
@@ -117,6 +118,23 @@ def haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     dlon = rlon2 - rlon1
     a = sin(dlat / 2) ** 2 + cos(rlat1) * cos(rlat2) * sin(dlon / 2) ** 2
     return 2 * 6371.0 * asin(min(1.0, sqrt(a)))
+
+
+def select_station_reference(
+    comune_istat: int | None,
+    zone_coord: tuple[float, float] | None,
+) -> tuple[float | None, float | None]:
+    """Return the point the setup sorts weather stations from.
+
+    The chosen municipality comes first: its coordinates are in COMUNI_COORDS,
+    keyed by the ISTAT code ARPAV gives in meteo_comuni. Without them the point
+    of the forecast zone is used, as before.
+    """
+    if comune_istat is not None and comune_istat in COMUNI_COORDS:
+        return COMUNI_COORDS[comune_istat]
+    if zone_coord is not None:
+        return zone_coord
+    return (None, None)
 
 
 def parse_arpav_timestamp(raw: str | None) -> datetime | None:
@@ -1029,8 +1047,8 @@ class ArpaVenetoApiClient:
 
     # -- Discovery / Registry endpoints --
 
-    async def async_get_comuni(self) -> tuple[dict[int, str], dict[int, int]]:
-        """Fetch municipalities: returns (comune_id -> display_name, comune_id -> zone_id)."""
+    async def async_get_comuni(self) -> tuple[dict[int, str], dict[int, int], dict[int, int]]:
+        """Fetch municipalities: (comune_id -> display_name, -> zone_id, -> ISTAT code)."""
         payload = await self._get_json(f"{API_REST_BASE}/meteo_comuni")
         rows = sorted(payload.get("data") or [], key=lambda x: str(x.get("comune") or ""))
         id_to_name = {
@@ -1043,7 +1061,12 @@ class ArpaVenetoApiClient:
             for r in rows
             if r.get("id") is not None and r.get("zonaid") is not None
         }
-        return id_to_name, id_to_zone
+        id_to_istat = {
+            int(r["id"]): istat
+            for r in rows
+            if r.get("id") is not None and (istat := _safe_int(r.get("istat"))) is not None
+        }
+        return id_to_name, id_to_zone, id_to_istat
 
     async def async_get_zones(self) -> tuple[dict[int, str], dict[int, tuple[float, float]]]:
         """Fetch the 18 real Veneto forecast zones (excluding internal zonaid >= 100)."""
