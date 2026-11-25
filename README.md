@@ -102,8 +102,13 @@ Copy `custom_components/arpa_veneto_meteo/` into your Home Assistant
    **ARPA Veneto Meteo** (or click the button above).
 2. Choose your **Municipality** to automatically look up the matching ARPAV
    forecast zone.
-3. Confirm the **Forecast zone** and pick your **Weather station** (sorted
-   nearest first).
+3. Confirm the **Forecast zone** and pick your **Weather station**, sorted by
+   distance from the chosen municipality (from the zone point if the
+   municipality has no coordinates).
+
+The municipality coordinates come from Wikidata (CC0) and are bundled in
+`comuni_coords.py`; regenerate them with `python3 scripts/generate_comuni_coords.py`
+when municipalities merge.
 
 You can change the zone or weather station later from **Reconfigure** without
 deleting the entry, and you can add multiple instances for different locations.

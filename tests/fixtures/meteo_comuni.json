@@ -1,0 +1,4008 @@
+{
+"data": [
+{
+"id": 2201,
+"provincia": "Belluno",
+"comune": "Agordo",
+"istat": 25001,
+"zonaid": 2
+},
+{
+"id": 2217,
+"provincia": "Belluno",
+"comune": "Alano di Piave",
+"istat": 25002,
+"zonaid": 3
+},
+{
+"id": 2208,
+"provincia": "Belluno",
+"comune": "Alleghe",
+"istat": 25003,
+"zonaid": 2
+},
+{
+"id": 2234,
+"provincia": "Belluno",
+"comune": "Alpago",
+"istat": 25072,
+"zonaid": 3
+},
+{
+"id": 2218,
+"provincia": "Belluno",
+"comune": "Arsiè",
+"istat": 25004,
+"zonaid": 3
+},
+{
+"id": 2179,
+"provincia": "Belluno",
+"comune": "Auronzo di Cadore",
+"istat": 25005,
+"zonaid": 1
+},
+{
+"id": 2215,
+"provincia": "Belluno",
+"comune": "BELLUNO",
+"istat": 25006,
+"zonaid": 3
+},
+{
+"id": 2186,
+"provincia": "Belluno",
+"comune": "Borca di Cadore",
+"istat": 25007,
+"zonaid": 1
+},
+{
+"id": 2224,
+"provincia": "Belluno",
+"comune": "Borgo Valbelluna",
+"istat": 25074,
+"zonaid": 3
+},
+{
+"id": 2188,
+"provincia": "Belluno",
+"comune": "Calalzo di Cadore",
+"istat": 25008,
+"zonaid": 1
+},
+{
+"id": 2200,
+"provincia": "Belluno",
+"comune": "Canale d'Agordo",
+"istat": 25023,
+"zonaid": 2
+},
+{
+"id": 2204,
+"provincia": "Belluno",
+"comune": "Cencenighe Agordino",
+"istat": 25010,
+"zonaid": 2
+},
+{
+"id": 2226,
+"provincia": "Belluno",
+"comune": "Cesiomaggiore",
+"istat": 25011,
+"zonaid": 3
+},
+{
+"id": 2235,
+"provincia": "Belluno",
+"comune": "Chies d'Alpago",
+"istat": 25012,
+"zonaid": 3
+},
+{
+"id": 2209,
+"provincia": "Belluno",
+"comune": "Cibiana di Cadore",
+"istat": 25013,
+"zonaid": 2
+},
+{
+"id": 2214,
+"provincia": "Belluno",
+"comune": "Colle Santa Lucia",
+"istat": 25014,
+"zonaid": 2
+},
+{
+"id": 2193,
+"provincia": "Belluno",
+"comune": "Comelico Superiore",
+"istat": 25015,
+"zonaid": 1
+},
+{
+"id": 2178,
+"provincia": "Belluno",
+"comune": "Cortina d'Ampezzo",
+"istat": 25016,
+"zonaid": 1
+},
+{
+"id": 2192,
+"provincia": "Belluno",
+"comune": "Danta di Cadore",
+"istat": 25017,
+"zonaid": 1
+},
+{
+"id": 2185,
+"provincia": "Belluno",
+"comune": "Domegge di Cadore",
+"istat": 25018,
+"zonaid": 1
+},
+{
+"id": 2203,
+"provincia": "Belluno",
+"comune": "Falcade",
+"istat": 25019,
+"zonaid": 2
+},
+{
+"id": 2221,
+"provincia": "Belluno",
+"comune": "Feltre",
+"istat": 25021,
+"zonaid": 3
+},
+{
+"id": 2219,
+"provincia": "Belluno",
+"comune": "Fonzaso",
+"istat": 25022,
+"zonaid": 3
+},
+{
+"id": 2197,
+"provincia": "Belluno",
+"comune": "Gosaldo",
+"istat": 25025,
+"zonaid": 2
+},
+{
+"id": 2202,
+"provincia": "Belluno",
+"comune": "La Valle Agordina",
+"istat": 25027,
+"zonaid": 2
+},
+{
+"id": 2222,
+"provincia": "Belluno",
+"comune": "Lamon",
+"istat": 25026,
+"zonaid": 3
+},
+{
+"id": 2227,
+"provincia": "Belluno",
+"comune": "Limana",
+"istat": 25029,
+"zonaid": 3
+},
+{
+"id": 2213,
+"provincia": "Belluno",
+"comune": "Livinallongo del Col di Lana",
+"istat": 25030,
+"zonaid": 2
+},
+{
+"id": 2237,
+"provincia": "Belluno",
+"comune": "Longarone",
+"istat": 25071,
+"zonaid": 3
+},
+{
+"id": 2189,
+"provincia": "Belluno",
+"comune": "Lorenzago di Cadore",
+"istat": 25032,
+"zonaid": 1
+},
+{
+"id": 2190,
+"provincia": "Belluno",
+"comune": "Lozzo di Cadore",
+"istat": 25033,
+"zonaid": 1
+},
+{
+"id": 2181,
+"provincia": "Belluno",
+"comune": "Ospitale di Cadore",
+"istat": 25035,
+"zonaid": 1
+},
+{
+"id": 2223,
+"provincia": "Belluno",
+"comune": "Pedavena",
+"istat": 25036,
+"zonaid": 3
+},
+{
+"id": 2182,
+"provincia": "Belluno",
+"comune": "Perarolo di Cadore",
+"istat": 25037,
+"zonaid": 1
+},
+{
+"id": 2177,
+"provincia": "Belluno",
+"comune": "Pieve di Cadore",
+"istat": 25039,
+"zonaid": 1
+},
+{
+"id": 2232,
+"provincia": "Belluno",
+"comune": "Ponte nelle Alpi",
+"istat": 25040,
+"zonaid": 3
+},
+{
+"id": 2220,
+"provincia": "Belluno",
+"comune": "Quero Vas",
+"istat": 25070,
+"zonaid": 3
+},
+{
+"id": 2199,
+"provincia": "Belluno",
+"comune": "Rivamonte Agordino",
+"istat": 25043,
+"zonaid": 2
+},
+{
+"id": 2210,
+"provincia": "Belluno",
+"comune": "Rocca Pietore",
+"istat": 25044,
+"zonaid": 2
+},
+{
+"id": 2231,
+"provincia": "Belluno",
+"comune": "San Gregorio nelle Alpi",
+"istat": 25045,
+"zonaid": 3
+},
+{
+"id": 2194,
+"provincia": "Belluno",
+"comune": "San Nicolò di Comelico",
+"istat": 25046,
+"zonaid": 1
+},
+{
+"id": 2195,
+"provincia": "Belluno",
+"comune": "San Pietro di Cadore",
+"istat": 25047,
+"zonaid": 1
+},
+{
+"id": 2207,
+"provincia": "Belluno",
+"comune": "San Tomaso Agordino",
+"istat": 25049,
+"zonaid": 2
+},
+{
+"id": 2187,
+"provincia": "Belluno",
+"comune": "San Vito di Cadore",
+"istat": 25051,
+"zonaid": 1
+},
+{
+"id": 2228,
+"provincia": "Belluno",
+"comune": "Santa Giustina Bellunese",
+"istat": 25048,
+"zonaid": 3
+},
+{
+"id": 2180,
+"provincia": "Belluno",
+"comune": "Santo Stefano di Cadore",
+"istat": 25050,
+"zonaid": 1
+},
+{
+"id": 2229,
+"provincia": "Belluno",
+"comune": "Sedico",
+"istat": 25053,
+"zonaid": 3
+},
+{
+"id": 2212,
+"provincia": "Belluno",
+"comune": "Selva di Cadore",
+"istat": 25054,
+"zonaid": 2
+},
+{
+"id": 2216,
+"provincia": "Belluno",
+"comune": "Seren del Grappa",
+"istat": 25055,
+"zonaid": 3
+},
+{
+"id": 2233,
+"provincia": "Belluno",
+"comune": "Sospirolo",
+"istat": 25056,
+"zonaid": 3
+},
+{
+"id": 2236,
+"provincia": "Belluno",
+"comune": "Soverzene",
+"istat": 25057,
+"zonaid": 3
+},
+{
+"id": 2225,
+"provincia": "Belluno",
+"comune": "Sovramonte",
+"istat": 25058,
+"zonaid": 3
+},
+{
+"id": 2196,
+"provincia": "Belluno",
+"comune": "Taibon Agordino",
+"istat": 25059,
+"zonaid": 2
+},
+{
+"id": 2230,
+"provincia": "Belluno",
+"comune": "Tambre",
+"istat": 25060,
+"zonaid": 3
+},
+{
+"id": 2205,
+"provincia": "Belluno",
+"comune": "Val di Zoldo",
+"istat": 25073,
+"zonaid": 2
+},
+{
+"id": 2206,
+"provincia": "Belluno",
+"comune": "Vallada Agordina",
+"istat": 25062,
+"zonaid": 2
+},
+{
+"id": 2183,
+"provincia": "Belluno",
+"comune": "Valle di Cadore",
+"istat": 25063,
+"zonaid": 1
+},
+{
+"id": 2191,
+"provincia": "Belluno",
+"comune": "Vigo di Cadore",
+"istat": 25065,
+"zonaid": 1
+},
+{
+"id": 2184,
+"provincia": "Belluno",
+"comune": "Vodo di Cadore",
+"istat": 25066,
+"zonaid": 1
+},
+{
+"id": 2198,
+"provincia": "Belluno",
+"comune": "Voltago Agordino",
+"istat": 25067,
+"zonaid": 2
+},
+{
+"id": 2211,
+"provincia": "Belluno",
+"comune": "Zoppè di Cadore",
+"istat": 25069,
+"zonaid": 2
+},
+{
+"id": 2506,
+"provincia": "Padova",
+"comune": "Abano Terme",
+"istat": 28001,
+"zonaid": 10
+},
+{
+"id": 2632,
+"provincia": "Padova",
+"comune": "Agna",
+"istat": 28002,
+"zonaid": 13
+},
+{
+"id": 2507,
+"provincia": "Padova",
+"comune": "Albignasego",
+"istat": 28003,
+"zonaid": 10
+},
+{
+"id": 2623,
+"provincia": "Padova",
+"comune": "Anguillara Veneta",
+"istat": 28004,
+"zonaid": 13
+},
+{
+"id": 2493,
+"provincia": "Padova",
+"comune": "Arquà  Petrarca",
+"istat": 28005,
+"zonaid": 10
+},
+{
+"id": 2638,
+"provincia": "Padova",
+"comune": "Arre",
+"istat": 28006,
+"zonaid": 13
+},
+{
+"id": 2668,
+"provincia": "Padova",
+"comune": "Arzergrande",
+"istat": 28007,
+"zonaid": 11
+},
+{
+"id": 2631,
+"provincia": "Padova",
+"comune": "Bagnoli di Sopra",
+"istat": 28008,
+"zonaid": 13
+},
+{
+"id": 2486,
+"provincia": "Padova",
+"comune": "Baone",
+"istat": 28009,
+"zonaid": 10
+},
+{
+"id": 2612,
+"provincia": "Padova",
+"comune": "Barbona",
+"istat": 28010,
+"zonaid": 13
+},
+{
+"id": 2494,
+"provincia": "Padova",
+"comune": "Battaglia Terme",
+"istat": 28011,
+"zonaid": 10
+},
+{
+"id": 2614,
+"provincia": "Padova",
+"comune": "Boara Pisani",
+"istat": 28012,
+"zonaid": 13
+},
+{
+"id": 2634,
+"provincia": "Padova",
+"comune": "Borgo Veneto",
+"istat": 28107,
+"zonaid": 13
+},
+{
+"id": 2533,
+"provincia": "Padova",
+"comune": "Borgoricco",
+"istat": 28013,
+"zonaid": 10
+},
+{
+"id": 2496,
+"provincia": "Padova",
+"comune": "Bovolenta",
+"istat": 28014,
+"zonaid": 10
+},
+{
+"id": 2497,
+"provincia": "Padova",
+"comune": "Brugine",
+"istat": 28015,
+"zonaid": 10
+},
+{
+"id": 2525,
+"provincia": "Padova",
+"comune": "Cadoneghe",
+"istat": 28016,
+"zonaid": 10
+},
+{
+"id": 2531,
+"provincia": "Padova",
+"comune": "Campo San Martino",
+"istat": 28020,
+"zonaid": 10
+},
+{
+"id": 2529,
+"provincia": "Padova",
+"comune": "Campodarsego",
+"istat": 28017,
+"zonaid": 10
+},
+{
+"id": 2527,
+"provincia": "Padova",
+"comune": "Campodoro",
+"istat": 28018,
+"zonaid": 10
+},
+{
+"id": 2538,
+"provincia": "Padova",
+"comune": "Camposampiero",
+"istat": 28019,
+"zonaid": 10
+},
+{
+"id": 2637,
+"provincia": "Padova",
+"comune": "Candiana",
+"istat": 28021,
+"zonaid": 13
+},
+{
+"id": 2626,
+"provincia": "Padova",
+"comune": "Carceri",
+"istat": 28022,
+"zonaid": 13
+},
+{
+"id": 2414,
+"provincia": "Padova",
+"comune": "Carmignano di Brenta",
+"istat": 28023,
+"zonaid": 9
+},
+{
+"id": 2495,
+"provincia": "Padova",
+"comune": "Cartura",
+"istat": 28026,
+"zonaid": 10
+},
+{
+"id": 2616,
+"provincia": "Padova",
+"comune": "Casale di Scodosia",
+"istat": 28027,
+"zonaid": 13
+},
+{
+"id": 2502,
+"provincia": "Padova",
+"comune": "Casalserugo",
+"istat": 28028,
+"zonaid": 10
+},
+{
+"id": 2608,
+"provincia": "Padova",
+"comune": "Castelbaldo",
+"istat": 28029,
+"zonaid": 13
+},
+{
+"id": 2512,
+"provincia": "Padova",
+"comune": "Cervarese Santa Croce",
+"istat": 28030,
+"zonaid": 10
+},
+{
+"id": 2492,
+"provincia": "Padova",
+"comune": "Cinto Euganeo",
+"istat": 28031,
+"zonaid": 10
+},
+{
+"id": 2542,
+"provincia": "Padova",
+"comune": "Cittadella",
+"istat": 28032,
+"zonaid": 10
+},
+{
+"id": 2666,
+"provincia": "Padova",
+"comune": "Codevigo",
+"istat": 28033,
+"zonaid": 11
+},
+{
+"id": 2636,
+"provincia": "Padova",
+"comune": "Conselve",
+"istat": 28034,
+"zonaid": 13
+},
+{
+"id": 2648,
+"provincia": "Padova",
+"comune": "Correzzola",
+"istat": 28035,
+"zonaid": 12
+},
+{
+"id": 2528,
+"provincia": "Padova",
+"comune": "Curtarolo",
+"istat": 28036,
+"zonaid": 10
+},
+{
+"id": 2546,
+"provincia": "Padova",
+"comune": "Due Carrare",
+"istat": 28106,
+"zonaid": 10
+},
+{
+"id": 2627,
+"provincia": "Padova",
+"comune": "Este",
+"istat": 28037,
+"zonaid": 13
+},
+{
+"id": 2540,
+"provincia": "Padova",
+"comune": "Fontaniva",
+"istat": 28038,
+"zonaid": 10
+},
+{
+"id": 2545,
+"provincia": "Padova",
+"comune": "Galliera Veneta",
+"istat": 28039,
+"zonaid": 10
+},
+{
+"id": 2499,
+"provincia": "Padova",
+"comune": "Galzignano Terme",
+"istat": 28040,
+"zonaid": 10
+},
+{
+"id": 2412,
+"provincia": "Padova",
+"comune": "Gazzo",
+"istat": 28041,
+"zonaid": 9
+},
+{
+"id": 2539,
+"provincia": "Padova",
+"comune": "Grantorto",
+"istat": 28042,
+"zonaid": 10
+},
+{
+"id": 2620,
+"provincia": "Padova",
+"comune": "Granze",
+"istat": 28043,
+"zonaid": 13
+},
+{
+"id": 2509,
+"provincia": "Padova",
+"comune": "Legnaro",
+"istat": 28044,
+"zonaid": 10
+},
+{
+"id": 2523,
+"provincia": "Padova",
+"comune": "Limena",
+"istat": 28045,
+"zonaid": 10
+},
+{
+"id": 2541,
+"provincia": "Padova",
+"comune": "Loreggia",
+"istat": 28046,
+"zonaid": 10
+},
+{
+"id": 2491,
+"provincia": "Padova",
+"comune": "Lozzo Atestino",
+"istat": 28047,
+"zonaid": 10
+},
+{
+"id": 2501,
+"provincia": "Padova",
+"comune": "Maserà di Padova",
+"istat": 28048,
+"zonaid": 10
+},
+{
+"id": 2609,
+"provincia": "Padova",
+"comune": "Masi",
+"istat": 28049,
+"zonaid": 13
+},
+{
+"id": 2534,
+"provincia": "Padova",
+"comune": "Massanzago",
+"istat": 28050,
+"zonaid": 10
+},
+{
+"id": 2617,
+"provincia": "Padova",
+"comune": "Megliadino San Vitale",
+"istat": 28052,
+"zonaid": 13
+},
+{
+"id": 2615,
+"provincia": "Padova",
+"comune": "Merlara",
+"istat": 28053,
+"zonaid": 13
+},
+{
+"id": 2518,
+"provincia": "Padova",
+"comune": "Mestrino",
+"istat": 28054,
+"zonaid": 10
+},
+{
+"id": 2485,
+"provincia": "Padova",
+"comune": "Monselice",
+"istat": 28055,
+"zonaid": 10
+},
+{
+"id": 2633,
+"provincia": "Padova",
+"comune": "Montagnana",
+"istat": 28056,
+"zonaid": 13
+},
+{
+"id": 2500,
+"provincia": "Padova",
+"comune": "Montegrotto Terme",
+"istat": 28057,
+"zonaid": 10
+},
+{
+"id": 2520,
+"provincia": "Padova",
+"comune": "Noventa Padovana",
+"istat": 28058,
+"zonaid": 10
+},
+{
+"id": 2635,
+"provincia": "Padova",
+"comune": "Ospedaletto Euganeo",
+"istat": 28059,
+"zonaid": 13
+},
+{
+"id": 2513,
+"provincia": "Padova",
+"comune": "PADOVA",
+"istat": 28060,
+"zonaid": 10
+},
+{
+"id": 2487,
+"provincia": "Padova",
+"comune": "Pernumia",
+"istat": 28061,
+"zonaid": 10
+},
+{
+"id": 2610,
+"provincia": "Padova",
+"comune": "Piacenza d'Adige",
+"istat": 28062,
+"zonaid": 13
+},
+{
+"id": 2526,
+"provincia": "Padova",
+"comune": "Piazzola sul Brenta",
+"istat": 28063,
+"zonaid": 10
+},
+{
+"id": 2719,
+"provincia": "Padova",
+"comune": "Piombino Dese",
+"istat": 28064,
+"zonaid": 6
+},
+{
+"id": 2667,
+"provincia": "Padova",
+"comune": "Piove di Sacco",
+"istat": 28065,
+"zonaid": 11
+},
+{
+"id": 2503,
+"provincia": "Padova",
+"comune": "Polverara",
+"istat": 28066,
+"zonaid": 10
+},
+{
+"id": 2625,
+"provincia": "Padova",
+"comune": "Ponso",
+"istat": 28067,
+"zonaid": 13
+},
+{
+"id": 2508,
+"provincia": "Padova",
+"comune": "Ponte San Nicolò",
+"istat": 28069,
+"zonaid": 10
+},
+{
+"id": 2490,
+"provincia": "Padova",
+"comune": "Pontelongo",
+"istat": 28068,
+"zonaid": 10
+},
+{
+"id": 2622,
+"provincia": "Padova",
+"comune": "Pozzonovo",
+"istat": 28070,
+"zonaid": 13
+},
+{
+"id": 2511,
+"provincia": "Padova",
+"comune": "Rovolon",
+"istat": 28071,
+"zonaid": 10
+},
+{
+"id": 2519,
+"provincia": "Padova",
+"comune": "Rubano",
+"istat": 28072,
+"zonaid": 10
+},
+{
+"id": 2516,
+"provincia": "Padova",
+"comune": "Saccolongo",
+"istat": 28073,
+"zonaid": 10
+},
+{
+"id": 2532,
+"provincia": "Padova",
+"comune": "San Giorgio delle Pertiche",
+"istat": 28075,
+"zonaid": 10
+},
+{
+"id": 2535,
+"provincia": "Padova",
+"comune": "San Giorgio in Bosco",
+"istat": 28076,
+"zonaid": 10
+},
+{
+"id": 2544,
+"provincia": "Padova",
+"comune": "San Martino di Lupari",
+"istat": 28077,
+"zonaid": 10
+},
+{
+"id": 2413,
+"provincia": "Padova",
+"comune": "San Pietro in Gù",
+"istat": 28078,
+"zonaid": 9
+},
+{
+"id": 2488,
+"provincia": "Padova",
+"comune": "San Pietro Viminario",
+"istat": 28079,
+"zonaid": 10
+},
+{
+"id": 2628,
+"provincia": "Padova",
+"comune": "Sant'Elena",
+"istat": 28083,
+"zonaid": 13
+},
+{
+"id": 2611,
+"provincia": "Padova",
+"comune": "Sant'Urbano",
+"istat": 28084,
+"zonaid": 13
+},
+{
+"id": 2537,
+"provincia": "Padova",
+"comune": "Santa Giustina in Colle",
+"istat": 28080,
+"zonaid": 10
+},
+{
+"id": 2510,
+"provincia": "Padova",
+"comune": "Santangelo di Piove di Sacco",
+"istat": 28082,
+"zonaid": 10
+},
+{
+"id": 2514,
+"provincia": "Padova",
+"comune": "Saonara",
+"istat": 28085,
+"zonaid": 10
+},
+{
+"id": 2517,
+"provincia": "Padova",
+"comune": "Selvazzano Dentro",
+"istat": 28086,
+"zonaid": 10
+},
+{
+"id": 2629,
+"provincia": "Padova",
+"comune": "Solesino",
+"istat": 28087,
+"zonaid": 13
+},
+{
+"id": 2621,
+"provincia": "Padova",
+"comune": "Stanghella",
+"istat": 28088,
+"zonaid": 13
+},
+{
+"id": 2504,
+"provincia": "Padova",
+"comune": "Teolo",
+"istat": 28089,
+"zonaid": 10
+},
+{
+"id": 2489,
+"provincia": "Padova",
+"comune": "Terrassa Padovana",
+"istat": 28090,
+"zonaid": 10
+},
+{
+"id": 2543,
+"provincia": "Padova",
+"comune": "Tombolo",
+"istat": 28091,
+"zonaid": 10
+},
+{
+"id": 2505,
+"provincia": "Padova",
+"comune": "Torreglia",
+"istat": 28092,
+"zonaid": 10
+},
+{
+"id": 2720,
+"provincia": "Padova",
+"comune": "Trebaseleghe",
+"istat": 28093,
+"zonaid": 6
+},
+{
+"id": 2630,
+"provincia": "Padova",
+"comune": "Tribano",
+"istat": 28094,
+"zonaid": 13
+},
+{
+"id": 2624,
+"provincia": "Padova",
+"comune": "Urbana",
+"istat": 28095,
+"zonaid": 13
+},
+{
+"id": 2515,
+"provincia": "Padova",
+"comune": "Veggiano",
+"istat": 28096,
+"zonaid": 10
+},
+{
+"id": 2613,
+"provincia": "Padova",
+"comune": "Vescovana",
+"istat": 28097,
+"zonaid": 13
+},
+{
+"id": 2618,
+"provincia": "Padova",
+"comune": "Vighizzolo d'Este",
+"istat": 28098,
+"zonaid": 13
+},
+{
+"id": 2524,
+"provincia": "Padova",
+"comune": "Vigodarzere",
+"istat": 28099,
+"zonaid": 10
+},
+{
+"id": 2521,
+"provincia": "Padova",
+"comune": "Vigonza",
+"istat": 28100,
+"zonaid": 10
+},
+{
+"id": 2536,
+"provincia": "Padova",
+"comune": "Villa del Conte",
+"istat": 28101,
+"zonaid": 10
+},
+{
+"id": 2619,
+"provincia": "Padova",
+"comune": "Villa Estense",
+"istat": 28102,
+"zonaid": 13
+},
+{
+"id": 2522,
+"provincia": "Padova",
+"comune": "Villafranca Padovana",
+"istat": 28103,
+"zonaid": 10
+},
+{
+"id": 2530,
+"provincia": "Padova",
+"comune": "Villanova di Camposampiero",
+"istat": 28104,
+"zonaid": 10
+},
+{
+"id": 2498,
+"provincia": "Padova",
+"comune": "Vo",
+"istat": 28105,
+"zonaid": 10
+},
+{
+"id": 2642,
+"provincia": "Rovigo",
+"comune": "Adria",
+"istat": 29001,
+"zonaid": 12
+},
+{
+"id": 2639,
+"provincia": "Rovigo",
+"comune": "Ariano nel Polesine",
+"istat": 29002,
+"zonaid": 12
+},
+{
+"id": 2574,
+"provincia": "Rovigo",
+"comune": "Arquà  Polesine",
+"istat": 29003,
+"zonaid": 13
+},
+{
+"id": 2580,
+"provincia": "Rovigo",
+"comune": "Badia Polesine",
+"istat": 29004,
+"zonaid": 13
+},
+{
+"id": 2561,
+"provincia": "Rovigo",
+"comune": "Bagnolo di Pò",
+"istat": 29005,
+"zonaid": 13
+},
+{
+"id": 2578,
+"provincia": "Rovigo",
+"comune": "Bergantino",
+"istat": 29006,
+"zonaid": 13
+},
+{
+"id": 2564,
+"provincia": "Rovigo",
+"comune": "Bosaro",
+"istat": 29007,
+"zonaid": 13
+},
+{
+"id": 2557,
+"provincia": "Rovigo",
+"comune": "Calto",
+"istat": 29008,
+"zonaid": 13
+},
+{
+"id": 2550,
+"provincia": "Rovigo",
+"comune": "Canaro",
+"istat": 29009,
+"zonaid": 13
+},
+{
+"id": 2581,
+"provincia": "Rovigo",
+"comune": "Canda",
+"istat": 29010,
+"zonaid": 13
+},
+{
+"id": 2562,
+"provincia": "Rovigo",
+"comune": "Castelguglielmo",
+"istat": 29011,
+"zonaid": 13
+},
+{
+"id": 2556,
+"provincia": "Rovigo",
+"comune": "Castelmassa",
+"istat": 29012,
+"zonaid": 13
+},
+{
+"id": 2570,
+"provincia": "Rovigo",
+"comune": "Castelnovo Bariano",
+"istat": 29013,
+"zonaid": 13
+},
+{
+"id": 2558,
+"provincia": "Rovigo",
+"comune": "Ceneselli",
+"istat": 29014,
+"zonaid": 13
+},
+{
+"id": 2585,
+"provincia": "Rovigo",
+"comune": "Ceregnano",
+"istat": 29015,
+"zonaid": 13
+},
+{
+"id": 2569,
+"provincia": "Rovigo",
+"comune": "Corbola",
+"istat": 29017,
+"zonaid": 13
+},
+{
+"id": 2584,
+"provincia": "Rovigo",
+"comune": "Costa di Rovigo",
+"istat": 29018,
+"zonaid": 13
+},
+{
+"id": 2566,
+"provincia": "Rovigo",
+"comune": "Crespino",
+"istat": 29019,
+"zonaid": 13
+},
+{
+"id": 2549,
+"provincia": "Rovigo",
+"comune": "Ficarolo",
+"istat": 29021,
+"zonaid": 13
+},
+{
+"id": 2553,
+"provincia": "Rovigo",
+"comune": "Fiesso Umbertiano",
+"istat": 29022,
+"zonaid": 13
+},
+{
+"id": 2554,
+"provincia": "Rovigo",
+"comune": "Frassinelle Polesine",
+"istat": 29023,
+"zonaid": 13
+},
+{
+"id": 2572,
+"provincia": "Rovigo",
+"comune": "Fratta Polesine",
+"istat": 29024,
+"zonaid": 13
+},
+{
+"id": 2551,
+"provincia": "Rovigo",
+"comune": "Gaiba",
+"istat": 29025,
+"zonaid": 13
+},
+{
+"id": 2576,
+"provincia": "Rovigo",
+"comune": "Gavello",
+"istat": 29026,
+"zonaid": 13
+},
+{
+"id": 2579,
+"provincia": "Rovigo",
+"comune": "Giacciano con Baruchella",
+"istat": 29027,
+"zonaid": 13
+},
+{
+"id": 2565,
+"provincia": "Rovigo",
+"comune": "Guarda Veneta",
+"istat": 29028,
+"zonaid": 13
+},
+{
+"id": 2582,
+"provincia": "Rovigo",
+"comune": "Lendinara",
+"istat": 29029,
+"zonaid": 13
+},
+{
+"id": 2643,
+"provincia": "Rovigo",
+"comune": "Loreo",
+"istat": 29030,
+"zonaid": 12
+},
+{
+"id": 2586,
+"provincia": "Rovigo",
+"comune": "Lusia",
+"istat": 29031,
+"zonaid": 13
+},
+{
+"id": 2577,
+"provincia": "Rovigo",
+"comune": "Melara",
+"istat": 29032,
+"zonaid": 13
+},
+{
+"id": 2548,
+"provincia": "Rovigo",
+"comune": "Occhiobello",
+"istat": 29033,
+"zonaid": 13
+},
+{
+"id": 2568,
+"provincia": "Rovigo",
+"comune": "Papozze",
+"istat": 29034,
+"zonaid": 13
+},
+{
+"id": 2589,
+"provincia": "Rovigo",
+"comune": "Pettorazza Grimani",
+"istat": 29035,
+"zonaid": 13
+},
+{
+"id": 2563,
+"provincia": "Rovigo",
+"comune": "Pincara",
+"istat": 29036,
+"zonaid": 13
+},
+{
+"id": 2555,
+"provincia": "Rovigo",
+"comune": "Polesella",
+"istat": 29037,
+"zonaid": 13
+},
+{
+"id": 2575,
+"provincia": "Rovigo",
+"comune": "Pontecchio Polesine",
+"istat": 29038,
+"zonaid": 13
+},
+{
+"id": 2641,
+"provincia": "Rovigo",
+"comune": "Porto Tolle",
+"istat": 29039,
+"zonaid": 12
+},
+{
+"id": 2742,
+"provincia": "Rovigo",
+"comune": "Porto Tolle litorale",
+"istat": 29039,
+"zonaid": 18
+},
+{
+"id": 2649,
+"provincia": "Rovigo",
+"comune": "Porto Viro",
+"istat": 29052,
+"zonaid": 12
+},
+{
+"id": 2743,
+"provincia": "Rovigo",
+"comune": "Porto Viro litorale",
+"istat": 29052,
+"zonaid": 18
+},
+{
+"id": 2644,
+"provincia": "Rovigo",
+"comune": "Rosolina",
+"istat": 29040,
+"zonaid": 12
+},
+{
+"id": 2744,
+"provincia": "Rovigo",
+"comune": "Rosolina litorale",
+"istat": 29040,
+"zonaid": 18
+},
+{
+"id": 2547,
+"provincia": "Rovigo",
+"comune": "ROVIGO",
+"istat": 29041,
+"zonaid": 13
+},
+{
+"id": 2559,
+"provincia": "Rovigo",
+"comune": "Salara",
+"istat": 29042,
+"zonaid": 13
+},
+{
+"id": 2571,
+"provincia": "Rovigo",
+"comune": "San Bellino",
+"istat": 29043,
+"zonaid": 13
+},
+{
+"id": 2588,
+"provincia": "Rovigo",
+"comune": "San Martino di Venezze",
+"istat": 29044,
+"zonaid": 13
+},
+{
+"id": 2552,
+"provincia": "Rovigo",
+"comune": "Stienta",
+"istat": 29045,
+"zonaid": 13
+},
+{
+"id": 2640,
+"provincia": "Rovigo",
+"comune": "Taglio di Po",
+"istat": 29046,
+"zonaid": 12
+},
+{
+"id": 2745,
+"provincia": "Rovigo",
+"comune": "Taglio di Po litorale",
+"istat": 29046,
+"zonaid": 18
+},
+{
+"id": 2560,
+"provincia": "Rovigo",
+"comune": "Trecenta",
+"istat": 29047,
+"zonaid": 13
+},
+{
+"id": 2587,
+"provincia": "Rovigo",
+"comune": "Villadose",
+"istat": 29048,
+"zonaid": 13
+},
+{
+"id": 2573,
+"provincia": "Rovigo",
+"comune": "Villamarzana",
+"istat": 29049,
+"zonaid": 13
+},
+{
+"id": 2583,
+"provincia": "Rovigo",
+"comune": "Villanova del Ghebbo",
+"istat": 29050,
+"zonaid": 13
+},
+{
+"id": 2567,
+"provincia": "Rovigo",
+"comune": "Villanova Marchesana",
+"istat": 29051,
+"zonaid": 13
+},
+{
+"id": 2696,
+"provincia": "Treviso",
+"comune": "Altivole",
+"istat": 26001,
+"zonaid": 6
+},
+{
+"id": 2704,
+"provincia": "Treviso",
+"comune": "Arcade",
+"istat": 26002,
+"zonaid": 6
+},
+{
+"id": 2438,
+"provincia": "Treviso",
+"comune": "Asolo",
+"istat": 26003,
+"zonaid": 5
+},
+{
+"id": 2441,
+"provincia": "Treviso",
+"comune": "Borso del Grappa",
+"istat": 26004,
+"zonaid": 5
+},
+{
+"id": 2694,
+"provincia": "Treviso",
+"comune": "Breda di Piave",
+"istat": 26005,
+"zonaid": 6
+},
+{
+"id": 2439,
+"provincia": "Treviso",
+"comune": "Caerano di San Marco",
+"istat": 26006,
+"zonaid": 5
+},
+{
+"id": 2476,
+"provincia": "Treviso",
+"comune": "Cappella Maggiore",
+"istat": 26007,
+"zonaid": 5
+},
+{
+"id": 2689,
+"provincia": "Treviso",
+"comune": "Carbonera",
+"istat": 26008,
+"zonaid": 6
+},
+{
+"id": 2672,
+"provincia": "Treviso",
+"comune": "Casale sul Sile",
+"istat": 26009,
+"zonaid": 6
+},
+{
+"id": 2679,
+"provincia": "Treviso",
+"comune": "Casier",
+"istat": 26010,
+"zonaid": 6
+},
+{
+"id": 2445,
+"provincia": "Treviso",
+"comune": "Castelcucco",
+"istat": 26011,
+"zonaid": 5
+},
+{
+"id": 2674,
+"provincia": "Treviso",
+"comune": "Castelfranco Veneto",
+"istat": 26012,
+"zonaid": 6
+},
+{
+"id": 2686,
+"provincia": "Treviso",
+"comune": "Castello di Godego",
+"istat": 26013,
+"zonaid": 6
+},
+{
+"id": 2452,
+"provincia": "Treviso",
+"comune": "Cavaso del Tomba",
+"istat": 26014,
+"zonaid": 5
+},
+{
+"id": 2722,
+"provincia": "Treviso",
+"comune": "Cessalto",
+"istat": 26015,
+"zonaid": 6
+},
+{
+"id": 2702,
+"provincia": "Treviso",
+"comune": "Chiarano",
+"istat": 26016,
+"zonaid": 6
+},
+{
+"id": 2705,
+"provincia": "Treviso",
+"comune": "Cimadolmo",
+"istat": 26017,
+"zonaid": 6
+},
+{
+"id": 2470,
+"provincia": "Treviso",
+"comune": "Cison di Valmarino",
+"istat": 26018,
+"zonaid": 5
+},
+{
+"id": 2714,
+"provincia": "Treviso",
+"comune": "Codognè",
+"istat": 26019,
+"zonaid": 6
+},
+{
+"id": 2473,
+"provincia": "Treviso",
+"comune": "Colle Umberto",
+"istat": 26020,
+"zonaid": 5
+},
+{
+"id": 2462,
+"provincia": "Treviso",
+"comune": "Conegliano",
+"istat": 26021,
+"zonaid": 5
+},
+{
+"id": 2474,
+"provincia": "Treviso",
+"comune": "Cordignano",
+"istat": 26022,
+"zonaid": 5
+},
+{
+"id": 2447,
+"provincia": "Treviso",
+"comune": "Cornuda",
+"istat": 26023,
+"zonaid": 5
+},
+{
+"id": 2448,
+"provincia": "Treviso",
+"comune": "Crocetta del Montello",
+"istat": 26025,
+"zonaid": 5
+},
+{
+"id": 2458,
+"provincia": "Treviso",
+"comune": "Farra di Soligo",
+"istat": 26026,
+"zonaid": 5
+},
+{
+"id": 2469,
+"provincia": "Treviso",
+"comune": "Follina",
+"istat": 26027,
+"zonaid": 5
+},
+{
+"id": 2711,
+"provincia": "Treviso",
+"comune": "Fontanelle",
+"istat": 26028,
+"zonaid": 6
+},
+{
+"id": 2437,
+"provincia": "Treviso",
+"comune": "Fonte",
+"istat": 26029,
+"zonaid": 5
+},
+{
+"id": 2478,
+"provincia": "Treviso",
+"comune": "Fregona",
+"istat": 26030,
+"zonaid": 5
+},
+{
+"id": 2715,
+"provincia": "Treviso",
+"comune": "Gaiarine",
+"istat": 26031,
+"zonaid": 6
+},
+{
+"id": 2443,
+"provincia": "Treviso",
+"comune": "Giavera del Montello",
+"istat": 26032,
+"zonaid": 5
+},
+{
+"id": 2467,
+"provincia": "Treviso",
+"comune": "Godega di Sant'Urbano",
+"istat": 26033,
+"zonaid": 5
+},
+{
+"id": 2707,
+"provincia": "Treviso",
+"comune": "Gorgo al Monticano",
+"istat": 26034,
+"zonaid": 6
+},
+{
+"id": 2682,
+"provincia": "Treviso",
+"comune": "Istrana",
+"istat": 26035,
+"zonaid": 6
+},
+{
+"id": 2685,
+"provincia": "Treviso",
+"comune": "Loria",
+"istat": 26036,
+"zonaid": 6
+},
+{
+"id": 2712,
+"provincia": "Treviso",
+"comune": "Mansuè",
+"istat": 26037,
+"zonaid": 6
+},
+{
+"id": 2709,
+"provincia": "Treviso",
+"comune": "Mareno di Piave",
+"istat": 26038,
+"zonaid": 6
+},
+{
+"id": 2442,
+"provincia": "Treviso",
+"comune": "Maser",
+"istat": 26039,
+"zonaid": 5
+},
+{
+"id": 2699,
+"provincia": "Treviso",
+"comune": "Maserada sul Piave",
+"istat": 26040,
+"zonaid": 6
+},
+{
+"id": 2713,
+"provincia": "Treviso",
+"comune": "Meduna di Livenza",
+"istat": 26041,
+"zonaid": 6
+},
+{
+"id": 2466,
+"provincia": "Treviso",
+"comune": "Miane",
+"istat": 26042,
+"zonaid": 5
+},
+{
+"id": 2669,
+"provincia": "Treviso",
+"comune": "Mogliano Veneto",
+"istat": 26043,
+"zonaid": 6
+},
+{
+"id": 2684,
+"provincia": "Treviso",
+"comune": "Monastier di Treviso",
+"istat": 26044,
+"zonaid": 6
+},
+{
+"id": 2446,
+"provincia": "Treviso",
+"comune": "Monfumo",
+"istat": 26045,
+"zonaid": 5
+},
+{
+"id": 2435,
+"provincia": "Treviso",
+"comune": "Montebelluna",
+"istat": 26046,
+"zonaid": 5
+},
+{
+"id": 2676,
+"provincia": "Treviso",
+"comune": "Morgano",
+"istat": 26047,
+"zonaid": 6
+},
+{
+"id": 2455,
+"provincia": "Treviso",
+"comune": "Moriago della Battaglia",
+"istat": 26048,
+"zonaid": 5
+},
+{
+"id": 2703,
+"provincia": "Treviso",
+"comune": "Motta di Livenza",
+"istat": 26049,
+"zonaid": 6
+},
+{
+"id": 2449,
+"provincia": "Treviso",
+"comune": "Nervesa della Battaglia",
+"istat": 26050,
+"zonaid": 5
+},
+{
+"id": 2701,
+"provincia": "Treviso",
+"comune": "Oderzo",
+"istat": 26051,
+"zonaid": 6
+},
+{
+"id": 2700,
+"provincia": "Treviso",
+"comune": "Ormelle",
+"istat": 26052,
+"zonaid": 6
+},
+{
+"id": 2468,
+"provincia": "Treviso",
+"comune": "Orsago",
+"istat": 26053,
+"zonaid": 5
+},
+{
+"id": 2688,
+"provincia": "Treviso",
+"comune": "Paese",
+"istat": 26055,
+"zonaid": 6
+},
+{
+"id": 2453,
+"provincia": "Treviso",
+"comune": "Pederobba",
+"istat": 26056,
+"zonaid": 5
+},
+{
+"id": 2444,
+"provincia": "Treviso",
+"comune": "Pieve del Grappa",
+"istat": 26096,
+"zonaid": 5
+},
+{
+"id": 2459,
+"provincia": "Treviso",
+"comune": "Pieve di Soligo",
+"istat": 26057,
+"zonaid": 5
+},
+{
+"id": 2695,
+"provincia": "Treviso",
+"comune": "Ponte di Piave",
+"istat": 26058,
+"zonaid": 6
+},
+{
+"id": 2692,
+"provincia": "Treviso",
+"comune": "Ponzano Veneto",
+"istat": 26059,
+"zonaid": 6
+},
+{
+"id": 2716,
+"provincia": "Treviso",
+"comune": "Portobuffolè",
+"istat": 26060,
+"zonaid": 6
+},
+{
+"id": 2451,
+"provincia": "Treviso",
+"comune": "Possagno",
+"istat": 26061,
+"zonaid": 5
+},
+{
+"id": 2697,
+"provincia": "Treviso",
+"comune": "Povegliano",
+"istat": 26062,
+"zonaid": 6
+},
+{
+"id": 2671,
+"provincia": "Treviso",
+"comune": "Preganziol",
+"istat": 26063,
+"zonaid": 6
+},
+{
+"id": 2677,
+"provincia": "Treviso",
+"comune": "Quinto di Treviso",
+"istat": 26064,
+"zonaid": 6
+},
+{
+"id": 2460,
+"provincia": "Treviso",
+"comune": "Refrontolo",
+"istat": 26065,
+"zonaid": 5
+},
+{
+"id": 2675,
+"provincia": "Treviso",
+"comune": "Resana",
+"istat": 26066,
+"zonaid": 6
+},
+{
+"id": 2475,
+"provincia": "Treviso",
+"comune": "Revine Lago",
+"istat": 26067,
+"zonaid": 5
+},
+{
+"id": 2687,
+"provincia": "Treviso",
+"comune": "Riese Pio X",
+"istat": 26068,
+"zonaid": 6
+},
+{
+"id": 2673,
+"provincia": "Treviso",
+"comune": "Roncade",
+"istat": 26069,
+"zonaid": 6
+},
+{
+"id": 2721,
+"provincia": "Treviso",
+"comune": "Salgareda",
+"istat": 26070,
+"zonaid": 6
+},
+{
+"id": 2683,
+"provincia": "Treviso",
+"comune": "San Biagio di Callalta",
+"istat": 26071,
+"zonaid": 6
+},
+{
+"id": 2463,
+"provincia": "Treviso",
+"comune": "San Fior",
+"istat": 26072,
+"zonaid": 5
+},
+{
+"id": 2461,
+"provincia": "Treviso",
+"comune": "San Pietro di Feletto",
+"istat": 26073,
+"zonaid": 5
+},
+{
+"id": 2706,
+"provincia": "Treviso",
+"comune": "San Polo di Piave",
+"istat": 26074,
+"zonaid": 6
+},
+{
+"id": 2464,
+"provincia": "Treviso",
+"comune": "San Vendemiano",
+"istat": 26076,
+"zonaid": 5
+},
+{
+"id": 2436,
+"provincia": "Treviso",
+"comune": "San Zenone degli Ezzelini",
+"istat": 26077,
+"zonaid": 5
+},
+{
+"id": 2708,
+"provincia": "Treviso",
+"comune": "Santa Lucia di Piave",
+"istat": 26075,
+"zonaid": 6
+},
+{
+"id": 2477,
+"provincia": "Treviso",
+"comune": "Sarmede",
+"istat": 26078,
+"zonaid": 5
+},
+{
+"id": 2465,
+"provincia": "Treviso",
+"comune": "Segusino",
+"istat": 26079,
+"zonaid": 5
+},
+{
+"id": 2456,
+"provincia": "Treviso",
+"comune": "Sernaglia della Battaglia",
+"istat": 26080,
+"zonaid": 5
+},
+{
+"id": 2680,
+"provincia": "Treviso",
+"comune": "Silea",
+"istat": 26081,
+"zonaid": 6
+},
+{
+"id": 2698,
+"provincia": "Treviso",
+"comune": "Spresiano",
+"istat": 26082,
+"zonaid": 6
+},
+{
+"id": 2450,
+"provincia": "Treviso",
+"comune": "Susegana",
+"istat": 26083,
+"zonaid": 5
+},
+{
+"id": 2471,
+"provincia": "Treviso",
+"comune": "Tarzo",
+"istat": 26084,
+"zonaid": 5
+},
+{
+"id": 2691,
+"provincia": "Treviso",
+"comune": "Trevignano",
+"istat": 26085,
+"zonaid": 6
+},
+{
+"id": 2678,
+"provincia": "Treviso",
+"comune": "TREVISO",
+"istat": 26086,
+"zonaid": 6
+},
+{
+"id": 2457,
+"provincia": "Treviso",
+"comune": "Valdobbiadene",
+"istat": 26087,
+"zonaid": 5
+},
+{
+"id": 2710,
+"provincia": "Treviso",
+"comune": "Vazzola",
+"istat": 26088,
+"zonaid": 6
+},
+{
+"id": 2681,
+"provincia": "Treviso",
+"comune": "Vedelago",
+"istat": 26089,
+"zonaid": 6
+},
+{
+"id": 2454,
+"provincia": "Treviso",
+"comune": "Vidor",
+"istat": 26090,
+"zonaid": 5
+},
+{
+"id": 2693,
+"provincia": "Treviso",
+"comune": "Villorba",
+"istat": 26091,
+"zonaid": 6
+},
+{
+"id": 2472,
+"provincia": "Treviso",
+"comune": "Vittorio Veneto",
+"istat": 26092,
+"zonaid": 5
+},
+{
+"id": 2440,
+"provincia": "Treviso",
+"comune": "Volpago del Montello",
+"istat": 26093,
+"zonaid": 5
+},
+{
+"id": 2690,
+"provincia": "Treviso",
+"comune": "Zenson di Piave",
+"istat": 26094,
+"zonaid": 6
+},
+{
+"id": 2670,
+"provincia": "Treviso",
+"comune": "Zero Branco",
+"istat": 26095,
+"zonaid": 6
+},
+{
+"id": 2732,
+"provincia": "Venezia",
+"comune": "Annone Veneto",
+"istat": 27001,
+"zonaid": 7
+},
+{
+"id": 2651,
+"provincia": "Venezia",
+"comune": "Campagna Lupia",
+"istat": 27002,
+"zonaid": 11
+},
+{
+"id": 2655,
+"provincia": "Venezia",
+"comune": "Campolongo Maggiore",
+"istat": 27003,
+"zonaid": 11
+},
+{
+"id": 2656,
+"provincia": "Venezia",
+"comune": "Camponogara",
+"istat": 27004,
+"zonaid": 11
+},
+{
+"id": 2723,
+"provincia": "Venezia",
+"comune": "Caorle",
+"istat": 27005,
+"zonaid": 7
+},
+{
+"id": 2741,
+"provincia": "Venezia",
+"comune": "Caorle litorale",
+"istat": 27005,
+"zonaid": 16
+},
+{
+"id": 2654,
+"provincia": "Venezia",
+"comune": "Cavallino Treporti",
+"istat": 27044,
+"zonaid": 17
+},
+{
+"id": 2645,
+"provincia": "Venezia",
+"comune": "Cavarzere",
+"istat": 27006,
+"zonaid": 12
+},
+{
+"id": 2730,
+"provincia": "Venezia",
+"comune": "Ceggia",
+"istat": 27007,
+"zonaid": 7
+},
+{
+"id": 2646,
+"provincia": "Venezia",
+"comune": "Chioggia",
+"istat": 27008,
+"zonaid": 12
+},
+{
+"id": 2746,
+"provincia": "Venezia",
+"comune": "Chioggia litorale",
+"istat": 27008,
+"zonaid": 18
+},
+{
+"id": 2736,
+"provincia": "Venezia",
+"comune": "Cinto Caomaggiore",
+"istat": 27009,
+"zonaid": 7
+},
+{
+"id": 2647,
+"provincia": "Venezia",
+"comune": "Cona",
+"istat": 27010,
+"zonaid": 12
+},
+{
+"id": 2731,
+"provincia": "Venezia",
+"comune": "Concordia Sagittaria",
+"istat": 27011,
+"zonaid": 7
+},
+{
+"id": 2657,
+"provincia": "Venezia",
+"comune": "Dolo",
+"istat": 27012,
+"zonaid": 11
+},
+{
+"id": 2724,
+"provincia": "Venezia",
+"comune": "Eraclea",
+"istat": 27013,
+"zonaid": 7
+},
+{
+"id": 2747,
+"provincia": "Venezia",
+"comune": "Eraclea litorale",
+"istat": 27013,
+"zonaid": 16
+},
+{
+"id": 2483,
+"provincia": "Venezia",
+"comune": "Fiesso d'Artico",
+"istat": 27014,
+"zonaid": 10
+},
+{
+"id": 2728,
+"provincia": "Venezia",
+"comune": "Fossalta di Piave",
+"istat": 27015,
+"zonaid": 7
+},
+{
+"id": 2735,
+"provincia": "Venezia",
+"comune": "Fossalta di Portogruaro",
+"istat": 27016,
+"zonaid": 7
+},
+{
+"id": 2480,
+"provincia": "Venezia",
+"comune": "Fossò",
+"istat": 27017,
+"zonaid": 10
+},
+{
+"id": 2737,
+"provincia": "Venezia",
+"comune": "Gruaro",
+"istat": 27018,
+"zonaid": 7
+},
+{
+"id": 2653,
+"provincia": "Venezia",
+"comune": "Jesolo",
+"istat": 27019,
+"zonaid": 17
+},
+{
+"id": 2662,
+"provincia": "Venezia",
+"comune": "Marcon",
+"istat": 27020,
+"zonaid": 11
+},
+{
+"id": 2661,
+"provincia": "Venezia",
+"comune": "Martellago",
+"istat": 27021,
+"zonaid": 11
+},
+{
+"id": 2665,
+"provincia": "Venezia",
+"comune": "Meolo",
+"istat": 27022,
+"zonaid": 11
+},
+{
+"id": 2652,
+"provincia": "Venezia",
+"comune": "Mira",
+"istat": 27023,
+"zonaid": 11
+},
+{
+"id": 2658,
+"provincia": "Venezia",
+"comune": "Mirano",
+"istat": 27024,
+"zonaid": 11
+},
+{
+"id": 2664,
+"provincia": "Venezia",
+"comune": "Musile di Piave",
+"istat": 27025,
+"zonaid": 11
+},
+{
+"id": 2717,
+"provincia": "Venezia",
+"comune": "Noale",
+"istat": 27026,
+"zonaid": 6
+},
+{
+"id": 2729,
+"provincia": "Venezia",
+"comune": "Noventa di Piave",
+"istat": 27027,
+"zonaid": 7
+},
+{
+"id": 2482,
+"provincia": "Venezia",
+"comune": "Pianiga",
+"istat": 27028,
+"zonaid": 10
+},
+{
+"id": 2733,
+"provincia": "Venezia",
+"comune": "Portogruaro",
+"istat": 27029,
+"zonaid": 7
+},
+{
+"id": 2734,
+"provincia": "Venezia",
+"comune": "Pramaggiore",
+"istat": 27030,
+"zonaid": 7
+},
+{
+"id": 2663,
+"provincia": "Venezia",
+"comune": "Quarto d'Altino",
+"istat": 27031,
+"zonaid": 11
+},
+{
+"id": 2660,
+"provincia": "Venezia",
+"comune": "Salzano",
+"istat": 27032,
+"zonaid": 11
+},
+{
+"id": 2727,
+"provincia": "Venezia",
+"comune": "San Donà di Piave",
+"istat": 27033,
+"zonaid": 7
+},
+{
+"id": 2726,
+"provincia": "Venezia",
+"comune": "San Michele al Tagliamento",
+"istat": 27034,
+"zonaid": 7
+},
+{
+"id": 2748,
+"provincia": "Venezia",
+"comune": "San Michele al Tagliamento-Bibione",
+"istat": 27034,
+"zonaid": 16
+},
+{
+"id": 2484,
+"provincia": "Venezia",
+"comune": "Santa Maria di Sala",
+"istat": 27035,
+"zonaid": 10
+},
+{
+"id": 2725,
+"provincia": "Venezia",
+"comune": "Santo Stino di Livenza",
+"istat": 27036,
+"zonaid": 7
+},
+{
+"id": 2718,
+"provincia": "Venezia",
+"comune": "Scorzè",
+"istat": 27037,
+"zonaid": 6
+},
+{
+"id": 2659,
+"provincia": "Venezia",
+"comune": "Spinea",
+"istat": 27038,
+"zonaid": 11
+},
+{
+"id": 2481,
+"provincia": "Venezia",
+"comune": "Strà",
+"istat": 27039,
+"zonaid": 10
+},
+{
+"id": 2738,
+"provincia": "Venezia",
+"comune": "Teglio Veneto",
+"istat": 27040,
+"zonaid": 7
+},
+{
+"id": 2739,
+"provincia": "Venezia",
+"comune": "Torre di Mosto",
+"istat": 27041,
+"zonaid": 7
+},
+{
+"id": 2650,
+"provincia": "Venezia",
+"comune": "VENEZIA",
+"istat": 27042,
+"zonaid": 11
+},
+{
+"id": 2740,
+"provincia": "Venezia",
+"comune": "VENEZIA lido-Pellestrina",
+"istat": 27042,
+"zonaid": 17
+},
+{
+"id": 2479,
+"provincia": "Venezia",
+"comune": "Vigonovo",
+"istat": 27043,
+"zonaid": 10
+},
+{
+"id": 2278,
+"provincia": "Verona",
+"comune": "Affi",
+"istat": 23001,
+"zonaid": 15
+},
+{
+"id": 2279,
+"provincia": "Verona",
+"comune": "Albaredo d'Adige",
+"istat": 23002,
+"zonaid": 14
+},
+{
+"id": 2603,
+"provincia": "Verona",
+"comune": "Angiari",
+"istat": 23003,
+"zonaid": 13
+},
+{
+"id": 2280,
+"provincia": "Verona",
+"comune": "Arcole",
+"istat": 23004,
+"zonaid": 14
+},
+{
+"id": 2281,
+"provincia": "Verona",
+"comune": "Badia Calavena",
+"istat": 23005,
+"zonaid": 8
+},
+{
+"id": 2282,
+"provincia": "Verona",
+"comune": "Bardolino",
+"istat": 23006,
+"zonaid": 15
+},
+{
+"id": 2283,
+"provincia": "Verona",
+"comune": "Belfiore",
+"istat": 23007,
+"zonaid": 14
+},
+{
+"id": 2601,
+"provincia": "Verona",
+"comune": "Bevilacqua",
+"istat": 23008,
+"zonaid": 13
+},
+{
+"id": 2604,
+"provincia": "Verona",
+"comune": "Bonavigo",
+"istat": 23009,
+"zonaid": 13
+},
+{
+"id": 2602,
+"provincia": "Verona",
+"comune": "Boschi Sant'Anna",
+"istat": 23010,
+"zonaid": 13
+},
+{
+"id": 2284,
+"provincia": "Verona",
+"comune": "Bosco Chiesanuova",
+"istat": 23011,
+"zonaid": 8
+},
+{
+"id": 2285,
+"provincia": "Verona",
+"comune": "Bovolone",
+"istat": 23012,
+"zonaid": 14
+},
+{
+"id": 2286,
+"provincia": "Verona",
+"comune": "Brentino Belluno",
+"istat": 23013,
+"zonaid": 8
+},
+{
+"id": 2287,
+"provincia": "Verona",
+"comune": "Brenzone",
+"istat": 23014,
+"zonaid": 15
+},
+{
+"id": 2288,
+"provincia": "Verona",
+"comune": "Bussolengo",
+"istat": 23015,
+"zonaid": 14
+},
+{
+"id": 2289,
+"provincia": "Verona",
+"comune": "Buttapietra",
+"istat": 23016,
+"zonaid": 14
+},
+{
+"id": 2290,
+"provincia": "Verona",
+"comune": "Caldiero",
+"istat": 23017,
+"zonaid": 14
+},
+{
+"id": 2291,
+"provincia": "Verona",
+"comune": "Caprino Veronese",
+"istat": 23018,
+"zonaid": 15
+},
+{
+"id": 2595,
+"provincia": "Verona",
+"comune": "Casaleone",
+"istat": 23019,
+"zonaid": 13
+},
+{
+"id": 2591,
+"provincia": "Verona",
+"comune": "Castagnaro",
+"istat": 23020,
+"zonaid": 13
+},
+{
+"id": 2292,
+"provincia": "Verona",
+"comune": "Castel d'Azzano",
+"istat": 23021,
+"zonaid": 14
+},
+{
+"id": 2293,
+"provincia": "Verona",
+"comune": "Castelnuovo del Garda",
+"istat": 23022,
+"zonaid": 15
+},
+{
+"id": 2294,
+"provincia": "Verona",
+"comune": "Cavaion Veronese",
+"istat": 23023,
+"zonaid": 15
+},
+{
+"id": 2295,
+"provincia": "Verona",
+"comune": "Cazzano di Tramigna",
+"istat": 23024,
+"zonaid": 14
+},
+{
+"id": 2593,
+"provincia": "Verona",
+"comune": "Cerea",
+"istat": 23025,
+"zonaid": 13
+},
+{
+"id": 2296,
+"provincia": "Verona",
+"comune": "Cerro Veronese",
+"istat": 23026,
+"zonaid": 8
+},
+{
+"id": 2297,
+"provincia": "Verona",
+"comune": "Cologna Veneta",
+"istat": 23027,
+"zonaid": 14
+},
+{
+"id": 2298,
+"provincia": "Verona",
+"comune": "Colognola ai Colli",
+"istat": 23028,
+"zonaid": 14
+},
+{
+"id": 2600,
+"provincia": "Verona",
+"comune": "Concamarise",
+"istat": 23029,
+"zonaid": 13
+},
+{
+"id": 2299,
+"provincia": "Verona",
+"comune": "Costermano",
+"istat": 23030,
+"zonaid": 15
+},
+{
+"id": 2300,
+"provincia": "Verona",
+"comune": "Dolcè",
+"istat": 23031,
+"zonaid": 14
+},
+{
+"id": 2301,
+"provincia": "Verona",
+"comune": "Erbè",
+"istat": 23032,
+"zonaid": 14
+},
+{
+"id": 2302,
+"provincia": "Verona",
+"comune": "Erbezzo",
+"istat": 23033,
+"zonaid": 8
+},
+{
+"id": 2303,
+"provincia": "Verona",
+"comune": "Ferrara di Monte Baldo",
+"istat": 23034,
+"zonaid": 15
+},
+{
+"id": 2304,
+"provincia": "Verona",
+"comune": "Fumane",
+"istat": 23035,
+"zonaid": 8
+},
+{
+"id": 2305,
+"provincia": "Verona",
+"comune": "Garda",
+"istat": 23036,
+"zonaid": 15
+},
+{
+"id": 2592,
+"provincia": "Verona",
+"comune": "Gazzo Veronese",
+"istat": 23037,
+"zonaid": 13
+},
+{
+"id": 2306,
+"provincia": "Verona",
+"comune": "Grezzana",
+"istat": 23038,
+"zonaid": 14
+},
+{
+"id": 2307,
+"provincia": "Verona",
+"comune": "Illasi",
+"istat": 23039,
+"zonaid": 14
+},
+{
+"id": 2308,
+"provincia": "Verona",
+"comune": "Isola della Scala",
+"istat": 23040,
+"zonaid": 14
+},
+{
+"id": 2309,
+"provincia": "Verona",
+"comune": "Isola Rizza",
+"istat": 23041,
+"zonaid": 14
+},
+{
+"id": 2310,
+"provincia": "Verona",
+"comune": "Lavagno",
+"istat": 23042,
+"zonaid": 14
+},
+{
+"id": 2311,
+"provincia": "Verona",
+"comune": "Lazise",
+"istat": 23043,
+"zonaid": 15
+},
+{
+"id": 2594,
+"provincia": "Verona",
+"comune": "Legnago",
+"istat": 23044,
+"zonaid": 13
+},
+{
+"id": 2312,
+"provincia": "Verona",
+"comune": "Malcesine",
+"istat": 23045,
+"zonaid": 15
+},
+{
+"id": 2313,
+"provincia": "Verona",
+"comune": "Marano di Valpolicella",
+"istat": 23046,
+"zonaid": 14
+},
+{
+"id": 2314,
+"provincia": "Verona",
+"comune": "Mezzane di Sotto",
+"istat": 23047,
+"zonaid": 14
+},
+{
+"id": 2605,
+"provincia": "Verona",
+"comune": "Minerbe",
+"istat": 23048,
+"zonaid": 13
+},
+{
+"id": 2315,
+"provincia": "Verona",
+"comune": "Montecchia di Crosara",
+"istat": 23049,
+"zonaid": 14
+},
+{
+"id": 2316,
+"provincia": "Verona",
+"comune": "Monteforte d'Alpone",
+"istat": 23050,
+"zonaid": 14
+},
+{
+"id": 2317,
+"provincia": "Verona",
+"comune": "Mozzecane",
+"istat": 23051,
+"zonaid": 14
+},
+{
+"id": 2318,
+"provincia": "Verona",
+"comune": "Negrar",
+"istat": 23052,
+"zonaid": 14
+},
+{
+"id": 2597,
+"provincia": "Verona",
+"comune": "Nogara",
+"istat": 23053,
+"zonaid": 13
+},
+{
+"id": 2319,
+"provincia": "Verona",
+"comune": "Nogarole Rocca",
+"istat": 23054,
+"zonaid": 14
+},
+{
+"id": 2320,
+"provincia": "Verona",
+"comune": "Oppeano",
+"istat": 23055,
+"zonaid": 14
+},
+{
+"id": 2321,
+"provincia": "Verona",
+"comune": "Palù",
+"istat": 23056,
+"zonaid": 14
+},
+{
+"id": 2322,
+"provincia": "Verona",
+"comune": "Pastrengo",
+"istat": 23057,
+"zonaid": 15
+},
+{
+"id": 2323,
+"provincia": "Verona",
+"comune": "Pescantina",
+"istat": 23058,
+"zonaid": 14
+},
+{
+"id": 2324,
+"provincia": "Verona",
+"comune": "Peschiera del Garda",
+"istat": 23059,
+"zonaid": 15
+},
+{
+"id": 2325,
+"provincia": "Verona",
+"comune": "Povegliano Veronese",
+"istat": 23060,
+"zonaid": 14
+},
+{
+"id": 2606,
+"provincia": "Verona",
+"comune": "Pressana",
+"istat": 23061,
+"zonaid": 13
+},
+{
+"id": 2326,
+"provincia": "Verona",
+"comune": "Rivoli Veronese",
+"istat": 23062,
+"zonaid": 15
+},
+{
+"id": 2327,
+"provincia": "Verona",
+"comune": "Roncà",
+"istat": 23063,
+"zonaid": 14
+},
+{
+"id": 2328,
+"provincia": "Verona",
+"comune": "Ronco all'Adige",
+"istat": 23064,
+"zonaid": 14
+},
+{
+"id": 2329,
+"provincia": "Verona",
+"comune": "Roverchiara",
+"istat": 23065,
+"zonaid": 14
+},
+{
+"id": 2330,
+"provincia": "Verona",
+"comune": "Roverè Veronese",
+"istat": 23067,
+"zonaid": 8
+},
+{
+"id": 2607,
+"provincia": "Verona",
+"comune": "Roveredo di Guà",
+"istat": 23066,
+"zonaid": 13
+},
+{
+"id": 2331,
+"provincia": "Verona",
+"comune": "Salizzole",
+"istat": 23068,
+"zonaid": 14
+},
+{
+"id": 2332,
+"provincia": "Verona",
+"comune": "San Bonifacio",
+"istat": 23069,
+"zonaid": 14
+},
+{
+"id": 2333,
+"provincia": "Verona",
+"comune": "San Giovanni Ilarione",
+"istat": 23070,
+"zonaid": 8
+},
+{
+"id": 2334,
+"provincia": "Verona",
+"comune": "San Giovanni Lupatoto",
+"istat": 23071,
+"zonaid": 14
+},
+{
+"id": 2335,
+"provincia": "Verona",
+"comune": "San Martino Buon Albergo",
+"istat": 23073,
+"zonaid": 14
+},
+{
+"id": 2336,
+"provincia": "Verona",
+"comune": "San Mauro di Saline",
+"istat": 23074,
+"zonaid": 8
+},
+{
+"id": 2337,
+"provincia": "Verona",
+"comune": "San Pietro di Morubio",
+"istat": 23075,
+"zonaid": 14
+},
+{
+"id": 2338,
+"provincia": "Verona",
+"comune": "San Pietro in Cariano",
+"istat": 23076,
+"zonaid": 14
+},
+{
+"id": 2341,
+"provincia": "Verona",
+"comune": "San Zeno di Montagna",
+"istat": 23079,
+"zonaid": 15
+},
+{
+"id": 2598,
+"provincia": "Verona",
+"comune": "Sanguinetto",
+"istat": 23072,
+"zonaid": 13
+},
+{
+"id": 2339,
+"provincia": "Verona",
+"comune": "Sant'Ambrogio di Valpolicella",
+"istat": 23077,
+"zonaid": 14
+},
+{
+"id": 2340,
+"provincia": "Verona",
+"comune": "Sant'Anna d'Alfaedo",
+"istat": 23078,
+"zonaid": 8
+},
+{
+"id": 2342,
+"provincia": "Verona",
+"comune": "Selva di Progno",
+"istat": 23080,
+"zonaid": 8
+},
+{
+"id": 2343,
+"provincia": "Verona",
+"comune": "Soave",
+"istat": 23081,
+"zonaid": 14
+},
+{
+"id": 2344,
+"provincia": "Verona",
+"comune": "Sommacampagna",
+"istat": 23082,
+"zonaid": 14
+},
+{
+"id": 2345,
+"provincia": "Verona",
+"comune": "Sona",
+"istat": 23083,
+"zonaid": 14
+},
+{
+"id": 2596,
+"provincia": "Verona",
+"comune": "Sorgà",
+"istat": 23084,
+"zonaid": 13
+},
+{
+"id": 2599,
+"provincia": "Verona",
+"comune": "Terrazzo",
+"istat": 23085,
+"zonaid": 13
+},
+{
+"id": 2346,
+"provincia": "Verona",
+"comune": "Torri del Benaco",
+"istat": 23086,
+"zonaid": 15
+},
+{
+"id": 2347,
+"provincia": "Verona",
+"comune": "Tregnago",
+"istat": 23087,
+"zonaid": 8
+},
+{
+"id": 2348,
+"provincia": "Verona",
+"comune": "Trevenzuolo",
+"istat": 23088,
+"zonaid": 14
+},
+{
+"id": 2349,
+"provincia": "Verona",
+"comune": "Valeggio sul Mincio",
+"istat": 23089,
+"zonaid": 15
+},
+{
+"id": 2350,
+"provincia": "Verona",
+"comune": "Velo Veronese",
+"istat": 23090,
+"zonaid": 8
+},
+{
+"id": 2351,
+"provincia": "Verona",
+"comune": "VERONA",
+"istat": 23091,
+"zonaid": 14
+},
+{
+"id": 2352,
+"provincia": "Verona",
+"comune": "Veronella",
+"istat": 23092,
+"zonaid": 14
+},
+{
+"id": 2353,
+"provincia": "Verona",
+"comune": "Vestenanova",
+"istat": 23093,
+"zonaid": 8
+},
+{
+"id": 2354,
+"provincia": "Verona",
+"comune": "Vigasio",
+"istat": 23094,
+"zonaid": 14
+},
+{
+"id": 2590,
+"provincia": "Verona",
+"comune": "Villa Bartolomea",
+"istat": 23095,
+"zonaid": 13
+},
+{
+"id": 2355,
+"provincia": "Verona",
+"comune": "Villafranca di Verona",
+"istat": 23096,
+"zonaid": 14
+},
+{
+"id": 2356,
+"provincia": "Verona",
+"comune": "Zevio",
+"istat": 23097,
+"zonaid": 14
+},
+{
+"id": 2357,
+"provincia": "Verona",
+"comune": "Zimella",
+"istat": 23098,
+"zonaid": 14
+},
+{
+"id": 2363,
+"provincia": "Vicenza",
+"comune": "Agugliaro",
+"istat": 24001,
+"zonaid": 9
+},
+{
+"id": 2367,
+"provincia": "Vicenza",
+"comune": "Albettone",
+"istat": 24002,
+"zonaid": 9
+},
+{
+"id": 2365,
+"provincia": "Vicenza",
+"comune": "Alonte",
+"istat": 24003,
+"zonaid": 9
+},
+{
+"id": 2388,
+"provincia": "Vicenza",
+"comune": "Altavilla Vicentina",
+"istat": 24004,
+"zonaid": 9
+},
+{
+"id": 2261,
+"provincia": "Vicenza",
+"comune": "Altissimo",
+"istat": 24005,
+"zonaid": 8
+},
+{
+"id": 2378,
+"provincia": "Vicenza",
+"comune": "Arcugnano",
+"istat": 24006,
+"zonaid": 9
+},
+{
+"id": 2275,
+"provincia": "Vicenza",
+"comune": "Arsiero",
+"istat": 24007,
+"zonaid": 8
+},
+{
+"id": 2386,
+"provincia": "Vicenza",
+"comune": "Arzignano",
+"istat": 24008,
+"zonaid": 9
+},
+{
+"id": 2238,
+"provincia": "Vicenza",
+"comune": "Asiago",
+"istat": 24009,
+"zonaid": 4
+},
+{
+"id": 2360,
+"provincia": "Vicenza",
+"comune": "Asigliano Veneto",
+"istat": 24010,
+"zonaid": 9
+},
+{
+"id": 2369,
+"provincia": "Vicenza",
+"comune": "Barbarano Mossano",
+"istat": 24124,
+"zonaid": 9
+},
+{
+"id": 2430,
+"provincia": "Vicenza",
+"comune": "Bassano del Grappa",
+"istat": 24012,
+"zonaid": 5
+},
+{
+"id": 2400,
+"provincia": "Vicenza",
+"comune": "Bolzano Vicentino",
+"istat": 24013,
+"zonaid": 9
+},
+{
+"id": 2419,
+"provincia": "Vicenza",
+"comune": "Breganze",
+"istat": 24014,
+"zonaid": 5
+},
+{
+"id": 2376,
+"provincia": "Vicenza",
+"comune": "Brendola",
+"istat": 24015,
+"zonaid": 9
+},
+{
+"id": 2407,
+"provincia": "Vicenza",
+"comune": "Bressanvido",
+"istat": 24016,
+"zonaid": 9
+},
+{
+"id": 2258,
+"provincia": "Vicenza",
+"comune": "Brogliano",
+"istat": 24017,
+"zonaid": 8
+},
+{
+"id": 2402,
+"provincia": "Vicenza",
+"comune": "Caldogno",
+"istat": 24018,
+"zonaid": 9
+},
+{
+"id": 2241,
+"provincia": "Vicenza",
+"comune": "Caltrano",
+"istat": 24019,
+"zonaid": 4
+},
+{
+"id": 2243,
+"provincia": "Vicenza",
+"comune": "Calvene",
+"istat": 24020,
+"zonaid": 4
+},
+{
+"id": 2392,
+"provincia": "Vicenza",
+"comune": "Camisano Vicentino",
+"istat": 24021,
+"zonaid": 9
+},
+{
+"id": 2362,
+"provincia": "Vicenza",
+"comune": "Campiglia dei Berici",
+"istat": 24022,
+"zonaid": 9
+},
+{
+"id": 2425,
+"provincia": "Vicenza",
+"comune": "Carrè",
+"istat": 24024,
+"zonaid": 5
+},
+{
+"id": 2422,
+"provincia": "Vicenza",
+"comune": "Cartigliano",
+"istat": 24025,
+"zonaid": 5
+},
+{
+"id": 2431,
+"provincia": "Vicenza",
+"comune": "Cassola",
+"istat": 24026,
+"zonaid": 5
+},
+{
+"id": 2380,
+"provincia": "Vicenza",
+"comune": "Castegnero",
+"istat": 24027,
+"zonaid": 9
+},
+{
+"id": 2396,
+"provincia": "Vicenza",
+"comune": "Castelgomberto",
+"istat": 24028,
+"zonaid": 9
+},
+{
+"id": 2256,
+"provincia": "Vicenza",
+"comune": "Chiampo",
+"istat": 24029,
+"zonaid": 8
+},
+{
+"id": 2432,
+"provincia": "Vicenza",
+"comune": "Chiuppano",
+"istat": 24030,
+"zonaid": 5
+},
+{
+"id": 2240,
+"provincia": "Vicenza",
+"comune": "Cogollo del Cengio",
+"istat": 24032,
+"zonaid": 4
+},
+{
+"id": 2420,
+"provincia": "Vicenza",
+"comune": "Colceresa",
+"istat": 24126,
+"zonaid": 5
+},
+{
+"id": 2263,
+"provincia": "Vicenza",
+"comune": "Cornedo Vicentino",
+"istat": 24034,
+"zonaid": 8
+},
+{
+"id": 2398,
+"provincia": "Vicenza",
+"comune": "Costabissara",
+"istat": 24035,
+"zonaid": 9
+},
+{
+"id": 2394,
+"provincia": "Vicenza",
+"comune": "Creazzo",
+"istat": 24036,
+"zonaid": 9
+},
+{
+"id": 2260,
+"provincia": "Vicenza",
+"comune": "Crespadoro",
+"istat": 24037,
+"zonaid": 8
+},
+{
+"id": 2403,
+"provincia": "Vicenza",
+"comune": "Dueville",
+"istat": 24038,
+"zonaid": 9
+},
+{
+"id": 2255,
+"provincia": "Vicenza",
+"comune": "Enego",
+"istat": 24039,
+"zonaid": 4
+},
+{
+"id": 2427,
+"provincia": "Vicenza",
+"comune": "Fara Vicentino",
+"istat": 24040,
+"zonaid": 5
+},
+{
+"id": 2254,
+"provincia": "Vicenza",
+"comune": "Foza",
+"istat": 24041,
+"zonaid": 4
+},
+{
+"id": 2252,
+"provincia": "Vicenza",
+"comune": "Gallio",
+"istat": 24042,
+"zonaid": 4
+},
+{
+"id": 2370,
+"provincia": "Vicenza",
+"comune": "Gambellara",
+"istat": 24043,
+"zonaid": 9
+},
+{
+"id": 2397,
+"provincia": "Vicenza",
+"comune": "Gambugliano",
+"istat": 24044,
+"zonaid": 9
+},
+{
+"id": 2385,
+"provincia": "Vicenza",
+"comune": "Grisignano di Zocco",
+"istat": 24046,
+"zonaid": 9
+},
+{
+"id": 2391,
+"provincia": "Vicenza",
+"comune": "Grumolo delle Abbadesse",
+"istat": 24047,
+"zonaid": 9
+},
+{
+"id": 2401,
+"provincia": "Vicenza",
+"comune": "Isola Vicentina",
+"istat": 24048,
+"zonaid": 9
+},
+{
+"id": 2274,
+"provincia": "Vicenza",
+"comune": "Laghi",
+"istat": 24049,
+"zonaid": 8
+},
+{
+"id": 2277,
+"provincia": "Vicenza",
+"comune": "Lastebasse",
+"istat": 24050,
+"zonaid": 8
+},
+{
+"id": 2379,
+"provincia": "Vicenza",
+"comune": "Longare",
+"istat": 24051,
+"zonaid": 9
+},
+{
+"id": 2364,
+"provincia": "Vicenza",
+"comune": "Lonigo",
+"istat": 24052,
+"zonaid": 9
+},
+{
+"id": 2242,
+"provincia": "Vicenza",
+"comune": "Lugo di Vicenza",
+"istat": 24053,
+"zonaid": 4
+},
+{
+"id": 2245,
+"provincia": "Vicenza",
+"comune": "Lusiana Conco",
+"istat": 24127,
+"zonaid": 4
+},
+{
+"id": 2265,
+"provincia": "Vicenza",
+"comune": "Malo",
+"istat": 24055,
+"zonaid": 8
+},
+{
+"id": 2415,
+"provincia": "Vicenza",
+"comune": "Marano Vicentino",
+"istat": 24056,
+"zonaid": 5
+},
+{
+"id": 2428,
+"provincia": "Vicenza",
+"comune": "Marostica",
+"istat": 24057,
+"zonaid": 5
+},
+{
+"id": 2264,
+"provincia": "Vicenza",
+"comune": "Monte di Malo",
+"istat": 24063,
+"zonaid": 8
+},
+{
+"id": 2375,
+"provincia": "Vicenza",
+"comune": "Montebello Vicentino",
+"istat": 24060,
+"zonaid": 9
+},
+{
+"id": 2384,
+"provincia": "Vicenza",
+"comune": "Montecchio Maggiore",
+"istat": 24061,
+"zonaid": 9
+},
+{
+"id": 2408,
+"provincia": "Vicenza",
+"comune": "Montecchio Precalcino",
+"istat": 24062,
+"zonaid": 9
+},
+{
+"id": 2381,
+"provincia": "Vicenza",
+"comune": "Montegalda",
+"istat": 24064,
+"zonaid": 9
+},
+{
+"id": 2374,
+"provincia": "Vicenza",
+"comune": "Montegaldella",
+"istat": 24065,
+"zonaid": 9
+},
+{
+"id": 2395,
+"provincia": "Vicenza",
+"comune": "Monteviale",
+"istat": 24066,
+"zonaid": 9
+},
+{
+"id": 2404,
+"provincia": "Vicenza",
+"comune": "Monticello Conte Otto",
+"istat": 24067,
+"zonaid": 9
+},
+{
+"id": 2382,
+"provincia": "Vicenza",
+"comune": "Montorso Vicentino",
+"istat": 24068,
+"zonaid": 9
+},
+{
+"id": 2434,
+"provincia": "Vicenza",
+"comune": "Mussolente",
+"istat": 24070,
+"zonaid": 5
+},
+{
+"id": 2373,
+"provincia": "Vicenza",
+"comune": "Nanto",
+"istat": 24071,
+"zonaid": 9
+},
+{
+"id": 2259,
+"provincia": "Vicenza",
+"comune": "Nogarole Vicentino",
+"istat": 24072,
+"zonaid": 8
+},
+{
+"id": 2421,
+"provincia": "Vicenza",
+"comune": "Nove",
+"istat": 24073,
+"zonaid": 5
+},
+{
+"id": 2359,
+"provincia": "Vicenza",
+"comune": "Noventa Vicentina",
+"istat": 24074,
+"zonaid": 9
+},
+{
+"id": 2366,
+"provincia": "Vicenza",
+"comune": "Orgiano",
+"istat": 24075,
+"zonaid": 9
+},
+{
+"id": 2253,
+"provincia": "Vicenza",
+"comune": "Pedemonte",
+"istat": 24076,
+"zonaid": 4
+},
+{
+"id": 2429,
+"provincia": "Vicenza",
+"comune": "Pianezze",
+"istat": 24077,
+"zonaid": 5
+},
+{
+"id": 2239,
+"provincia": "Vicenza",
+"comune": "Piovene Rocchette",
+"istat": 24078,
+"zonaid": 4
+},
+{
+"id": 2358,
+"provincia": "Vicenza",
+"comune": "Poiana Maggiore",
+"istat": 24079,
+"zonaid": 9
+},
+{
+"id": 2272,
+"provincia": "Vicenza",
+"comune": "Posina",
+"istat": 24080,
+"zonaid": 8
+},
+{
+"id": 2246,
+"provincia": "Vicenza",
+"comune": "Pove del Grappa",
+"istat": 24081,
+"zonaid": 5
+},
+{
+"id": 2410,
+"provincia": "Vicenza",
+"comune": "Pozzoleone",
+"istat": 24082,
+"zonaid": 9
+},
+{
+"id": 2399,
+"provincia": "Vicenza",
+"comune": "Quinto Vicentino",
+"istat": 24083,
+"zonaid": 9
+},
+{
+"id": 2266,
+"provincia": "Vicenza",
+"comune": "Recoaro Terme",
+"istat": 24084,
+"zonaid": 8
+},
+{
+"id": 2248,
+"provincia": "Vicenza",
+"comune": "Roana",
+"istat": 24085,
+"zonaid": 4
+},
+{
+"id": 2433,
+"provincia": "Vicenza",
+"comune": "Romano d'Ezzelino",
+"istat": 24086,
+"zonaid": 5
+},
+{
+"id": 2423,
+"provincia": "Vicenza",
+"comune": "Rosà",
+"istat": 24087,
+"zonaid": 5
+},
+{
+"id": 2424,
+"provincia": "Vicenza",
+"comune": "Rossano Veneto",
+"istat": 24088,
+"zonaid": 5
+},
+{
+"id": 2251,
+"provincia": "Vicenza",
+"comune": "Rotzo",
+"istat": 24089,
+"zonaid": 4
+},
+{
+"id": 2244,
+"provincia": "Vicenza",
+"comune": "Salcedo",
+"istat": 24090,
+"zonaid": 4
+},
+{
+"id": 2257,
+"provincia": "Vicenza",
+"comune": "San Pietro Mussolino",
+"istat": 24094,
+"zonaid": 8
+},
+{
+"id": 2268,
+"provincia": "Vicenza",
+"comune": "San Vito di Leguzzano",
+"istat": 24096,
+"zonaid": 8
+},
+{
+"id": 2406,
+"provincia": "Vicenza",
+"comune": "Sandrigo",
+"istat": 24091,
+"zonaid": 9
+},
+{
+"id": 2271,
+"provincia": "Vicenza",
+"comune": "Santorso",
+"istat": 24095,
+"zonaid": 8
+},
+{
+"id": 2417,
+"provincia": "Vicenza",
+"comune": "Sarcedo",
+"istat": 24097,
+"zonaid": 5
+},
+{
+"id": 2371,
+"provincia": "Vicenza",
+"comune": "Sarego",
+"istat": 24098,
+"zonaid": 9
+},
+{
+"id": 2409,
+"provincia": "Vicenza",
+"comune": "Schiavon",
+"istat": 24099,
+"zonaid": 9
+},
+{
+"id": 2267,
+"provincia": "Vicenza",
+"comune": "Schio",
+"istat": 24100,
+"zonaid": 8
+},
+{
+"id": 2250,
+"provincia": "Vicenza",
+"comune": "Solagna",
+"istat": 24101,
+"zonaid": 4
+},
+{
+"id": 2361,
+"provincia": "Vicenza",
+"comune": "Sossano",
+"istat": 24102,
+"zonaid": 9
+},
+{
+"id": 2387,
+"provincia": "Vicenza",
+"comune": "Sovizzo",
+"istat": 24103,
+"zonaid": 9
+},
+{
+"id": 2411,
+"provincia": "Vicenza",
+"comune": "Tezze sul Brenta",
+"istat": 24104,
+"zonaid": 9
+},
+{
+"id": 2416,
+"provincia": "Vicenza",
+"comune": "Thiene",
+"istat": 24105,
+"zonaid": 5
+},
+{
+"id": 2276,
+"provincia": "Vicenza",
+"comune": "Tonezza del Cimone",
+"istat": 24106,
+"zonaid": 8
+},
+{
+"id": 2269,
+"provincia": "Vicenza",
+"comune": "Torrebelvicino",
+"istat": 24107,
+"zonaid": 8
+},
+{
+"id": 2390,
+"provincia": "Vicenza",
+"comune": "Torri di Quartesolo",
+"istat": 24108,
+"zonaid": 9
+},
+{
+"id": 2393,
+"provincia": "Vicenza",
+"comune": "Trissino",
+"istat": 24110,
+"zonaid": 9
+},
+{
+"id": 2372,
+"provincia": "Vicenza",
+"comune": "Val Liona",
+"istat": 24123,
+"zonaid": 9
+},
+{
+"id": 2249,
+"provincia": "Vicenza",
+"comune": "Valbrenta",
+"istat": 24125,
+"zonaid": 4
+},
+{
+"id": 2262,
+"provincia": "Vicenza",
+"comune": "Valdagno",
+"istat": 24111,
+"zonaid": 8
+},
+{
+"id": 2247,
+"provincia": "Vicenza",
+"comune": "Valdastico",
+"istat": 24112,
+"zonaid": 4
+},
+{
+"id": 2270,
+"provincia": "Vicenza",
+"comune": "Valli del Pasubio",
+"istat": 24113,
+"zonaid": 8
+},
+{
+"id": 2273,
+"provincia": "Vicenza",
+"comune": "Velo d'Astico",
+"istat": 24115,
+"zonaid": 8
+},
+{
+"id": 2389,
+"provincia": "Vicenza",
+"comune": "VICENZA",
+"istat": 24116,
+"zonaid": 9
+},
+{
+"id": 2368,
+"provincia": "Vicenza",
+"comune": "Villaga",
+"istat": 24117,
+"zonaid": 9
+},
+{
+"id": 2405,
+"provincia": "Vicenza",
+"comune": "Villaverla",
+"istat": 24118,
+"zonaid": 9
+},
+{
+"id": 2418,
+"provincia": "Vicenza",
+"comune": "Zanè",
+"istat": 24119,
+"zonaid": 5
+},
+{
+"id": 2383,
+"provincia": "Vicenza",
+"comune": "Zermeghedo",
+"istat": 24120,
+"zonaid": 9
+},
+{
+"id": 2377,
+"provincia": "Vicenza",
+"comune": "Zovencedo",
+"istat": 24121,
+"zonaid": 9
+},
+{
+"id": 2426,
+"provincia": "Vicenza",
+"comune": "Zugliano",
+"istat": 24122,
+"zonaid": 5
+}
+]
+}
