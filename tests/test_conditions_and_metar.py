@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import unittest
 from datetime import UTC, datetime, timedelta
 from unittest.mock import patch
@@ -27,6 +28,7 @@ from custom_components.arpa_veneto_meteo.const import (  # noqa: E402
     SOURCE_METAR,
 )
 from custom_components.arpa_veneto_meteo.metar import (  # noqa: E402
+    async_fetch_stations,
     is_observation_current,
     metar_condition,
     parse_observation,
@@ -74,6 +76,50 @@ class TestMetarParser(unittest.TestCase):
         obs_cavok = parse_observation({"icaoId": "LIPZ", "clouds": [], "rawOb": "LIPZ CAVOK"})
         self.assertEqual(obs_cavok.cloud_coverage, 0)
         self.assertEqual(metar_condition(obs_cavok, is_day=False), "clear-night")
+
+
+class _FakeResponse:
+    def __init__(self, payload: list[dict]) -> None:
+        self._payload = payload
+
+    async def __aenter__(self) -> _FakeResponse:
+        return self
+
+    async def __aexit__(self, *exc: object) -> None:
+        return None
+
+    def raise_for_status(self) -> None:
+        return None
+
+    async def json(self, content_type: str | None = None) -> list[dict]:
+        return self._payload
+
+
+class _FakeSession:
+    def __init__(self, payload: list[dict]) -> None:
+        self.payload = payload
+        self.urls: list[str] = []
+
+    def get(self, url: str, timeout: object = None) -> _FakeResponse:
+        self.urls.append(url)
+        return _FakeResponse(self.payload)
+
+
+class TestMetarStationSearch(unittest.IsolatedAsyncioTestCase):
+    async def test_bbox_is_rounded_for_aviationweather(self) -> None:
+        # ARPAV station coordinates have 8 decimals; aviationweather.gov answers
+        # 400 to a bbox with more than 6 decimals.
+        session = _FakeSession(
+            [
+                {"icaoId": "LIPU", "site": "Padova", "lat": 45.395, "lon": 11.848, "siteType": ["METAR"]},
+            ]
+        )
+        stations = await async_fetch_stations(
+            session, 45.18668992, 11.8487995, lambda lat, lon: 20.0
+        )
+        bbox = re.search(r"bbox=([^&]+)", session.urls[0]).group(1)
+        self.assertEqual(bbox, "43.6867,10.3488,46.6867,13.3488")
+        self.assertEqual([s.icao for s in stations], ["LIPU"])
 
 
 class TestConditionClassifier(unittest.IsolatedAsyncioTestCase):
