@@ -75,7 +75,8 @@ async def async_fetch_stations(
 ) -> list[MetarStation]:
     """Return aerodromes issuing METAR around coordinates, reporting & nearest first."""
     span = SEARCH_RANGE_DEGREES
-    bbox = f"{latitude - span},{longitude - span},{latitude + span},{longitude + span}"
+    # aviationweather.gov answers 400 to coordinates with more than 6 decimals
+    bbox = f"{latitude - span:.4f},{longitude - span:.4f},{latitude + span:.4f},{longitude + span:.4f}"
     url = f"{METAR_API_BASE}/stationinfo?bbox={bbox}&format=json"
     timeout = aiohttp.ClientTimeout(total=DEFAULT_HTTP_TIMEOUT, connect=DEFAULT_CONNECT_TIMEOUT)
 
