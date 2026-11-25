@@ -106,10 +106,6 @@ Copy `custom_components/arpa_veneto_meteo/` into your Home Assistant
    distance from the chosen municipality (from the zone point if the
    municipality has no coordinates).
 
-The municipality coordinates come from Wikidata (CC0) and are bundled in
-`comuni_coords.py`; regenerate them with `python3 scripts/generate_comuni_coords.py`
-when municipalities merge.
-
 You can change the zone or weather station later from **Reconfigure** without
 deleting the entry, and you can add multiple instances for different locations.
 
@@ -305,6 +301,13 @@ ruff check custom_components tests
 GitHub Actions (`.github/workflows/ci.yml`) runs Ruff, pytest, HACS validation
 and `hassfest` on every push and pull request.
 
+To regenerate the bundled Veneto municipality coordinates (`comuni_coords.py`)
+when municipalities merge:
+
+```bash
+python3 scripts/generate_comuni_coords.py
+```
+
 ## Disclaimer and Data Attribution
 
 This is an unofficial project and is **not affiliated with, endorsed by, or
@@ -316,6 +319,10 @@ sponsored by ARPAV**.
   license.
 - Optional METAR observations are provided by the NOAA Aviation Weather Center
   ([https://aviationweather.gov](https://aviationweather.gov)).
+- Bundled Veneto municipality coordinates (`comuni_coords.py`) are sourced from
+  [Wikidata](https://www.wikidata.org/) under the
+  [Creative Commons CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+  dedication.
 
 ## License
 
