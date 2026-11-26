@@ -30,7 +30,6 @@ import xml.etree.ElementTree as ET
 from datetime import UTC, datetime, timedelta
 from math import asin, cos, log, radians, sin, sqrt
 from typing import Any
-from zoneinfo import ZoneInfo
 
 import aiohttp
 
@@ -53,7 +52,6 @@ from .const import (
     DEFAULT_CONNECT_TIMEOUT,
     DEFAULT_HTTP_TIMEOUT,
     FORECAST_CONDITION_SYMBOLS,
-    LOCAL_TIMEZONE_NAME,
     MAX_REAL_ZONE_ID,
     MOUNTAIN_ZONE_IDS,
     POLLEN_DATA_BASE_URL,
@@ -62,6 +60,7 @@ from .const import (
     POLLEN_RISK_MAP,
     POLLEN_SPECIES_SLUGS,
     RADAR_MOSAIC_PNG_URL,
+    ROME_TZ,
     SOURCE_STATION,
 )
 from .models import (
@@ -303,7 +302,7 @@ def parse_station_observations(
         if ref_now.tzinfo is None:
             ref_now = ref_now.replace(tzinfo=UTC)
         ref_arpav = ref_now.astimezone(ARPAV_TZ)
-        rome_midnight = ref_now.astimezone(ZoneInfo(LOCAL_TIMEZONE_NAME)).replace(
+        rome_midnight = ref_now.astimezone(ROME_TZ).replace(
             hour=0, minute=0, second=0, microsecond=0
         )
 

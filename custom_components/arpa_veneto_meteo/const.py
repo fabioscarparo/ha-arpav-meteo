@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 from datetime import timedelta, timezone
+from zoneinfo import ZoneInfo
 
 DOMAIN = "arpa_veneto_meteo"
 
 # Built-in Lovelace card serving metadata
-CARD_VERSION = "1.1.3"
+CARD_VERSION = "1.1.4"
 CARD_FILENAME = "arpa-veneto-meteo-card.js"
 CARD_URL = f"/{DOMAIN}/{CARD_FILENAME}"
 
@@ -31,6 +32,7 @@ POLLEN_DATA_BASE_URL = f"{WWW_BASE}/risorse/data-meteo/pollini"
 # ARPAV timestamps are always fixed solar time (UTC+1) all year round
 ARPAV_TZ = timezone(timedelta(hours=1))
 LOCAL_TIMEZONE_NAME = "Europe/Rome"
+ROME_TZ = ZoneInfo(LOCAL_TIMEZONE_NAME)
 
 # HTTP configuration
 DEFAULT_HTTP_TIMEOUT = 20.0

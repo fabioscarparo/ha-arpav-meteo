@@ -181,6 +181,28 @@ class TestRecorderAndHACompliance(unittest.TestCase):
                         f"Missing docstring on {node.name} in {py_file.name}:{node.lineno}",
                     )
 
+    def test_no_zoneinfo_constructed_inside_functions(self) -> None:
+        """Ensure ZoneInfo is resolved at module level, never on the event loop."""
+        import ast
+
+        for py_file in sorted(COMP_DIR.glob("*.py")):
+            tree = ast.parse(py_file.read_text(encoding="utf-8"))
+            for fn in ast.walk(tree):
+                if not isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    continue
+                for call in ast.walk(fn):
+                    if not isinstance(call, ast.Call):
+                        continue
+                    func = call.func
+                    is_zoneinfo = (
+                        (isinstance(func, ast.Name) and func.id == "ZoneInfo")
+                        or (isinstance(func, ast.Attribute) and func.attr == "ZoneInfo")
+                    )
+                    self.assertFalse(
+                        is_zoneinfo,
+                        f"ZoneInfo() called inside {fn.name} in {py_file.name}:{call.lineno}",
+                    )
+
 
 class TestEntitiesAndForecastAggregation(unittest.TestCase):
     """Tests for Weather, Sensor, and BinarySensor entity outputs."""
